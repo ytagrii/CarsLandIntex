@@ -34,6 +34,13 @@ namespace CarsLandIntex
             {
                 options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
+
+            //This is for the HTTP to HTTPS redirect
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+            });
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -72,6 +79,9 @@ namespace CarsLandIntex
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //This may come in handy for the cookie part later
+            //app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {
