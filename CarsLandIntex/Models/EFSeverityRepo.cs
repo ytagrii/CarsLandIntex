@@ -1,10 +1,8 @@
 ﻿using System;
 namespace CarsLandIntex.Models
 {
-    public class EFSeverityRepo
+    public class EFSeverityRepo : ISeverityRepo
     {
-        public EFSeverityRepo()
-        {
-        }
+        
     }
 }

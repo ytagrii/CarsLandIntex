@@ -1,10 +1,8 @@
 ﻿using System;
 namespace CarsLandIntex.Models
 {
-    public class ISeverityRepo
+    public interface ISeverityRepo
     {
-        public ISeverityRepo()
-        {
-        }
+       
     }
 }

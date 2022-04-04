@@ -1,10 +1,8 @@
 ﻿using System;
 namespace CarsLandIntex.Models
 {
-    public class ICrashRepository
+    public interface ICrashRepository
     {
-        public ICrashRepository()
-        {
-        }
+        
     }
 }

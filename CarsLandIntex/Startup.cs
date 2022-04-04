@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
+using CarsLandIntex.Models;
 
 namespace CarsLandIntex
 {
@@ -40,7 +41,8 @@ namespace CarsLandIntex
             {
                 options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
-
+            services.AddScoped<ICrashRepository, EFCrashRepo>();
+            services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {
