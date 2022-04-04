@@ -36,6 +36,12 @@ namespace CarsLandIntex
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AuthDBContext>();
 
+            // Redirect from HTTP and stuff
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+            });
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
@@ -58,6 +64,9 @@ namespace CarsLandIntex
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //This may come in handy with the cookie policy in the future, but we'll see
+            //app.UseCookiePolicy();
 
             app.UseRouting();
 
