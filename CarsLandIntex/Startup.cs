@@ -36,6 +36,11 @@ namespace CarsLandIntex
                 options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
+            });
+
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {
