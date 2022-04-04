@@ -12,6 +12,7 @@ using CarsLandIntex.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace CarsLandIntex
 {
@@ -39,6 +40,16 @@ namespace CarsLandIntex
             services.AddHttpsRedirection(options =>
             {
                 options.HttpsPort = 443;
+            });
+
+            //This ensures that the user must consent for cookies
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -80,8 +91,8 @@ namespace CarsLandIntex
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //This may come in handy for the cookie part later
-            //app.UseCookiePolicy();
+            //Enable cookie policies
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {
