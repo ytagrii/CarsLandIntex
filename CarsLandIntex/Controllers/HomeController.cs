@@ -39,6 +39,8 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult ExploreData()
         {
+            var x = repo.Crashes.Distinct();
+            ViewBag.Counties = x;
             var data = repo.Crashes.Take(300).ToList();
             return View(data);
         }
