@@ -31,12 +31,12 @@ namespace CarsLandIntex.Models
         [Required]
         public int CITY_ID { get; set; }
         [ForeignKey("CITY_ID")]
-        public string CITY { get; set; }
+        public City CITY { get; set; }
 
         [Required]
         public int COUNTY_ID { get; set; }
         [ForeignKey("COUNTY_ID")]
-        public string COUNTY_NAME { get; set; }
+        public County COUNTY_NAME { get; set; }
 
         [Required]
         public int CRASH_SEVERITY_ID { get; set; }

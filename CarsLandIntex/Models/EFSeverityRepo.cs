@@ -11,7 +11,7 @@ namespace CarsLandIntex.Models
             context = temp;
         }
 
-        public IQueryable<Severity> Severities => context.Severities;
+        public IQueryable<Severity> Severities => context.Severity;
        
     }
 }

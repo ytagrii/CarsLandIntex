@@ -37,12 +37,12 @@ namespace CarsLandIntex
                 options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<CrashDataDBContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
-            //services.AddScoped<ICrashRepository, EFCrashRepo>();
-            //services.AddScoped<ISeverityRepo, EFSeverityRepo>();
+            services.AddScoped<ICrashRepository, EFCrashRepo>();
+            services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {
@@ -116,7 +116,7 @@ namespace CarsLandIntex
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
-                //endpoints.MapFallbackToPage("/admin/{*catchall}");
+                
                 //endpoints.MapFallbackToPage("/admin/{*catchall}", "/Areas/Identity/Pages/Admin/Index");
             });
 
