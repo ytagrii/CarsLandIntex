@@ -1,0 +1,34 @@
+﻿@inherits LayoutComponentBase
+
+@*LAYOUT FOR THE ADMIN PAGES*@
+<div class="bg-info text-white p-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <span class="navbar-brand m-lg-2">Book Store Admin</span>
+            </div>
+            <div class="col-2 text-right">
+                   
+                <a href="/account/logout" class="btn btn-sm btn-dark">Log Out</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row p-2">
+        @*THE SIDE NAVIGATION*@
+        <div class="col-3 btn-block">
+            <NavLink class="btn btn-block btn-outline-primary" href="/admin/books" ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">Books</NavLink>
+
+            <NavLink class="btn btn-block btn-outline-primary" href="/admin/purchases" ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">Purchases</NavLink>
+        </div>
+        @*THIS RENDERS THE BODY DYNAMICALLY*@
+        <div class="col">
+            @Body
+        </div>
+    </div>
+</div>
