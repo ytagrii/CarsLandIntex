@@ -13,13 +13,15 @@ namespace CarsLandIntex.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ICrashRepository repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp)
         {
             _logger = logger;
+            repo = temp;
         }
 
-        
+
         public IActionResult Index()
         {
             return View();
@@ -37,7 +39,8 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult ExploreData()
         {
-            return View();
+            var data = repo.Crashes.Take(300).ToList();
+            return View(data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

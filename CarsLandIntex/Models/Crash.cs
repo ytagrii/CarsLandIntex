@@ -11,7 +11,7 @@ namespace CarsLandIntex.Models
         public int CRASH_ID { get; set; }
 
         [Required]
-        public DateTime CRASH_DATETIME { get; set; }
+        public string CRASH_DATETIME { get; set; }
 
         [Required]
         public int ROUTE { get; set; }
@@ -20,10 +20,10 @@ namespace CarsLandIntex.Models
         public double MILEPOINT { get; set; }
 
         [Required]
-        public string LAT_UTM_Y { get; set; }
+        public double LAT_UTM_Y { get; set; }
 
         [Required]
-        public string LONG_UTM_X { get; set; }
+        public double LONG_UTM_X { get; set; }
 
         [Required]
         public string MAIN_ROAD_NAME { get; set; }
@@ -44,61 +44,61 @@ namespace CarsLandIntex.Models
         public Severity Severity { get; set; }
 
         [Required]
-        public bool WORK_ZONE_RELATED { get; set; }
+        public int WORK_ZONE_RELATED { get; set; }
 
         [Required]
-        public bool PEDESTRIAN_INVOLVED { get; set; }
+        public int PEDESTRIAN_INVOLVED { get; set; }
 
         [Required]
-        public bool BICYCLIST_INVOLVED { get; set; }
+        public int BICYCLIST_INVOLVED { get; set; }
 
         [Required]
-        public bool MOTORCYCLE_INVOLVED { get; set; }
+        public int MOTORCYCLE_INVOLVED { get; set; }
 
         [Required]
-        public bool IMPROPER_RESTRAINT { get; set; }
+        public int IMPROPER_RESTRAINT { get; set; }
 
         [Required]
-        public bool UNRESTRAINED { get; set; }
+        public int UNRESTRAINED { get; set; }
 
         [Required]
-        public bool DUI { get; set; }
+        public int DUI { get; set; }
 
         [Required]
-        public bool INTERSECTION_RELATED { get; set; }
+        public int INTERSECTION_RELATED { get; set; }
 
         [Required]
-        public bool WILD_ANIMAL_RELATED { get; set; }
+        public int WILD_ANIMAL_RELATED { get; set; }
 
         [Required]
-        public bool DOMESTIC_ANIMAL_RELATED { get; set; }
+        public int DOMESTIC_ANIMAL_RELATED { get; set; }
 
         [Required]
-        public bool OVERTURN_ROLLOVER { get; set; }
+        public int OVERTURN_ROLLOVER { get; set; }
 
         [Required]
-        public bool COMMERCIAL_MOTOR_VEH_INVOLVED { get; set; }
+        public int COMMERCIAL_MOTOR_VEH_INVOLVED { get; set; }
 
         [Required]
-        public bool TEENAGE_DRIVER_INVOLVED { get; set; }
+        public int TEENAGE_DRIVER_INVOLVED { get; set; }
 
         [Required]
-        public bool OLDER_DRIVER_INVOLVED { get; set; }
+        public int OLDER_DRIVER_INVOLVED { get; set; }
 
         [Required]
-        public bool NIGHT_DARK_CONDITION { get; set; }
+        public int NIGHT_DARK_CONDITION { get; set; }
 
         [Required]
-        public bool SINGLE_VEHICLE { get; set; }
+        public int SINGLE_VEHICLE { get; set; }
 
         [Required]
-        public bool DISTRACTED_DRIVING { get; set; }
+        public int DISTRACTED_DRIVING { get; set; }
 
         [Required]
-        public bool DROWSY_DRIVING { get; set; }
+        public int DROWSY_DRIVING { get; set; }
 
         [Required]
-        public bool ROADWAY_DEPARTURE { get; set; }
+        public int ROADWAY_DEPARTURE { get; set; }
 
 
 

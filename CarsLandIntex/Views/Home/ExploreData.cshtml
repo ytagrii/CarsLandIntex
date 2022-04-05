@@ -1,22 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Explore Data";
 }
-
+@model List<Crash>
 <!-- Wrapper -->
-<div id="wrapper">
+<div id="">
 
-    <!-- Header -->
-    <div id="header">
-        <div class="logo">
-            <i class="fa fa-car" aria-hidden="true" style="font-size: 2em;"></i>
-        </div>
-        <div class="content">
-            <div class="inner">
-                <h1>Explore Crash Data</h1>
-            </div>
-        </div>
-        
-    </div>
+    
 
    
     <div class="row">
@@ -25,13 +14,37 @@
         </div>
         <div class="col">
             <h4>Crash Data</h4>
+            <br />
+            <table class=" table-bordered ">
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Route</td>
+                        <td>Milepoint</td>
+                        <td>Crash Severity</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Crash c in Model)
+                    {
+                        <tr>
+                            <td>@c.CRASH_DATETIME</td>
+                            <td>@c.ROUTE</td>
+                            <td>@c.MILEPOINT</td>
+                            <td>@c.CRASH_SEVERITY_ID</td>
+                        </tr>
+                       
+                    }
+                </tbody>
+            </table>
+            
         </div>
     </div>
 </div>
 
 
 <!-- BG -->
-<div id="bg"></div>
+
 
 <!-- Scripts -->
 <script nonce="MasonEmmaRyanLevi" src="~/js/jquery.min.js"></script>
