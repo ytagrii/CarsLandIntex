@@ -4,6 +4,13 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+$(document).ready(
+	function () {
+		$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function () {
+			$(this).toggleClass('open');
+		});
+});
+
 (function($) {
 
 	var	$window = $(window),

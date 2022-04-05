@@ -19,10 +19,23 @@
         <nav style="z-index:3;" class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">CarsLandIntex</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">*@
+                    @*<span class="navbar-toggler-icon"></span>*@
+                    <div class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation" id="nav-icon3">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                @*</button>*@
+                @*<div id="nav-icon3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>*@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
@@ -43,19 +56,34 @@
     <div class="container">
         <!--This enables the cookie consent notification-->
         <partial name="_CookieConsentPartial" />
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-            <footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2022 - CarsLandIntex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            @RenderSection("Scripts", required: false)
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - CarsLandIntex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
-</html>
+@*<script>
+        const header = document.querySelector("header");
+        document.querySelector(".menu-icon").addEventListener("click", () => {
+            header.classList.toggle("close");
+        });
+    </script>*@
+    <script>
+        $(document).ready(
+            function ()
+            {
+                $('#nav-icon3').click(function () {
+                    $(this).toggleClass('open');
+                });
+            });
+    </script>
+</html >
