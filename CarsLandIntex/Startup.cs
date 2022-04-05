@@ -116,7 +116,7 @@ namespace CarsLandIntex
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
-                //endpoints.MapFallbackToPage("/admin/{*catchall}");
+                
                 //endpoints.MapFallbackToPage("/admin/{*catchall}", "/Areas/Identity/Pages/Admin/Index");
             });
 
