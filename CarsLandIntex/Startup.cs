@@ -37,7 +37,7 @@ namespace CarsLandIntex
                 options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<CrashDataDBContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
