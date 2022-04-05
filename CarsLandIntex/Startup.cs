@@ -104,7 +104,7 @@ namespace CarsLandIntex
             //Adding in the Content Security Policy HTTP header response
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self';") ;
                 await next();
             });
 
