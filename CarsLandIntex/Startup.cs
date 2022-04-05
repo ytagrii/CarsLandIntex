@@ -102,6 +102,13 @@ namespace CarsLandIntex
             //Enable cookie policies
             app.UseCookiePolicy();
 
+            //Adding in the Content Security Policy HTTP header response
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';");
+                await next();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
