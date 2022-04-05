@@ -1,0 +1,21 @@
+﻿@page "/admin"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@{
+    Layout = null;
+}
+@*THIS IS THE INDEX PAGE that is the bulding blocks for all others*@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book Store Admin</title>
+        <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <base href="/" />
+    </head>
+    <body>
+        <component type="typeof(Routed)" render-mode="Server" />
+        <script src="/_framework/blazor.server.js"></script>
+    </body>
+</html>
+
+
