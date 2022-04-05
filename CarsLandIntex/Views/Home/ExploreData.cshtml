@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Explore Data";
+}
+@model List<Crash>
+<!-- Wrapper -->
+<div id="">
+
+    
+
+   
+    <div class="row">
+        <div class="col-2">
+            <h4>Filters</h4>
+        </div>
+        <div class="col">
+            <h4>Crash Data</h4>
+            <br />
+            <table class=" table-bordered ">
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Route</td>
+                        <td>Milepoint</td>
+                        <td>Crash Severity</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Crash c in Model)
+                    {
+                        <tr>
+                            <td>@c.CRASH_DATETIME</td>
+                            <td>@c.ROUTE</td>
+                            <td>@c.MILEPOINT</td>
+                            <td>@c.CRASH_SEVERITY_ID</td>
+                        </tr>
+                       
+                    }
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+
+
+<!-- BG -->
+
+
+<!-- Scripts -->
+<script nonce="MasonEmmaRyanLevi" src="~/js/jquery.min.js"></script>
+<script nonce="MasonEmmaRyanLevi" src="~/js/browser.min.js"></script>
+<script nonce="MasonEmmaRyanLevi" src="~/js/breakpoints.min.js"></script>
+<script nonce="MasonEmmaRyanLevi" src="~/js/util.js"></script>
+<script nonce="MasonEmmaRyanLevi" src="~/js/main.js"></script>
+
+
+
+
+
+
+
