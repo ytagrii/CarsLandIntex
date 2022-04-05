@@ -15,7 +15,7 @@
                 <td>MFA Enabled?</td>
                 <td>Email</td>
                 <td>Email Confirmed</td>
-                <td>Edit User</td>
+                @*<td>Edit User</td>*@
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,9 @@
                 <td>@u.TwoFactorEnabled</td>
                 <td>@u.Email</td>
                 <td>@u.EmailConfirmed</td>
-                <td>
+                @*<td>
                     <NavLink class="btn btn-secondary btn-sm" href="@GetEditUrl(u.Id)">Edit</NavLink>
-                </td>
+                </td>*@
              </tr>
             <tr>
                 @if (UserRoles?.Count() > 0)

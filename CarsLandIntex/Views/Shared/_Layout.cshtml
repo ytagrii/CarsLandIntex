@@ -3,6 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src 'self' 'unsafe-inline'
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
+                          'unsafe-eval';
+               style-src 'self' 'unsafe-inline';
+               upgrade-insecure-requests;">
     <title>@ViewData["Title"] - CarsLandIntex</title>
     <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -13,7 +24,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/css/main.css" />
     <noscript><link rel="stylesheet" href="~/css/noscript.css" /></noscript>
-    <script>$(document).ready(function () {
+    <script>
+    $(document).ready(function () {
             $('#nav-icon3').click(function () {
                 $(this).toggleClass('open');
             });

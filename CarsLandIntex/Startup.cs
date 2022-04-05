@@ -37,12 +37,12 @@ namespace CarsLandIntex
                 options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<CrashDataDBContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
-            //services.AddScoped<ICrashRepository, EFCrashRepo>();
-            //services.AddScoped<ISeverityRepo, EFSeverityRepo>();
+            services.AddScoped<ICrashRepository, EFCrashRepo>();
+            services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {
@@ -103,11 +103,11 @@ namespace CarsLandIntex
             app.UseCookiePolicy();
 
             //Adding in the Content Security Policy HTTP header response
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'nonce-MasonEmmaRyanLevi' ;") ;
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'nonce-MasonEmmaRyanLevi' ;");
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
@@ -116,7 +116,7 @@ namespace CarsLandIntex
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
-                //endpoints.MapFallbackToPage("/admin/{*catchall}");
+                
                 //endpoints.MapFallbackToPage("/admin/{*catchall}", "/Areas/Identity/Pages/Admin/Index");
             });
 
