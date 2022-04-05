@@ -41,8 +41,8 @@ namespace CarsLandIntex
             {
                 options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
-            //services.AddScoped<ICrashRepository, EFCrashRepo>();
-            //services.AddScoped<ISeverityRepo, EFSeverityRepo>();
+            services.AddScoped<ICrashRepository, EFCrashRepo>();
+            services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {

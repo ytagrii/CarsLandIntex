@@ -12,7 +12,7 @@ namespace CarsLandIntex.Models
             context = temp;
         }
 
-        public IQueryable<Crash> Crashes => context.Crashes;
+        public IQueryable<Crash> Crashes => context.master;
 
         public void UpdateCrash(Crash c)
         {
@@ -31,7 +31,7 @@ namespace CarsLandIntex.Models
         }
         public List<Crash> GetAll(int id)
         {
-            var c = context.Crashes.Where(x => x.CRASH_SEVERITY_ID == id).ToList();
+            var c = context.master.Where(x => x.CRASH_SEVERITY_ID == id).ToList();
             return c;
         }
         
