@@ -15,9 +15,7 @@
                 <td>MFA Enabled?</td>
                 <td>Email</td>
                 <td>Email Confirmed</td>
-                <td>Admin Role</td>
-                <td>Basic Role</td>
-                <td>Super Admin Role</td>
+                <td>Edit User</td>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +29,8 @@
                 <td>@u.TwoFactorEnabled</td>
                 <td>@u.Email</td>
                 <td>@u.EmailConfirmed</td>
-
+             </tr>
+            <tr>
                 @if (UserRoles?.Count() > 0)
                 {
                     @if (RoleData?.Count() > 0)
@@ -41,20 +40,51 @@
                             var foundRole = false;
                             @foreach (IdentityUserRole<string> iur in UserRoles)
                             {
-                                @if(u.Id == iur.UserId)
+                                @if (u.Id == iur.UserId)
                                 {
-                                    @if(iur.RoleId == ir.Id)
+                                    @if (iur.RoleId == ir.Id)
                                     {
                                         foundRole = true;
-                                        <td><button class="btn btn-sm btn-danger" @onclick="@(x => RemoveRole(u.Id, ir.Id))"
-                                                    >Revoke @ir.Name Access</button></td>
+                                        @if (ir.Name == "Super Admin")
+                                        {
+                                            <td colspan="4">
+                                                <button class="btn btn-sm btn-danger" @onclick="@(x => RemoveRole(u.Id, ir.Id))">
+                                                    Revoke @ir.Name Access
+                                                </button>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td colspan="1">
+                                                <button class="btn btn-sm btn-danger" @onclick="@(x => RemoveRole(u.Id, ir.Id))">
+                                                    Revoke @ir.Name Access
+                                                </button>
+                                            </td>
+                                        }
+
                                     }
                                 }
                             }
-                            @if(foundRole == false)
+                            @if (foundRole == false)
                             {
-                                <td><button class="btn btn-sm btn-warning" @onclick="@(x => AddRole(u.Id, ir.Id))"
-                                            >Add @ir.Name Access </button></td>
+                                @if (ir.Name == "Super Admin")
+                                {
+                                    <td colspan="4">
+                                        <button class="btn btn-sm btn-warning" @onclick="@(x => AddRole(u.Id, ir.Id))">
+                                            Add @ir.Name Access
+                                        </button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td colspan="1">
+                                        <button class="btn btn-sm btn-warning" @onclick="@(x => AddRole(u.Id, ir.Id))">
+                                            Add @ir.Name Access
+                                        </button>
+                                    </td>
+                                }
+
+
                             }
 
                         }
@@ -62,11 +92,10 @@
                 }
                 else
                 {
-                <td><button>Add Admin Access</button></td>
-                <td><button>Add Basic Access</button></td>
-                <td><button>Add Super Admin Access</button></td>
+                    <td colspan="6">Not Working</td>
+                   
                 }
-
+               
             </tr>
             }
         </tbody>
