@@ -30,6 +30,11 @@ namespace CarsLandIntex.Controllers
             return View();
         }
 
+        public IActionResult Template()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
