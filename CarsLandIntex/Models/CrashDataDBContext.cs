@@ -12,7 +12,9 @@ namespace CarsLandIntex.Models
         }
 
         //this is what migrations will reconize
-        public DbSet<Crash> Crashes { get; set; }
-        public DbSet<Severity> Severities { get; set; }
+        public DbSet<Crash> master { get; set; }
+        public DbSet<Severity> Severity { get; set; }
+        public DbSet<City> cities { get;  }
+        public DbSet<County> counties { get;  }
     }
 }
