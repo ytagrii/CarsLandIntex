@@ -1,9 +1,97 @@
 ﻿@page "/admin"
 @page "/admin/users"
+@inherits OwningComponentBase<CarsLandIntex.Data.ApplicationDbContext>
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 <h3>Users</h3>
+@if (UserData?.Count() > 0)
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Phone</td>
+                <td>MFA Enabled?</td>
+                <td>Email</td>
+                <td>Email Confirmed</td>
+                <td>Role</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (IdentityUser u in UserData)
+            {
+                <tr>
+                    <td>@u.UserName</td>
+                    <td>@u.PhoneNumber</td>
+                    <td>@u.TwoFactorEnabled</td>
+                    <td>@u.Email</td>
+                    <td>@u.EmailConfirmed</td>
+                    <td>
+                        @if (UserRoles?.Count() > 0)
+                        {
+                            @foreach (IdentityUserRole<string> iur in UserRoles)
+                            {
+                                @if (iur.UserId == u.Id)
+                                {
+                                    @if (RoleData?.Count() > 0)
+                                    {
+                                        @foreach (IdentityRole ir in RoleData)
+                                        {
+                                            @if(ir.Id == iur.RoleId)
+                                            {
+                                                @ir.Name
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (RoleData?.Count() > 0)
+{
+    @foreach (IdentityRole ir in RoleData)
+    {
+        <p>@ir.Id @ir.Name</p>
+    }
+}
+
+@if (UserRoles?.Count() > 0)
+{
+    @foreach (IdentityUserRole<string> iur in UserRoles)
+    {
+        <p>@iur.RoleId @iur.UserId</p>
+    }
+}
 
 @code {
-    
+
+    public CarsLandIntex.Data.ApplicationDbContext repo => Service;
+
+    public IEnumerable<IdentityUser> UserData { get; set; }
+    public IEnumerable<IdentityRole> RoleData { get; set; }
+    public IEnumerable<IdentityUserRole<string>> UserRoles { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        UserData = await repo.Users.ToListAsync();
+        RoleData = await repo.Roles.ToListAsync();
+        UserRoles = await repo.UserRoles.ToListAsync();
+
+    }
+
+    @*UsersContext = new CarsLandIntex.Data.ApplicationDbContext();*@
+
 }
 

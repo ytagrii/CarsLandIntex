@@ -8,9 +8,11 @@ namespace CarsLandIntex.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        //private DbContextOptions<ApplicationDbContext> context { get; set; }
+        
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            //context = options;
         }
     }
 }
