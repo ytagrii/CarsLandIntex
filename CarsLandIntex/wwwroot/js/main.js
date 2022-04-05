@@ -16,7 +16,7 @@ $(document).ready(
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
-		$header = $('#header'),
+		$header = $('#header1'),
 		$footer = $('#footer'),
 		$main = $('#main'),
 		$main_articles = $main.children('article');
@@ -100,6 +100,7 @@ $(document).ready(
 								$main_articles.removeClass('active');
 
 							// Hide header, footer.
+
 								$header.hide();
 								$footer.hide();
 
@@ -233,6 +234,7 @@ $(document).ready(
 								$main.hide();
 
 							// Show footer, header.
+
 								$footer.show();
 								$header.show();
 
@@ -343,6 +345,7 @@ $(document).ready(
 			$window.on('hashchange', function(event) {
 
 				// Empty hash?
+
 					if (location.hash == ''
 					||	location.hash == '#') {
 
@@ -395,6 +398,7 @@ $(document).ready(
 		// Initialize.
 
 			// Hide main, articles.
+
 				$main.hide();
 				$main_articles.hide();
 
