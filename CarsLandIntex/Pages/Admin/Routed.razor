@@ -1,0 +1,9 @@
+﻿@*THIS RAZOR PAGE HANDLES THE ROUTING AND SENDS A PAGE NOT FOUND IF A ROUTE IS BAD*@
+<Router AppAssembly="typeof(Startup).Assembly">
+    <Found>
+        <RouteView RouteData="@context" DefaultLayout="typeof(CarsLandIntex.Pages.Admin.AdminLayout)"></RouteView>
+    </Found>
+    <NotFound>
+        <h4 class="bg-danger text-white text-center">No Matching Route Found</h4>
+    </NotFound>
+</Router>
