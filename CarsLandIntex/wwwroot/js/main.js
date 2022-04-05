@@ -16,7 +16,8 @@ $(document).ready(
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
-		$header = $('#header1'),
+		$header = $('#header'),
+		$header1 = $('#header1'),
 		$footer = $('#footer'),
 		$main = $('#main'),
 		$main_articles = $main.children('article');
@@ -101,6 +102,7 @@ $(document).ready(
 
 							// Hide header, footer.
 
+								$header1.hide();
 								$header.hide();
 								$footer.hide();
 
@@ -175,6 +177,8 @@ $(document).ready(
 							setTimeout(function() {
 
 								// Hide header, footer.
+
+									$header1.hide();
 									$header.hide();
 									$footer.hide();
 
@@ -237,6 +241,7 @@ $(document).ready(
 
 								$footer.show();
 								$header.show();
+								$header1.show();
 
 							// Unmark as visible.
 								$body.removeClass('is-article-visible');
@@ -272,6 +277,7 @@ $(document).ready(
 						// Show footer, header.
 							$footer.show();
 							$header.show();
+							$header1.show();
 
 						// Unmark as visible.
 							setTimeout(function() {
