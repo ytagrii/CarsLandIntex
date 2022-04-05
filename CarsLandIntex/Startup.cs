@@ -103,11 +103,11 @@ namespace CarsLandIntex
             app.UseCookiePolicy();
 
             //Adding in the Content Security Policy HTTP header response
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'nonce-MasonEmmaRyanLevi' ;") ;
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'nonce-MasonEmmaRyanLevi' ;");
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
