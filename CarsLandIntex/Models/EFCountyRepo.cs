@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Linq;
+
 namespace CarsLandIntex.Models
 {
-    public class EFCountyRepo
+    public class EFCountyRepo : ICountyRepo
     {
-        public EFCountyRepo()
+        private CrashDataDBContext context { get; set; }
+        public EFCountyRepo(CrashDataDBContext temp)
         {
+            context = temp;
         }
+
+        public IQueryable<County> Counties => context.counties;
     }
 }

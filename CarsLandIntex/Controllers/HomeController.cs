@@ -14,11 +14,13 @@ namespace CarsLandIntex.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ICrashRepository repo;
+        private ICountyRepo countyContext;
 
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con)
         {
             _logger = logger;
             repo = temp;
+            countyContext = con;
         }
 
 
@@ -39,7 +41,7 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult ExploreData()
         {
-            var x = repo.Crashes.Distinct();
+            var x = repo.
             ViewBag.Counties = x;
             var data = repo.Crashes.Take(300).ToList();
             return View(data);
