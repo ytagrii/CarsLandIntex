@@ -23,12 +23,13 @@
             {
             <tr>
                 <td>@u.UserName</td>
-                <td>
-                    <input type="tel" value="@u.PhoneNumber" />
-                </td>
+                <td>@u.PhoneNumber</td>
                 <td>@u.TwoFactorEnabled</td>
                 <td>@u.Email</td>
                 <td>@u.EmailConfirmed</td>
+                <td>
+                    <NavLink class="btn btn-secondary btn-sm" href="@GetEditUrl(u.Id)">Edit</NavLink>
+                </td>
              </tr>
             <tr>
                 @if (UserRoles?.Count() > 0)
@@ -101,6 +102,10 @@
         </tbody>
     </table>
 }
+else
+{
+    <h3>No Users Found</h3>
+}
 @*@if (found == false)
 {
     <select @onclick="@(x => UpdateRole(u.Id, 1))">
@@ -170,6 +175,8 @@
         repo.SaveChanges();
         await UpdateData();
     }
+
+    public string GetEditUrl(string id) => $"/admin/users/edit/{id}";
 
 
 }
