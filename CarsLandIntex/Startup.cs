@@ -115,7 +115,11 @@ namespace CarsLandIntex
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                //endpoints.MapFallbackToPage("/admin/{*catchall}", "/Areas/Identity/Admin/Index");
             });
+
+
         }
     }
 }
