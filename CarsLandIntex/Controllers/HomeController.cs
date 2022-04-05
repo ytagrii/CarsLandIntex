@@ -34,15 +34,15 @@ namespace CarsLandIntex.Controllers
             return View();
         }
 
-        public IActionResult Template()
+        public IActionResult Severity()
         {
             return View();
         }
 
         public IActionResult ExploreData()
         {
-            var x = repo.
-            ViewBag.Counties = x;
+            //var x = countyContext
+            //ViewBag.Counties = x;
             var data = repo.Crashes.Take(300).ToList();
             return View(data);
         }
