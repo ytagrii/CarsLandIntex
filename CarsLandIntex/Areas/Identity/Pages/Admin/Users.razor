@@ -129,17 +129,15 @@
         IdentityUserRole<string> temp = new IdentityUserRole<string>();
         temp.RoleId = roleId.ToString();
         temp.UserId = userId;
-        repo.Add(temp);
+        repo.UserRoles.Add(temp);
         repo.SaveChanges();
         await UpdateData();
     }
 
     public async Task RemoveRole(string userId, string roleId)
     {
-        IdentityUserRole<string> temp = new IdentityUserRole<string>();
-        temp.RoleId = roleId.ToString();
-        temp.UserId = userId;
-        repo.Remove(temp);
+        IdentityUserRole<string> temp = repo.UserRoles.FirstOrDefault(x => x.UserId == userId && x.RoleId == roleId);
+        repo.UserRoles.Remove(temp);
         repo.SaveChanges();
         await UpdateData();
     }
