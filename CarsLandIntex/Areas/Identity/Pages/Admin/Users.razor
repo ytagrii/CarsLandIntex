@@ -15,60 +15,93 @@
                 <td>MFA Enabled?</td>
                 <td>Email</td>
                 <td>Email Confirmed</td>
-                <td>Role</td>
+                <td>Admin Role</td>
+                <td>Basic Role</td>
+                <td>Super Admin Role</td>
             </tr>
         </thead>
         <tbody>
             @foreach (IdentityUser u in UserData)
             {
-                <tr>
-                    <td>@u.UserName</td>
-                    <td>@u.PhoneNumber</td>
-                    <td>@u.TwoFactorEnabled</td>
-                    <td>@u.Email</td>
-                    <td>@u.EmailConfirmed</td>
-                    <td>
-                        @if (UserRoles?.Count() > 0)
+            <tr>
+                <td>@u.UserName</td>
+                <td>
+                    <input type="tel" value="@u.PhoneNumber" />
+                </td>
+                <td>@u.TwoFactorEnabled</td>
+                <td>@u.Email</td>
+                <td>@u.EmailConfirmed</td>
+
+                @if (UserRoles?.Count() > 0)
+                {
+                    @if (RoleData?.Count() > 0)
+                    {
+                        @foreach (IdentityRole ir in RoleData)
                         {
+                            var foundRole = false;
                             @foreach (IdentityUserRole<string> iur in UserRoles)
                             {
-                                @if (iur.UserId == u.Id)
+                                @if(u.Id == iur.UserId)
                                 {
-                                    @if (RoleData?.Count() > 0)
+                                    @if(iur.RoleId == ir.Id)
                                     {
-                                        @foreach (IdentityRole ir in RoleData)
-                                        {
-                                            @if(ir.Id == iur.RoleId)
-                                            {
-                                                @ir.Name
-                                            }
-                                        }
+                                        foundRole = true;
+                                        <td><button class="btn btn-sm btn-danger" @onclick="@(x => RemoveRole(u.Id, ir.Id))"
+                                                    >Revoke @ir.Name Access</button></td>
                                     }
                                 }
                             }
+                            @if(foundRole == false)
+                            {
+                                <td><button class="btn btn-sm btn-warning" @onclick="@(x => AddRole(u.Id, ir.Id))"
+                                            >Add @ir.Name Access </button></td>
+                            }
+
                         }
-                    </td>
-                </tr>
+                    }
+                }
+                else
+                {
+                <td><button>Add Admin Access</button></td>
+                <td><button>Add Basic Access</button></td>
+                <td><button>Add Super Admin Access</button></td>
+                }
+
+            </tr>
             }
         </tbody>
     </table>
 }
-
-@if (RoleData?.Count() > 0)
+@*@if (found == false)
 {
-    @foreach (IdentityRole ir in RoleData)
+    <select @onclick="@(x => UpdateRole(u.Id, 1))">
+        <option></option>
+        @if (RoleData?.Count() > 0)
+        {
+            @foreach (IdentityRole ir in RoleData)
+            {
+                <option value="@ir.Id">
+                    @ir.Name
+                </option>
+            }
+        }
+    </select>
+}*@
+@*@if (RoleData?.Count() > 0)
     {
-        <p>@ir.Id @ir.Name</p>
+        @foreach (IdentityRole ir in RoleData)
+        {
+            <p>@ir.Id @ir.Name</p>
+        }
     }
-}
 
-@if (UserRoles?.Count() > 0)
-{
-    @foreach (IdentityUserRole<string> iur in UserRoles)
+    @if (UserRoles?.Count() > 0)
     {
-        <p>@iur.RoleId @iur.UserId</p>
-    }
-}
+        @foreach (IdentityUserRole<string> iur in UserRoles)
+        {
+            <p>@iur.RoleId @iur.UserId</p>
+        }
+    }*@
 
 @code {
 
@@ -91,7 +124,26 @@
 
     }
 
-    @*UsersContext = new CarsLandIntex.Data.ApplicationDbContext();*@
+    public async Task AddRole(string userId, string roleId)
+    {
+        IdentityUserRole<string> temp = new IdentityUserRole<string>();
+        temp.RoleId = roleId.ToString();
+        temp.UserId = userId;
+        repo.Add(temp);
+        repo.SaveChanges();
+        await UpdateData();
+    }
+
+    public async Task RemoveRole(string userId, string roleId)
+    {
+        IdentityUserRole<string> temp = new IdentityUserRole<string>();
+        temp.RoleId = roleId.ToString();
+        temp.UserId = userId;
+        repo.Remove(temp);
+        repo.SaveChanges();
+        await UpdateData();
+    }
+
 
 }
 
