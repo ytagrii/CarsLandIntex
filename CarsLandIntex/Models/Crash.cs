@@ -29,9 +29,13 @@ namespace CarsLandIntex.Models
         public string MAIN_ROAD_NAME { get; set; }
 
         [Required]
+        public int CITY_ID { get; set; }
+        [ForeignKey("CITY_ID")]
         public string CITY { get; set; }
 
         [Required]
+        public int COUNTY_ID { get; set; }
+        [ForeignKey("COUNTY_ID")]
         public string COUNTY_NAME { get; set; }
 
         [Required]
