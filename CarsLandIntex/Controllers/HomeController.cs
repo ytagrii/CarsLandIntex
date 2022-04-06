@@ -14,13 +14,17 @@ namespace CarsLandIntex.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ICrashRepository repo;
-        private ICountyRepo countyContext;
+        private ICountyRepo countyRepo;
+        private ICityRepo cityRepo;
+        private ISeverityRepo sevRepo;
 
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
         {
             _logger = logger;
             repo = temp;
-            countyContext = con;
+            countyRepo = con;
+            cityRepo = cr;
+            sevRepo = sr;
         }
 
 
@@ -41,9 +45,13 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult ExploreData()
         {
-            //var x = countyContext
-            //ViewBag.Counties = x;
-            var data = repo.Crashes.Take(300).ToList();
+            List<County> x = countyRepo.counties.ToList();
+            List<City> cities = cityRepo.cities.ToList();
+            List<Severity> severities = sevRepo.Severities.ToList();
+            ViewBag.Counties = x;
+            ViewBag.Cities = cities;
+            ViewBag.Severity = severities;
+            var data = repo.Crashes.Take(500).ToList();
             return View(data);
         }
 
