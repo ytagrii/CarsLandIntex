@@ -1,5 +1,5 @@
 @{ ViewData["Title"] = "Full Summary"; }
-@model List<Crash>
+@model ExploreDataInfo
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -50,15 +50,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Crash c in Model)
+                        @foreach (Crash c in Model.Crashes)
                         {
-                            <tr>
-                                <td>@c.CRASH_DATETIME</td>
-                                <td>@c.COUNTY_NAME.COUNTY_NAME</td>
-                                <td>@c.MILEPOINT</td>
-                                <td>@c.CRASH_SEVERITY_ID</td>
-                            </tr>
-                         }
+            <tr>
+                <td>@c.CRASH_DATETIME</td>
+                <td>@c.COUNTY_ID</td>
+                <td>@c.MILEPOINT</td>
+                <td>@c.CRASH_SEVERITY_ID</td>
+            </tr>}
                     </tbody>
                     <tfoot>
                         <tr>

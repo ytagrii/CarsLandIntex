@@ -73,7 +73,7 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult FullSummary()
         {
-            int numberPerPage = 100000;
+            int numberPerPage = 500;
             var data = new ExploreDataInfo
             {
                 Crashes = repo.Crashes.Take(numberPerPage),
