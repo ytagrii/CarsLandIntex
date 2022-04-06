@@ -14,11 +14,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using CarsLandIntex.Models;
+using Microsoft.Data.SqlClient;
 
 namespace CarsLandIntex
 {
     public class Startup
     {
+        private string _mainConnection = null;
+        private string _authConnection = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +32,17 @@ namespace CarsLandIntex
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //This configures a secret variable for the db password
+            var mainbuilder = new SqlConnectionStringBuilder(
+            Configuration.GetConnectionString("ConnectionStrings: MainConnection"));
+            mainbuilder.Password = Configuration["DbPassword"];
+            _mainConnection = mainbuilder.ConnectionString;
+
+            var authbuilder = new SqlConnectionStringBuilder(
+            Configuration.GetConnectionString("ConnectionStrings: AuthConnection"));
+            authbuilder.Password = Configuration["DbPassword"];
+            _authConnection = authbuilder.ConnectionString;
+
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlite(
             //        Configuration.GetConnectionString("DefaultConnection")));

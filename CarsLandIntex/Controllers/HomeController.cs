@@ -78,8 +78,12 @@ namespace CarsLandIntex.Controllers
             int numberPerPage = 500;
             var data = new ExploreDataInfo
             {
-                Crashes = repo.Crashes.Take(numberPerPage),
-                Filter = new Filtering(),
+                Crashes = repo.Crashes
+                .Where(x =>x.CRASH_SEVERITY_ID == filter.severity)
+                .Where(x => x.COUNTY_ID == filter.county)
+                .Where(x => x.CITY.CITY == filter.city)
+                .Take(numberPerPage),
+                Filter = filter,
                 County = countyRepo.counties,
                 Cities = cityRepo.cities,
                 Severity = sevRepo.Severities,
