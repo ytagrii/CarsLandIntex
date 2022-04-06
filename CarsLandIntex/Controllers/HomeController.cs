@@ -44,6 +44,7 @@ namespace CarsLandIntex.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult ExploreData()
         {
             int numberPerPage = 500;
@@ -68,6 +69,34 @@ namespace CarsLandIntex.Controllers
             };
             
             
+            return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult ExploreData(Filtering filter)
+        {
+            int numberPerPage = 500;
+            var data = new ExploreDataInfo
+            {
+                Crashes = repo.Crashes.Take(numberPerPage),
+                Filter = new Filtering(),
+                County = countyRepo.counties,
+                Cities = cityRepo.cities,
+                Severity = sevRepo.Severities,
+                PageInfo = new PageInfo
+                {
+                    //this is where the total pages needed comes into play
+                    //TotalCrashes = (bookCategory == null ? repo.Books.Count() :
+                    //    repo.Books.Where(b => b.Category == bookCategory).Count()
+                    //),
+                    TotalCrashes = repo.Crashes.Count(),
+                    CrashesPerPage = numberPerPage,
+                    CurrentPage = 1
+                }
+
+            };
+
+
             return View(data);
         }
 
