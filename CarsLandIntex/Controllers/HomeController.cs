@@ -22,8 +22,7 @@ namespace CarsLandIntex.Controllers
         private ISeverityRepo sevRepo;
         private InferenceSession _session;
 
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
-        public HomeController(ILogger<HomeController> logger, InferenceSession session)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr, InferenceSession session)
         {
             _logger = logger;
             _session = session;
