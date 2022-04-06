@@ -1,0 +1,15 @@
+﻿using System;
+using System.Linq;
+
+namespace CarsLandIntex.Models.ViewModels
+{
+    public class ExploreDataInfo
+    {
+        public IQueryable<Crash> Crashes { get; set; }
+        public Filtering Filter { get; set; }
+        public IQueryable<City> Cities { get; set; }
+        public IQueryable<County> County { get; set; }
+        public IQueryable<Severity> Severity { get; set; }
+        public PageInfo PageInfo { get; set; }
+    }
+}
