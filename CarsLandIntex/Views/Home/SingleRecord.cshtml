@@ -20,12 +20,12 @@
                                     <tr>
                                         <td>Date</td>
                                         <td>
-                                            
+                                            @Model.CRASH_DATETIME.Substring(0, Model.CRASH_DATETIME.IndexOf(" "))
                                     </td>
                                     </tr>
                                     <tr>
                                         <td>Time</td>
-                                        @Model.
+                                        
 
                                         @{if (Model.hour > 12)
                                             { @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
