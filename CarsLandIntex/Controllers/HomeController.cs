@@ -161,18 +161,18 @@ namespace CarsLandIntex.Controllers
         {
             if (ModelState.IsValid)
             {
+                data.AttributeSetting(data);
 
-            }
-            data.AttributeSetting(data);
-
-            var result = _session.Run(new List<NamedOnnxValue>
+                var result = _session.Run(new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
             });
-            Tensor<long> score = result.First().AsTensor<long>();
-            var prediction = new Prediction { PredictedValue = score.First()};
-            result.Dispose();
-            return View(prediction);
+                Tensor<long> score = result.First().AsTensor<long>();
+                var prediction = new Prediction { PredictedValue = score.First() };
+                result.Dispose();
+                return View(prediction);
+            }
+            return MachineLearning();
         }
     }
 }
