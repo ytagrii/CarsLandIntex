@@ -29,11 +29,11 @@
                                         @{if (Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" "))) > 12)
                                             {
                                                 @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
-                                                <td>PM</td>
+                                                <td>@(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "))-12) PM</td>
                                             }
                                             else
                                             {
-                                                <td>AM</td>
+                                                <td>@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" ")) AM</td>
                                             }
                                           }
 
