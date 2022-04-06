@@ -3,18 +3,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self' 'unsafe-inline';
+               img-src data: https:;
+               object-src 'none';
+               script-src 'self' 'nonce-frick';
+               style-src 'self' maxcdn.bootstrapcdn.com;";
+               upgrade-insecure-requests;">
+
     <title>@ViewData["Title"] - CarsLandIntex</title>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link nonce="frick" href="~/css/site.css" rel="stylesheet" />
+    <link nonce="frick" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!--
     NEW STUFF BELOW
     -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="~/css/main.css" />
-    <noscript><link rel="stylesheet" href="~/css/noscript.css" /></noscript>
-    <script>
-    $(document).ready(function () {
+    <link nonce="frick" rel="stylesheet" href="~/css/main.css" />
+    <noscript><link nonce="frick" rel="stylesheet" href="~/css/noscript.css" /></noscript>
+    <script nonce="frick">
+        $(document).ready(function () {
             $('#nav-icon3').click(function () {
                 $(this).toggleClass('open');
             });
@@ -22,7 +33,7 @@
 </head>
 <body class="is-preload">
     <header>
-        <nav style="z-index:10;" class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3">
+        <nav nonce="frick" style="z-index:10;" class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">CarsLandIntex</a>
                 @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -77,9 +88,9 @@
             &copy; 2022 - CarsLandIntex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script nonce="frick" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script nonce="frick" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script nonce="frick" src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
     
 </body>
