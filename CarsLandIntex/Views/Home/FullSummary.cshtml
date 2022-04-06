@@ -52,14 +52,13 @@
                     <tbody>
                         @foreach (Crash c in Model.Crashes)
                         {
-            <tr>
-                <td>@c.CRASH_DATETIME</td>
-                <td>@c.County.COUNTY_NAME</td>
-                <td>@c.MILEPOINT</td>
-                <td>@c.Severity.DESCRIPTION</td>
-            </tr>}
-                    </tbody>
-                    <tfoot>
+                    <tr>
+                        <td>@c.CRASH_DATETIME</td>
+                        <td>@c.County.COUNTY_NAME</td>
+                        <td>@c.MILEPOINT</td>
+                        <td>Severity</td>
+                    </tr>}
+<tfoot>
                         <tr>
                             <td colspan="2"></td>
                             <td>100.00</td>
