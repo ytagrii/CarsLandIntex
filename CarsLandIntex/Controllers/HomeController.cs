@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CarsLandIntex.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
 
 namespace CarsLandIntex.Controllers
@@ -18,10 +20,13 @@ namespace CarsLandIntex.Controllers
         private ICountyRepo countyRepo;
         private ICityRepo cityRepo;
         private ISeverityRepo sevRepo;
+        private InferenceSession _session;
 
         public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
+        public HomeController(ILogger<HomeController> logger, InferenceSession session)
         {
             _logger = logger;
+            _session = session;
             repo = temp;
             countyRepo = con;
             cityRepo = cr;
@@ -143,6 +148,27 @@ namespace CarsLandIntex.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // Machine Learning Model Stuff
+        public IActionResult MachineLearning()
+        {
+            return View();
+        }
+            
+        [HttpPost]
+        public IActionResult Score(CrashData data)
+        {
+            data.AttributeSetting(data);
+
+            var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
+            });
+            Tensor<long> score = result.First().AsTensor<long>();
+            var prediction = new Prediction { PredictedValue = score.First()};
+            result.Dispose();
+            return View(prediction);
         }
     }
 }
