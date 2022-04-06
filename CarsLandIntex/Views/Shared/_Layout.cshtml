@@ -12,7 +12,8 @@
                object-src 'none';
                script-src 'self' 'nonce-frick';
                style-src 'self' maxcdn.bootstrapcdn.com;
-               upgrade-insecure-requests;">
+               upgrade-insecure-requests;
+               frame-src 'self' https://www.google.com/">
 
     <title>@ViewData["Title"] - CarsLandIntex</title>
     <link nonce="frick" href="~/css/site.css" rel="stylesheet" />
@@ -24,12 +25,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link nonce="frick" rel="stylesheet" href="~/css/main.css" />
     <noscript><link nonce="frick" rel="stylesheet" href="~/css/noscript.css" /></noscript>
-    <script nonce="frick">
+    @*<script nonce="frick">
         $(document).ready(function () {
             $('#nav-icon3').click(function () {
                 $(this).toggleClass('open');
             });
-        });</script>
+        });</script>*@
 </head>
 <body class="is-preload">
     <header id="header1">
@@ -72,6 +73,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="FullSummary">Full Summary</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="SingleRecord">Single Record</a>
                             </li>
                         </ul>
                     </div>

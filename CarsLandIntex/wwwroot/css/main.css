@@ -2470,3 +2470,21 @@ th{
     position: sticky;
     top: 0; /* Don't forget this, required for the stickiness */
 }
+
+.model-box {
+    position: relative;
+    width: 50%;
+    height: 0;
+    padding-top: 50%; /* This is your aspect ratio */
+}
+
+.model {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
