@@ -41,9 +41,9 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult ExploreData()
         {
-            List<County> x = countyRepo.Counties.Where(c => c.COUNTY_NAME != null).ToList();
+            List<County> x = countyRepo.counties.ToList();
             ViewBag.Counties = x;
-            var data = repo.Crashes.Take(300).ToList();
+            var data = repo.Crashes.Take(500).ToList();
             return View(data);
         }
 

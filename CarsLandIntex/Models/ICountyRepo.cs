@@ -5,6 +5,6 @@ namespace CarsLandIntex.Models
 {
     public interface ICountyRepo
     {
-        IQueryable<County> Counties { get; }
+        IQueryable<County> counties { get; }
     }
 }

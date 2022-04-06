@@ -11,6 +11,6 @@ namespace CarsLandIntex.Models
             context = temp;
         }
 
-        public IQueryable<County> Counties => context.counties;
+        public IQueryable<County> counties => context.counties;
     }
 }
