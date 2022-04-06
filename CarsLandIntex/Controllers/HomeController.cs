@@ -45,12 +45,14 @@ namespace CarsLandIntex.Controllers
         }
 
         [HttpGet]
-        public IActionResult ExploreData()
+        public IActionResult ExploreData(int pageNum = 1)
         {
-            int numberPerPage = 500;
+            int numberPerPage = 50;
             var data = new ExploreDataInfo
             {
-                Crashes = repo.Crashes.Take(numberPerPage),
+                Crashes = repo.Crashes
+                .Skip((pageNum - 1) * (numberPerPage))
+                .Take(numberPerPage),
                 Filter = new Filtering(),
                 County = countyRepo.counties,
                 Cities = cityRepo.cities,
@@ -63,7 +65,7 @@ namespace CarsLandIntex.Controllers
                     //),
                     TotalCrashes = repo.Crashes.Count(),
                     CrashesPerPage = numberPerPage,
-                    CurrentPage = 1
+                    CurrentPage = pageNum
                 }
 
             };
