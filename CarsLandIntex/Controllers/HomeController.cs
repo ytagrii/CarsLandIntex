@@ -154,10 +154,15 @@ namespace CarsLandIntex.Controllers
         {
             return View();
         }
-            
+        
+        // Actual Machine Learning Call
         [HttpPost]
         public IActionResult Score(CrashData data)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             data.AttributeSetting(data);
 
             var result = _session.Run(new List<NamedOnnxValue>
