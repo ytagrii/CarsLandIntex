@@ -120,22 +120,6 @@ namespace CarsLandIntex.Models
                     property.SetValue(randomname, 1);
                 }
             }
-
         }
-    //public void citySetting(CrashData randomname)
-    //{
-    //        PropertyInfo[] properties = typeof(CrashData).GetProperties();
-    //        foreach (PropertyInfo property in properties)
-    //        {
-    //            if (property.Name == randomname.county)
-    //            {
-    //                property.SetValue(randomname, 1);
-    //            }
-    //        }
-    //    }
-    //public void daySetting()
-    //{
-    //}
-
    }
 }

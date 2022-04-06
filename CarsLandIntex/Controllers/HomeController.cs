@@ -150,8 +150,16 @@ namespace CarsLandIntex.Controllers
         }
 
         // Machine Learning Model Stuff
-        public IActionResult MachineLearning()
+        public IActionResult MachineLearning(Prediction p)
         {
+            if (p == null)
+            {
+                ViewBag.predictions = "";
+            }
+            else
+            {
+                ViewBag.predictions = p;
+            }
             return View();
         }
         
@@ -170,9 +178,9 @@ namespace CarsLandIntex.Controllers
                 Tensor<long> score = result.First().AsTensor<long>();
                 var prediction = new Prediction { PredictedValue = score.First() };
                 result.Dispose();
-                return View(prediction);
+                return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
             }
-            return MachineLearning();
+            return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
         }
     }
 }
