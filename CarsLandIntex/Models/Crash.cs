@@ -36,7 +36,7 @@ namespace CarsLandIntex.Models
         [Required]
         public int COUNTY_ID { get; set; }
         [ForeignKey("COUNTY_ID")]
-        public County COUNTY_NAME { get; set; }
+        public County County { get; set; }
 
         [Required]
         public int CRASH_SEVERITY_ID { get; set; }
