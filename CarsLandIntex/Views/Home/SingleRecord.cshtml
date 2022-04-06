@@ -1,5 +1,5 @@
 @{ ViewData["Title"] = "Home Page"; }
-
+@model Crash
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -18,8 +18,8 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>Text</td>
-                                        <td>Variable</td>
+                                        <td>Date</td>
+                                        <td>@Model.CRASH_DATETIME</td>
                                     </tr>
                                     <tr>
                                         <td>Text</td>
@@ -41,7 +41,10 @@
                         <iframe class="model"
                                 frameborder="1"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&q=40.76544545+-111.9168294&zoom=13&maptype=satellite"
+                                @{
+                                    string api_string = "https://www.google.com/maps/embed/v1/view?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&center=" + Model.LAT_UTM_Y + "," + Model.LONG_UTM_X + "&zoom=18&maptype=satellite";
+                                }
+                                src=@api_string
                                 allowfullscreen>
                         </iframe>
                     </div>
