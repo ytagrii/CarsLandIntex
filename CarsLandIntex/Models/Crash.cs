@@ -11,94 +11,94 @@ namespace CarsLandIntex.Models
         public int CRASH_ID { get; set; }
 
         [Required]
-        public string CRASH_DATETIME { get; set; }
+        public string? CRASH_DATETIME { get; set; }
 
         [Required]
-        public int ROUTE { get; set; }
+        public int? ROUTE { get; set; }
 
         [Required]
-        public double MILEPOINT { get; set; }
+        public double? MILEPOINT { get; set; }
 
         [Required]
-        public double LAT_UTM_Y { get; set; }
+        public double? LAT_UTM_Y { get; set; }
 
         [Required]
-        public double LONG_UTM_X { get; set; }
+        public double? LONG_UTM_X { get; set; }
 
         [Required]
-        public string MAIN_ROAD_NAME { get; set; }
+        public string? MAIN_ROAD_NAME { get; set; }
 
         [Required]
-        public int CITY_ID { get; set; }
+        public int? CITY_ID { get; set; }
         [ForeignKey("CITY_ID")]
-        public City CITY { get; set; }
+        public City? CITY { get; set; }
 
         [Required]
-        public int COUNTY_ID { get; set; }
+        public int? COUNTY_ID { get; set; }
         [ForeignKey("COUNTY_ID")]
-        public County County { get; set; }
+        public County? County { get; set; }
 
         [Required]
-        public int CRASH_SEVERITY_ID { get; set; }
+        public int? CRASH_SEVERITY_ID { get; set; }
         [ForeignKey("CRASH_SEVERITY_ID")]
-        public Severity Severity { get; set; }
+        public Severity? Severity { get; set; }
 
         [Required]
-        public int WORK_ZONE_RELATED { get; set; }
+        public int? WORK_ZONE_RELATED { get; set; }
 
         [Required]
-        public int PEDESTRIAN_INVOLVED { get; set; }
+        public int? PEDESTRIAN_INVOLVED { get; set; }
 
         [Required]
-        public int BICYCLIST_INVOLVED { get; set; }
+        public int? BICYCLIST_INVOLVED { get; set; }
 
         [Required]
-        public int MOTORCYCLE_INVOLVED { get; set; }
+        public int? MOTORCYCLE_INVOLVED { get; set; }
 
         [Required]
-        public int IMPROPER_RESTRAINT { get; set; }
+        public int? IMPROPER_RESTRAINT { get; set; }
 
         [Required]
-        public int UNRESTRAINED { get; set; }
+        public int? UNRESTRAINED { get; set; }
 
         [Required]
-        public int DUI { get; set; }
+        public int? DUI { get; set; }
 
         [Required]
-        public int INTERSECTION_RELATED { get; set; }
+        public int? INTERSECTION_RELATED { get; set; }
 
         [Required]
-        public int WILD_ANIMAL_RELATED { get; set; }
+        public int? WILD_ANIMAL_RELATED { get; set; }
 
         [Required]
-        public int DOMESTIC_ANIMAL_RELATED { get; set; }
+        public int? DOMESTIC_ANIMAL_RELATED { get; set; }
 
         [Required]
-        public int OVERTURN_ROLLOVER { get; set; }
+        public int? OVERTURN_ROLLOVER { get; set; }
 
         [Required]
-        public int COMMERCIAL_MOTOR_VEH_INVOLVED { get; set; }
+        public int? COMMERCIAL_MOTOR_VEH_INVOLVED { get; set; }
 
         [Required]
-        public int TEENAGE_DRIVER_INVOLVED { get; set; }
+        public int? TEENAGE_DRIVER_INVOLVED { get; set; }
 
         [Required]
-        public int OLDER_DRIVER_INVOLVED { get; set; }
+        public int? OLDER_DRIVER_INVOLVED { get; set; }
 
         [Required]
-        public int NIGHT_DARK_CONDITION { get; set; }
+        public int? NIGHT_DARK_CONDITION { get; set; }
 
         [Required]
-        public int SINGLE_VEHICLE { get; set; }
+        public int? SINGLE_VEHICLE { get; set; }
 
         [Required]
-        public int DISTRACTED_DRIVING { get; set; }
+        public int? DISTRACTED_DRIVING { get; set; }
 
         [Required]
-        public int DROWSY_DRIVING { get; set; }
+        public int? DROWSY_DRIVING { get; set; }
 
         [Required]
-        public int ROADWAY_DEPARTURE { get; set; }
+        public int? ROADWAY_DEPARTURE { get; set; }
 
 
 
