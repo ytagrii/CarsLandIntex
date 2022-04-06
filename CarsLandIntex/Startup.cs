@@ -92,6 +92,8 @@ namespace CarsLandIntex
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("Models/carCrash.onnx"));
         }
@@ -112,7 +114,7 @@ namespace CarsLandIntex
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
