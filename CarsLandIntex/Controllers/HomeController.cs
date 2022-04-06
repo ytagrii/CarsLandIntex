@@ -131,6 +131,12 @@ namespace CarsLandIntex.Controllers
             return View(data);
         }
 
+        public IActionResult SingleRecord(int id)
+        {
+            Crash c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id);
+
+            return View(c);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
