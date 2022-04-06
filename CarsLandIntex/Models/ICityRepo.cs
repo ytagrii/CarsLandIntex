@@ -5,6 +5,6 @@ namespace CarsLandIntex.Models
 {
     public interface ICityRepo
     {
-        IQueryable<City> Cities { get; }
+        IQueryable<City> cities { get; }
     }
 }

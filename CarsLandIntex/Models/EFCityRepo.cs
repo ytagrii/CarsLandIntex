@@ -11,6 +11,6 @@ namespace CarsLandIntex.Models
             context = temp;
         }
 
-        public IQueryable<City> Cities => context.cities;
+        public IQueryable<City> cities => context.cities;
     }
 }
