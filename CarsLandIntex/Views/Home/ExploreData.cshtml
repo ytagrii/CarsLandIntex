@@ -68,19 +68,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @*@foreach (Crash c in Model.Crashes)
-                {
-                    <tr>
-                        <td>@c.CRASH_DATETIME</td>
-                        <td>@c.County.COUNTY_NAME</td>
-                        <td>@c.MILEPOINT</td>
-                        <td>@c.Severity.DESCRIPTION</td>
-                        <td>
-                            <a class="btn btn-sm" asp-controller="Home" asp-action="SingleRecord" asp-route-id="@c.CRASH_ID">View Details</a>
-                        </td>
-                    </tr>
+                    @if (Model.Crashes.Count() > 0)
+                    {
+                        @foreach (Crash c in Model.Crashes)
+                        {
+                            <tr>
+                                <td>@c.CRASH_DATETIME</td>
+                                <td>@c.County.COUNTY_NAME</td>
+                                <td>@c.MILEPOINT</td>
+                                <td>@c.Severity.DESCRIPTION</td>
+                                <td>
+                                    <a class="btn btn-sm" asp-controller="Home" asp-action="SingleRecord" asp-route-id="@c.CRASH_ID">View Details</a>
+                                </td>
+                            </tr>
 
-                }*@
+                        }
+                    }
                 </tbody>
             </table>
             <br />

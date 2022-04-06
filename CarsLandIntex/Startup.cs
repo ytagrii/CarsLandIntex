@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using CarsLandIntex.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.ML.OnnxRuntime;
 
 namespace CarsLandIntex
 {
@@ -91,6 +92,8 @@ namespace CarsLandIntex
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("Models/carCrash.onnx"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
