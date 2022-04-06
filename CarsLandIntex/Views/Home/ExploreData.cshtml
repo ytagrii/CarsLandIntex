@@ -68,27 +68,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Crash c in Model.Crashes)
-                    {
-                        <tr>
-                            <td>@c.CRASH_DATETIME</td>
-                            <td>@c.County.COUNTY_NAME</td>
-                            <td>@c.MILEPOINT</td>
-                            <td>@c.Severity.DESCRIPTION</td>
-                            <td>
-                                <a class="btn btn-sm" asp-controller="Home" asp-action="SingleRecord" asp-route-id="@c.CRASH_ID">View Details</a>
-                            </td>
-                        </tr>
+                    @*@foreach (Crash c in Model.Crashes)
+                {
+                    <tr>
+                        <td>@c.CRASH_DATETIME</td>
+                        <td>@c.County.COUNTY_NAME</td>
+                        <td>@c.MILEPOINT</td>
+                        <td>@c.Severity.DESCRIPTION</td>
+                        <td>
+                            <a class="btn btn-sm" asp-controller="Home" asp-action="SingleRecord" asp-route-id="@c.CRASH_ID">View Details</a>
+                        </td>
+                    </tr>
 
-                    }
+                }*@
                 </tbody>
             </table>
             <br />
             <br />
-            <div book-page="@Model.PageInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
+            <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="1">First Page</a>
+            <div crash-page="@Model.PageInfo" page-action="ExploreData"
+                 page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
                  page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+            <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="@Model.PageInfo.TotalPages">Last Page</a>
             <br />
             <br />
+            <br />
+       
+
 
         </div>
     </div>
