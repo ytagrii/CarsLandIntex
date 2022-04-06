@@ -17,6 +17,7 @@ $(document).ready(
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
 		$header = $('#header'),
+		$header1 = $('#header1'),
 		$footer = $('#footer'),
 		$main = $('#main'),
 		$main_articles = $main.children('article');
@@ -100,6 +101,8 @@ $(document).ready(
 								$main_articles.removeClass('active');
 
 							// Hide header, footer.
+
+								$header1.hide();
 								$header.hide();
 								$footer.hide();
 
@@ -174,6 +177,8 @@ $(document).ready(
 							setTimeout(function() {
 
 								// Hide header, footer.
+
+									$header1.hide();
 									$header.hide();
 									$footer.hide();
 
@@ -233,8 +238,10 @@ $(document).ready(
 								$main.hide();
 
 							// Show footer, header.
+
 								$footer.show();
 								$header.show();
+								$header1.show();
 
 							// Unmark as visible.
 								$body.removeClass('is-article-visible');
@@ -270,6 +277,7 @@ $(document).ready(
 						// Show footer, header.
 							$footer.show();
 							$header.show();
+							$header1.show();
 
 						// Unmark as visible.
 							setTimeout(function() {
@@ -343,6 +351,7 @@ $(document).ready(
 			$window.on('hashchange', function(event) {
 
 				// Empty hash?
+
 					if (location.hash == ''
 					||	location.hash == '#') {
 
@@ -395,6 +404,7 @@ $(document).ready(
 		// Initialize.
 
 			// Hide main, articles.
+
 				$main.hide();
 				$main_articles.hide();
 

@@ -43,6 +43,8 @@ namespace CarsLandIntex
             });
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
+            services.AddScoped<ICountyRepo, EFCountyRepo>();
+            services.AddScoped<ICityRepo, EFCityRepo>();
             //This is for the HTTP to HTTPS redirect
             services.AddHttpsRedirection(options =>
             {

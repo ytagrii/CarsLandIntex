@@ -32,8 +32,8 @@
         });</script>
 </head>
 <body class="is-preload">
-    <header>
-        <nav nonce="frick" style="z-index:10;" class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3">
+    <header id="header1">
+        <nav style="z-index:10;" class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">CarsLandIntex</a>
                 @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -65,10 +65,13 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Template">Template</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ExploreData">View Data</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Severity">Severity</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="FullSummary">Severity</a>
                             </li>
                         </ul>
                     </div>

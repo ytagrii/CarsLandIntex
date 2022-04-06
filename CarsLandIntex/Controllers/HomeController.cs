@@ -13,13 +13,21 @@ namespace CarsLandIntex.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ICrashRepository repo;
+        private ICountyRepo countyRepo;
+        private ICityRepo cityRepo;
+        private ISeverityRepo sevRepo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
         {
             _logger = logger;
+            repo = temp;
+            countyRepo = con;
+            cityRepo = cr;
+            sevRepo = sr;
         }
 
-        
+
         public IActionResult Index()
         {
             return View();
@@ -30,9 +38,33 @@ namespace CarsLandIntex.Controllers
             return View();
         }
 
-        public IActionResult Template()
+        public IActionResult Severity()
         {
             return View();
+        }
+
+        public IActionResult ExploreData()
+        {
+            List<County> x = countyRepo.counties.ToList();
+            List<City> cities = cityRepo.cities.ToList();
+            List<Severity> severities = sevRepo.Severities.ToList();
+            ViewBag.Counties = x;
+            ViewBag.Cities = cities;
+            ViewBag.Severity = severities;
+            var data = repo.Crashes.Take(500).ToList();
+            return View(data);
+        }
+
+        public IActionResult FullSummary()
+        {
+            List<County> x = countyRepo.counties.ToList();
+            List<City> cities = cityRepo.cities.ToList();
+            List<Severity> severities = sevRepo.Severities.ToList();
+            ViewBag.Counties = x;
+            ViewBag.Cities = cities;
+            ViewBag.Severity = severities;
+            var data = repo.Crashes.Take(500).ToList();
+            return View(data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
