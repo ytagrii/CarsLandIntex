@@ -33,15 +33,15 @@ namespace CarsLandIntex
         public void ConfigureServices(IServiceCollection services)
         {
             //This configures a secret variable for the db password
-            var mainbuilder = new SqlConnectionStringBuilder(
-            Configuration.GetConnectionString("ConnectionStrings: MainConnection"));
-            mainbuilder.Password = Configuration["DbPassword"];
-            _mainConnection = mainbuilder.ConnectionString;
+            //var mainbuilder = new SqlConnectionStringBuilder(
+            //Configuration.GetConnectionString("ConnectionStrings: MainConnection"));
+            //mainbuilder.Password = Configuration["DbPassword"];
+            //_mainConnection = mainbuilder.ConnectionString;
 
-            var authbuilder = new SqlConnectionStringBuilder(
-            Configuration.GetConnectionString("ConnectionStrings: AuthConnection"));
-            authbuilder.Password = Configuration["DbPassword"];
-            _authConnection = authbuilder.ConnectionString;
+            //var authbuilder = new SqlConnectionStringBuilder(
+            //Configuration.GetConnectionString("ConnectionStrings: AuthConnection"));
+            //authbuilder.Password = Configuration["DbPassword"];
+            //_authConnection = authbuilder.ConnectionString;
 
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlite(
