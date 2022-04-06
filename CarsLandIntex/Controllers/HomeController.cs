@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 //using Microsoft.ML.OnnxRuntime;
 //using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
+using CarsLandIntex.Infastructure;
 
 namespace CarsLandIntex.Controllers
 {
@@ -52,12 +53,21 @@ namespace CarsLandIntex.Controllers
         public IActionResult ExploreData(int pageNum = 1)
         {
             int numberPerPage = 50;
+            Filtering filter = HttpContext.Session.GetJson<Filtering>("filter") ?? new Filtering();
+            if(filter.county == 0)
+            {
+                filter.county = null;
+            }
             var data = new ExploreDataInfo
             {
                 Crashes = repo.Crashes
+                .Where(x => (filter.severity == null ? x.CRASH_SEVERITY_ID != null : x.CRASH_SEVERITY_ID == filter.severity)
+                    && (filter.county == null ? x.COUNTY_ID != null : x.COUNTY_ID == filter.county)
+                    && (filter.city == null ? x.CITY_ID != null : x.CITY.CITY == filter.city)
+                )
                 .Skip((pageNum - 1) * (numberPerPage))
                 .Take(numberPerPage),
-                Filter = new Filtering(),
+                Filter = filter,
                 County = countyRepo.counties,
                 Cities = cityRepo.cities,
                 Severity = sevRepo.Severities,
@@ -81,15 +91,17 @@ namespace CarsLandIntex.Controllers
         [HttpPost]
         public IActionResult ExploreData(Filtering filter)
         {
-            int numberPerPage = 500;
+            HttpContext.Session.SetJson("filter", filter);
+            int numberPerPage = 50;
             var data = new ExploreDataInfo
             {
                 Crashes = repo.Crashes
-                .Where(x =>x.CRASH_SEVERITY_ID == filter.severity)
-                .Where(x => x.COUNTY_ID == filter.county)
-                .Where(x => x.CITY.CITY == filter.city)
+                .Where(x => (filter.severity == null ? x.CRASH_SEVERITY_ID != null : x.CRASH_SEVERITY_ID == filter.severity)
+                    && (filter.county == null ? x.COUNTY_ID != null : x.COUNTY_ID == filter.county)
+                    && (filter.city == null ? x.CITY_ID != null : x.CITY.CITY == filter.city)
+                )
                 .Take(numberPerPage),
-                Filter = filter,
+                Filter = HttpContext.Session.GetJson<Filtering>("filter"),
                 County = countyRepo.counties,
                 Cities = cityRepo.cities,
                 Severity = sevRepo.Severities,

@@ -61,8 +61,8 @@
                 <thead>
                     <tr>
                         <td>Date</td>
-                        <td>Route</td>
-                        <td>Milepoint</td>
+                        <td>County</td>
+                        <td>City</td>
                         <td>Crash Severity</td>
                         <td></td>
                     </tr>
@@ -70,13 +70,13 @@
                 <tbody>
                     @if (Model.Crashes.Count() > 0)
                     {
-                        @foreach (Crash c in Model.Crashes)
+                        @foreach (var c in Model.Crashes)
                         {
                             <tr>
-                                <td>@c.CRASH_DATETIME</td>
-                                <td>@c.County.COUNTY_NAME</td>
-                                <td>@c.MILEPOINT</td>
-                                <td>@c.Severity.DESCRIPTION</td>
+                                <td>@c?.CRASH_DATETIME</td>
+                                <td>@c?.County.COUNTY_NAME</td>
+                                <td>@c?.CITY.CITY</td>
+                                <td>@c?.Severity.DESCRIPTION</td>
                                 <td>
                                     <a class="btn btn-sm" asp-controller="Home" asp-action="SingleRecord" asp-route-id="@c.CRASH_ID">View Details</a>
                                 </td>
@@ -92,7 +92,8 @@
             <div crash-page="@Model.PageInfo" page-action="ExploreData"
                  page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
                  page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
-            <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="@Model.PageInfo.TotalPages">Last Page</a>
+            <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="@Model.PageInfo.TotalPages"
+                    >Last Page</a>
             <br />
             <br />
             <br />
