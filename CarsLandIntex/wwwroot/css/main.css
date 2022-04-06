@@ -2465,3 +2465,8 @@ body.is-preload #header3 {
 .i-font-size {
    font-size: 2em;
 }
+
+th{
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+}
