@@ -99,7 +99,14 @@ namespace CarsLandIntex.Models
 
         [Required]
         public int? ROADWAY_DEPARTURE { get; set; }
-
+        [Required]
+        public long month { get; set; }
+        [Required]
+        public long hour { get; set; }
+        [Required]
+        public long minute { get; set; }
+        [Required]
+        public string weekday { get; set; }
 
 
     }
