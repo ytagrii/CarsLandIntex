@@ -73,13 +73,26 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult FullSummary()
         {
-            List<County> x = countyRepo.counties.ToList();
-            List<City> cities = cityRepo.cities.ToList();
-            List<Severity> severities = sevRepo.Severities.ToList();
-            ViewBag.Counties = x;
-            ViewBag.Cities = cities;
-            ViewBag.Severity = severities;
-            var data = repo.Crashes.ToList();
+            int numberPerPage = 100000;
+            var data = new ExploreDataInfo
+            {
+                Crashes = repo.Crashes.Take(numberPerPage),
+                Filter = new Filtering(),
+                County = countyRepo.counties,
+                Cities = cityRepo.cities,
+                Severity = sevRepo.Severities,
+                PageInfo = new PageInfo
+                {
+                    //this is where the total pages needed comes into play
+                    //TotalCrashes = (bookCategory == null ? repo.Books.Count() :
+                    //    repo.Books.Where(b => b.Category == bookCategory).Count()
+                    //),
+                    TotalCrashes = repo.Crashes.Count(),
+                    CrashesPerPage = numberPerPage,
+                    CurrentPage = 1
+                }
+
+            };
             return View(data);
         }
 
