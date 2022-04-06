@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Explore Data";
 }
-@model List<Crash>
+@model ExploreDataInfo
 <!-- Wrapper -->
 <div id="" >
     <div class="row">
@@ -13,7 +13,7 @@
                     <lablel>County</lablel>
                     <select>
                         <option></option>
-                        @foreach (County county in ViewBag.Counties)
+                        @foreach (County county in Model.County)
                         {
                             <option value="@county">@county.COUNTY_NAME</option>
                         }
@@ -23,7 +23,7 @@
                     <label>City</label>
                     <input list="cities" type="text" />
                     <datalist id="cities">
-                        @foreach (City city in ViewBag.Cities)
+                        @foreach (City city in Model.Cities)
                         {
                             <option value="@city.CITY"></option>
                         }
@@ -41,7 +41,7 @@
                     <label>Crash Severity</label>
                     <select>
                         <option></option>
-                        @foreach (Severity sev in ViewBag.Severity)
+                        @foreach (Severity sev in Model.Severity)
                         {
                             <option value="@sev">@sev.DESCRIPTION</option>
                         }
@@ -67,7 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Crash c in Model)
+                    @foreach (Crash c in Model.Crashes)
                     {
                         <tr>
                             <td>@c.CRASH_DATETIME</td>
