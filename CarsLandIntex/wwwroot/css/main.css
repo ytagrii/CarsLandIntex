@@ -2473,7 +2473,7 @@ th{
 
 .model-box {
     position: relative;
-    width: 70%;
+    width: 50%;
     height: 0;
     padding-top: 50%; /* This is your aspect ratio */
 }
@@ -2495,7 +2495,7 @@ th{
 
 .cushyBoi {
     position: relative;
-    width: 30%;
+    width: 50%;
     height: 0;
     padding-top: 50%; /* This is your aspect ratio */
 }
