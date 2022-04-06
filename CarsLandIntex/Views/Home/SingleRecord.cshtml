@@ -19,15 +19,32 @@
                                 <tbody>
                                     <tr>
                                         <td>Date</td>
-                                        <td>@Model.CRASH_DATETIME</td>
+                                        <td>
+                                            @Model.CRASH_DATETIME.Substring(0, Model.CRASH_DATETIME.IndexOf(" "))
+                                    </td>
                                     </tr>
                                     <tr>
-                                        <td>Text</td>
-                                        <td>Variable</td>
+                                        <td>Time</td>
+
+                                        @{if (Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" "))) > 12)
+                                            {
+                                                @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
+                                                <td>PM</td>
+                                            }
+                                            else
+                                            {
+                                                <td>AM</td>
+                                            }
+                                          }
+
                                     </tr>
                                     <tr>
-                                        <td>Text</td>
-                                        <td>Variable</td>
+                                        <td>Latitude</td>
+                                        <td>@Model.LAT_UTM_Y</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Longitude</td>
+                                        <td>@Model.LONG_UTM_X</td>
                                     </tr>
                                     <tr>
                                         <td>Text</td>
@@ -42,7 +59,7 @@
                                 frameborder="1"
                                 referrerpolicy="no-referrer-when-downgrade"
                                 @{
-                                    string api_string = "https://www.google.com/maps/embed/v1/view?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&center=" + Model.LAT_UTM_Y + "," + Model.LONG_UTM_X + "&zoom=18&maptype=satellite";
+                                    string api_string = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&q=" + Model.LAT_UTM_Y + "+" + Model.LONG_UTM_X + "&zoom=16&maptype=satellite";
                                 }
                                 src=@api_string
                                 allowfullscreen>
