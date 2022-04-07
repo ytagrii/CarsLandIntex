@@ -138,6 +138,32 @@ namespace CarsLandIntex.Models
             month = Convert.ToInt64(c.month);
             hour = Convert.ToInt64(c.hour);
             minute = Convert.ToInt64(c.minute);
+
+            string cityParsed = c.CITY.CITY.ToString().ToUpper().Replace(" ", "_");
+            cityParsed = "city_" + cityParsed;
+
+            string countyParsed = c.County.ToString().ToUpper().Replace(" ", "_");
+            countyParsed = "county_" + countyParsed;
+
+            PropertyInfo[] properties = typeof(CrashData).GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.Name == countyParsed)
+                {
+                    property.SetValue(countyParsed, 1);
+                }
+
+                if (property.Name == cityParsed)
+                {
+                    property.SetValue(cityParsed, 1);
+                }
+
+                if (property.Name == c.weekday)
+                {
+                    property.SetValue(c.weekday, 1);
+                }
+            }
         }
     }
 }
