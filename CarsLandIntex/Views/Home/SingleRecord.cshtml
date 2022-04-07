@@ -14,16 +14,16 @@
                                     {
                                         if (Model.crash.hour > 12)
                                         {
-                        <td>@(Model.crash.hour - 12):@Model.crash.minute PM</td> }
+                        <td>@(Model.crash.hour - 12):@(Model.crash.minute)PM</td> }
                                         else if (Model.crash.hour == 12)
                                         {
-                        <td>@(Model.crash.hour):@Model.crash.minute PM</td> }
+                        <td>@(Model.crash.hour):@(Model.crash.minute)PM</td> }
                                         else if (Model.crash.hour == 0)
                                         {
-                        <td>12:@Model.crash.minute AM</td> }
+                        <td>12:@(Model.crash.minute)AM</td> }
                     else
                     {
-                <td>@(Model.crash.hour):@Model.crash.minute AM</td> }
+                <td>@(Model.crash.hour):@(Model.crash.minute)AM</td> }
                             }
                             else
                             {
@@ -41,7 +41,7 @@
                 <td>@Model.crash.hour:0@(Model.crash.minute)AM</td> }
                             } }
 
-                    a car crash occurred. As a result of the crash there was @(Model.crash.Severity.Sentence_Usable).
+                    a motor vehicle accident occurred. As a result of the accident there was @(Model.crash.Severity.Sentence_Usable).
 
                     The driver was
 
