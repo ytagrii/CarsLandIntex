@@ -17,17 +17,17 @@ namespace CarsLandIntex.Models
 
         public void UpdateCrash(Crash c)
         {
-            context.Update(c);
+            context.master.Update(c);
             context.SaveChanges();
         }
         public void DeleteCrash(Crash c)
         {
-            context.Remove(c);
+            context.master.Remove(c);
             context.SaveChanges();
         }
         public void AddCrash(Crash c)
         {
-            context.Add(c);
+            context.master.Add(c);
             context.SaveChanges();
         }
         public List<Crash> GetAll(int id)

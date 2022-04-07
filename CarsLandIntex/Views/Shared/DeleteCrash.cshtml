@@ -9,6 +9,6 @@
     <form method="post" asp-controller="Home" asp-action="DeleteCrash">
         <input type="hidden" asp-for="@Model.CRASH_ID" />
         <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-        <a class="btn btn-lg btn-success" asp-controller="Home" asp-route="SingleRecord" asp-route-id="@Model.CRASH_ID">Cancel</a>
+        @*<a class="btn btn-lg btn-success" asp-controller="Home" asp-route="ExploreData">Cancel</a>*@
     </form>
 </div>

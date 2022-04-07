@@ -129,11 +129,11 @@ namespace CarsLandIntex.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditCrash()
+        public IActionResult EditCrash(int id)
         {
             var data = new EditAddCrashData
             {
-                crash = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == 11282098),
+                crash = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id),
                 Cities = cityRepo.cities,
                 County = countyRepo.counties,
                 Severity = sevRepo.Severities
@@ -145,6 +145,22 @@ namespace CarsLandIntex.Controllers
         public IActionResult EditCrash(Crash crash)
         {
             repo.UpdateCrash(crash);
+
+            return RedirectToAction("ExploreData");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteCrash(int id)
+        {
+            Crash c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id);
+            return View(c);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCrash(Crash crash)
+        {
+            var x = repo.Crashes.FirstOrDefault(r => r.CRASH_ID == crash.CRASH_ID);
+            repo.DeleteCrash(x);
 
             return RedirectToAction("ExploreData");
         }
