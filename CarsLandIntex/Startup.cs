@@ -21,8 +21,8 @@ namespace CarsLandIntex
 {
     public class Startup
     {
-        private string _mainConnection = null;
-        private string _authConnection = null;
+        //private string _mainConnection = null;
+        //private string _authConnection = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -106,11 +106,9 @@ namespace CarsLandIntex
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseExceptionHandler("Home/Error");
             }
-            app.UseHttpsRedirection();
+            app.UseHsts();
             app.UseStaticFiles();
 
             app.UseRouting();
