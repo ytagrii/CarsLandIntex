@@ -198,6 +198,7 @@ namespace CarsLandIntex.Controllers
                 crash.minute = crash.CRASH_DATETIME.Value.Minute;
                 crash.month = crash.CRASH_DATETIME.Value.Month;
             }
+            //if(crash.)
             
             if (ModelState.IsValid)
             {
