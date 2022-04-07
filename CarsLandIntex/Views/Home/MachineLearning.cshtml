@@ -2,179 +2,546 @@
     ViewData["Title"] = "Predictions";
 }
 @model CrashData
+<div id="wrapper">
 
-<form class="form" method="post" asp-controller="Home" asp-action="Score">
-
-    <div class="text-danger" asp-validation-summary="All"></div>
-
-    <div class="form-group">
-        <label>Was a Ped Involved?</label>
-        <input type="radio" id="pedestrian_involved" name="pedestrian_involved" asp-for="pedestrian_involved" value="1">
-        <label for="pedestrian_involved" asp-for="pedestrian_involved">Yes</label>
-        <input type="radio" id="pedestrian_involved1" name="pedestrian_involved" asp-for="pedestrian_involved" value="0">
-        <label for="pedestrian_involved1" asp-for="pedestrian_involved">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a Cyclist Involved?</label>
-        <input type="radio" id="bicyclist_involved" name="bicyclist_involved" asp-for="bicyclist_involved" value="1">
-        <label for="bicyclist_involved" asp-for="bicyclist_involved">Yes</label>
-        <input type="radio" id="bicyclist_involved1" name="bicyclist_involved" asp-for="bicyclist_involved" value="0">
-        <label for="bicyclist_involved1" asp-for="bicyclist_involved">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a motorcycle_involved Involved?</label>
-        <input type="radio" id="motorcycle_involved" name="motorcycle_involved" asp-for="motorcycle_involved" value="1">
-        <label for="motorcycle_involved" asp-for="motorcycle_involved">Yes</label>
-        <input type="radio" id="motorcycle_involved1" name="motorcycle_involved" asp-for="motorcycle_involved" value="0">
-        <label for="motorcycle_involved1" asp-for="motorcycle_involved">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a  improper_restraint Involved?</label>
-        <input type="radio" id="improper_restraint" name="improper_restraint" asp-for="improper_restraint" value="1">
-        <label for="improper_restraint" asp-for="improper_restraint">Yes</label>
-        <input type="radio" id="improper_restraint1" name="improper_restraint" asp-for="improper_restraint" value="0">
-        <label for="improper_restraint1" asp-for="improper_restraint">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a unrestrained Involved?</label>
-        <input type="radio" id="unrestrained" name="unrestrained" asp-for="unrestrained" value="1">
-        <label for="unrestrained" asp-for="unrestrained">Yes</label>
-        <input type="radio" id="unrestrained1" name="unrestrained" asp-for="unrestrained" value="0">
-        <label for="unrestrained1" asp-for="unrestrained">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a dui Involved?</label>
-        <input type="radio" id="dui" name="dui" asp-for="dui" value="1">
-        <label for="dui" asp-for="dui">Yes</label>
-        <input type="radio" id="dui1" name="dui" asp-for="dui" value="0">
-        <label for="dui1" asp-for="dui">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a intersection_related Involved?</label>
-        <input type="radio" id="intersection_related" name="intersection_related" asp-for="intersection_related" value="1">
-        <label for="intersection_related" asp-for="intersection_related">Yes</label>
-        <input type="radio" id="intersection_related1" name="intersection_related" asp-for="intersection_related" value="0">
-        <label for="intersection_related1" asp-for="intersection_related">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a overturn_rollover Involved?</label>
-        <input type="radio" id="overturn_rollover" name="overturn_rollover" asp-for="overturn_rollover" value="1">
-        <label for="overturn_rollover" asp-for="overturn_rollover">Yes</label>
-        <input type="radio" id="overturn_rollover1" name="overturn_rollover" asp-for="overturn_rollover" value="0">
-        <label for="overturn_rollover1" asp-for="overturn_rollover">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a older_driver_involved Involved?</label>
-        <input type="radio" id="older_driver_involved" name="older_driver_involved" asp-for="older_driver_involved" value="1">
-        <label for="older_driver_involved" asp-for="older_driver_involved">Yes</label>
-        <input type="radio" id="older_driver_involved1" name="older_driver_involved" asp-for="older_driver_involved" value="0">
-        <label for="older_driver_involved1" asp-for="older_driver_involved">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a single_vehicle Involved?</label>
-        <input type="radio" id="single_vehicle" name="single_vehicle" asp-for="single_vehicle" value="1">
-        <label for="single_vehicle" asp-for="single_vehicle">Yes</label>
-        <input type="radio" id="single_vehicle1" name="single_vehicle" asp-for="single_vehicle" value="0">
-        <label for="single_vehicle1" asp-for="single_vehicle">No</label>
+    <!-- Header -->
+    <div id="header">
+        <div class="logo">
+            <i class="fa fa-car i-font-size" aria-hidden="true"></i>
+        </div>
+        <div class="content">
+            <div class="inner">
+                <h1>Machine Learning Predictions</h1>
+                <p>
+                    We have implented a few models to help identify issues and trends in car accidents to aide with decision making
+                </p>
+            </div>
+        </div>
+        <nav>
+            <ul class="main_buttons">
+                <li><a href="#severity">Severity Prediction</a></li>
+                <li><a href="#result">Results</a></li>
+                <li><a href="#about">Button3</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <div class="form-group">
-        <label>Was a distracted_driving Involved?</label>
-        <input type="radio" id="distracted_driving" name="distracted_driving" asp-for="distracted_driving" value="1">
-        <label for="distracted_driving" asp-for="distracted_driving">Yes</label>
-        <input type="radio" id="distracted_driving1" name="distracted_driving" asp-for="distracted_driving" value="0">
-        <label for="distracted_driving1" asp-for="distracted_driving">No</label>
+    <!-- Main -->
+    <div id="main">
+        <!-- Intro -->
+        <!-- The First button contains the form for the Severity Prediction-->
+        <article id="severity">
+            <h2 class="major">Severity Prediction</h2>
+            <h4>Predict how severe a car accident will be based on the below conditions</h4>
+            <form class="form" method="post" asp-controller="Home" asp-action="Score">
+
+                <div asp-validation-summary="All"></div>
+
+                <div class="form-group">
+                    <label>Was a pedestrian involved?</label>
+                    <input type="radio" id="pedestrian_involved" name="pedestrian_involved" asp-for="pedestrian_involved" value="1">
+                    <label for="pedestrian_involved" asp-for="pedestrian_involved">Yes</label>
+                    <input type="radio" id="pedestrian_involved1" name="pedestrian_involved" asp-for="pedestrian_involved" value="0">
+                    <label for="pedestrian_involved1" asp-for="pedestrian_involved">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a cyclist involved?</label>
+                    <input type="radio" id="bicyclist_involved" name="bicyclist_involved" asp-for="bicyclist_involved" value="1">
+                    <label for="bicyclist_involved" asp-for="bicyclist_involved">Yes</label>
+                    <input type="radio" id="bicyclist_involved1" name="bicyclist_involved" asp-for="bicyclist_involved" value="0">
+                    <label for="bicyclist_involved1" asp-for="bicyclist_involved">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a motorcycle involved?</label>
+                    <input type="radio" id="motorcycle_involved" name="motorcycle_involved" asp-for="motorcycle_involved" value="1">
+                    <label for="motorcycle_involved" asp-for="motorcycle_involved">Yes</label>
+                    <input type="radio" id="motorcycle_involved1" name="motorcycle_involved" asp-for="motorcycle_involved" value="0">
+                    <label for="motorcycle_involved1" asp-for="motorcycle_involved">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a person improperly wearing a seatbelt?</label>
+                    <input type="radio" id="improper_restraint" name="improper_restraint" asp-for="improper_restraint" value="1">
+                    <label for="improper_restraint" asp-for="improper_restraint">Yes</label>
+                    <input type="radio" id="improper_restraint1" name="improper_restraint" asp-for="improper_restraint" value="0">
+                    <label for="improper_restraint1" asp-for="improper_restraint">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a person not wearing a seatbelt?</label>
+                    <input type="radio" id="unrestrained" name="unrestrained" asp-for="unrestrained" value="1">
+                    <label for="unrestrained" asp-for="unrestrained">Yes</label>
+                    <input type="radio" id="unrestrained1" name="unrestrained" asp-for="unrestrained" value="0">
+                    <label for="unrestrained1" asp-for="unrestrained">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a DUI involved?</label>
+                    <input type="radio" id="dui" name="dui" asp-for="dui" value="1">
+                    <label for="dui" asp-for="dui">Yes</label>
+                    <input type="radio" id="dui1" name="dui" asp-for="dui" value="0">
+                    <label for="dui1" asp-for="dui">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was the incident related to an intersection?</label>
+                    <input type="radio" id="intersection_related" name="intersection_related" asp-for="intersection_related" value="1">
+                    <label for="intersection_related" asp-for="intersection_related">Yes</label>
+                    <input type="radio" id="intersection_related1" name="intersection_related" asp-for="intersection_related" value="0">
+                    <label for="intersection_related1" asp-for="intersection_related">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Did the vehicle overturn or rollover?</label>
+                    <input type="radio" id="overturn_rollover" name="overturn_rollover" asp-for="overturn_rollover" value="1">
+                    <label for="overturn_rollover" asp-for="overturn_rollover">Yes</label>
+                    <input type="radio" id="overturn_rollover1" name="overturn_rollover" asp-for="overturn_rollover" value="0">
+                    <label for="overturn_rollover1" asp-for="overturn_rollover">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was a driver older than 64 involved?</label>
+                    <input type="radio" id="older_driver_involved" name="older_driver_involved" asp-for="older_driver_involved" value="1">
+                    <label for="older_driver_involved" asp-for="older_driver_involved">Yes</label>
+                    <input type="radio" id="older_driver_involved1" name="older_driver_involved" asp-for="older_driver_involved" value="0">
+                    <label for="older_driver_involved1" asp-for="older_driver_involved">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was only a single vehicle involved?</label>
+                    <input type="radio" id="single_vehicle" name="single_vehicle" asp-for="single_vehicle" value="1">
+                    <label for="single_vehicle" asp-for="single_vehicle">Yes</label>
+                    <input type="radio" id="single_vehicle1" name="single_vehicle" asp-for="single_vehicle" value="0">
+                    <label for="single_vehicle1" asp-for="single_vehicle">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was the driver distracted?</label>
+                    <input type="radio" id="distracted_driving" name="distracted_driving" asp-for="distracted_driving" value="1">
+                    <label for="distracted_driving" asp-for="distracted_driving">Yes</label>
+                    <input type="radio" id="distracted_driving1" name="distracted_driving" asp-for="distracted_driving" value="0">
+                    <label for="distracted_driving1" asp-for="distracted_driving">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Was the driver drowsy?</label>
+                    <input type="radio" id="drowsy_driving" name="drowsy_driving" asp-for="drowsy_driving" value="1">
+                    <label for="drowsy_driving" asp-for="drowsy_driving">Yes</label>
+                    <input type="radio" id="drowsy_driving1" name="drowsy_driving" asp-for="drowsy_driving" value="0">
+                    <label for="drowsy_driving1" asp-for="drowsy_driving">No</label>
+                </div>
+                <div class="form-group">
+                    <label>Did a vehicle depart the roadway?</label>
+                    <input type="radio" id="roadway_departure" name="roadway_departure" asp-for="roadway_departure" value="1">
+                    <label for="roadway_departure" asp-for="roadway_departure">Yes</label>
+                    <input type="radio" id="roadway_departure1" name="roadway_departure" asp-for="roadway_departure" value="0">
+                    <label for="roadway_departure1" asp-for="roadway_departure">No</label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="month">Which month did this incident occur?</label>
+                    <select class="form-control" asp-for="month">
+                        <option value=1>January</option>
+                        <option value=2>Febuary</option>
+                        <option value=3>March</option>
+                        <option value=4>April</option>
+                        <option value=5>May</option>
+                        <option value=6>June</option>
+                        <option value=7>July</option>
+                        <option value=8>August</option>
+                        <option value=9>September</option>
+                        <option value=10>October</option>
+                        <option value=11>November</option>
+                        <option value=12>December</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="hour">Which hour did this incident occur?</label>
+                    <input class="form-control" asp-for="hour" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="minute">Which minute did this incident occur?</label>
+                    <input class="form-control" asp-for="minute" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="weekday">Which day of the week did this incident occur?</label>
+                    <select class="form-control" asp-for="weekday">
+                        <option value="weekday_Saturday">Saturday</option>
+                        <option value="weekday_Sunday">Sunday</option>
+                        <option value="other">Other Day of the Week</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="county">Which county did this incident occur in?</label>
+                    <select class="form-control" asp-for="county">
+                        <option value="county_name_TOOELE">Tooele</option>
+                        <option value="county_name_WASHINGTON">Washington</option>
+                        <option value="county_name_WEBER">Weber</option>
+                        <option value="other">Other County</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="city">Which cirty did this incident occur in?</label>
+                    <select class="form-control" asp-for="city">
+                        <option value="city_AMERICAN_FORK">American Fork</option>
+                        <option value="city_BLUE_CREEK">Blue Creek</option>
+                        <option value="city_BOULDER">Boulder</option>
+                        <option value="city_EMORY">Emory</option>
+                        <option value="city_GARDEN_CITY">Garden City</option>
+                        <option value="city_GREEN_RIVER">Green River</option>
+                        <option value="city_HARRISVILLE">Harrisville</option>
+                        <option value="city_HIGHLAND">Highland</option>
+                        <option value="city_HOLDEN">Holden</option>
+                        <option value="city_HURRICANE">Hurricane</option>
+                        <option value="city_LA_VERKIN">La Verkin</option>
+                        <option value="city_LAYTON">Layton</option>
+                        <option value="city_LYNN">Lynn</option>
+                        <option value="city_MAPLETON">Mapleton</option>
+                        <option value="city_MOSIDA">Mosida</option>
+                        <option value="city_MOUNT_PLEASANT">Mount Pleasant</option>
+                        <option value="city_OGDEN">Ogden</option>
+                        <option value="city_OUTSIDE_CITY_LIMITS">Outside City Limits</option>
+                        <option value="city_PROVO">Provo</option>
+                        <option value="city_ROY">Roy</option>
+                        <option value="city_SALT_LAKE_CITY">Salt Lake City</option>
+                        <option value="city_SOUTH_OGDEN">South Ogden</option>
+                        <option value="city_SPANISH_FORK">Spanish Fork</option>
+                        <option value="city_ST_GEORGE">St. George</option>
+                        <option value="city_SYRACUSE">Syracuse</option>
+                        <option value="city_THOMPSON">Thompson</option>
+                        <option value="city_VIVIAN_PARK">Vivian Park</option>
+                        <option value="city_WEST_JORDAN">West Jordan</option>
+                        <option value="city_WANSHIP">Wanship</option>
+                        <option value="other">Other City</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-lg">Predict Severity</button>
+            </form>
+        </article>
+
+        <!-- Work -->
+        <article id="result">
+            <h2 class="major">Severity Result</h2>
+            <h4>Results will be one of the following: </h4>
+            <ul>
+                <li>1: No Injury</li>
+                <li>2: Possible Injury</li>
+                <li>3: Suspected Minor Injury</li>
+                <li>4: Suspected Serious Injury</li>
+                <li>5: Fatal</li>
+            </ul>
+            @if (ViewBag.predictions == null)
+            {
+                <h4></h4>
+            }
+            else
+            {
+                <h4>Predicted Severity is Level @ViewBag.predictions.PredictedValue</h4>
+            }
+
+        </article>
+
+        <!-- Contact -->
+        <article id="contact">
+            <h2 class="major">Contact</h2>
+            <form method="post" action="#">
+                <div class="fields">
+                    <div class="field half">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" />
+                    </div>
+                    <div class="field half">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" />
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" rows="4"></textarea>
+                    </div>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="Send Message" class="primary" /></li>
+                    <li><input type="reset" value="Reset" /></li>
+                </ul>
+            </form>
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
+        </article>
+
+        <!-- Elements -->
+        <article id="elements">
+            <h2 class="major">Support</h2>
+            <section>
+                <h3 class="major">Text</h3>
+
+                <div id="purchase">
+                    <img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/86f00ea2a7bd151d5411c7c50fe3281b161b38f0/original.png" alt="Don't YEET and drive" onerror="this.style.display='none'">
+                    <div id="purchase-inner">
+                        <p>Don't YEET and drive</p>
+                        <p>$20.00</p>
+                        <a target="_blank" href="https://square.link/u/bSv5gwod?src=embed">Buy now</a>
+                    </div>
+                </div>
+                <br />
+                <div id="purchase">
+                    <img src="~/images/DontYEET.png" alt="Don't YEET and drive" onerror="this.style.display='none'">
+                    <div id="purchase-inner">
+                        <p>Don't YEET and drive</p>
+                        <p>$20.00</p>
+                        <a target="_blank" href="https://square.link/u/bSv5gwod?src=embed">Buy now</a>
+                    </div>
+                </div>
+
+
+
+                <p>
+                    This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+                    This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+                    This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.
+                </p>
+                <hr />
+                <h2>Heading Level 2</h2>
+                <h3>Heading Level 3</h3>
+                <h4>Heading Level 4</h4>
+                <h5>Heading Level 5</h5>
+                <h6>Heading Level 6</h6>
+                <hr />
+                <h4>Blockquote</h4>
+                <blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+                <h4>Preformatted</h4>
+                <pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+print 'Iteration ' + i;
+deck.shuffle();
+i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+            </section>
+
+            <section>
+                <h3 class="major">Lists</h3>
+
+                <h4>Unordered</h4>
+                <ul>
+                    <li>Dolor pulvinar etiam.</li>
+                    <li>Sagittis adipiscing.</li>
+                    <li>Felis enim feugiat.</li>
+                </ul>
+
+                <h4>Alternate</h4>
+                <ul class="alt">
+                    <li>Dolor pulvinar etiam.</li>
+                    <li>Sagittis adipiscing.</li>
+                    <li>Felis enim feugiat.</li>
+                </ul>
+
+                <h4>Ordered</h4>
+                <ol>
+                    <li>Dolor pulvinar etiam.</li>
+                    <li>Etiam vel felis viverra.</li>
+                    <li>Felis enim feugiat.</li>
+                    <li>Dolor pulvinar etiam.</li>
+                    <li>Etiam vel felis lorem.</li>
+                    <li>Felis enim et feugiat.</li>
+                </ol>
+                <h4>Icons</h4>
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                </ul>
+
+                <h4>Actions</h4>
+                <ul class="actions">
+                    <li><a href="#" class="button primary">Default</a></li>
+                    <li><a href="#" class="button">Default</a></li>
+                </ul>
+                <ul class="actions stacked">
+                    <li><a href="#" class="button primary">Default</a></li>
+                    <li><a href="#" class="button">Default</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="major">Table</h3>
+                <h4>Default</h4>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Item One</td>
+                                <td>Ante turpis integer aliquet porttitor.</td>
+                                <td>29.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Two</td>
+                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                                <td>19.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Three</td>
+                                <td> Morbi faucibus arcu accumsan lorem.</td>
+                                <td>29.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Four</td>
+                                <td>Vitae integer tempus condimentum.</td>
+                                <td>19.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Five</td>
+                                <td>Ante turpis integer aliquet porttitor.</td>
+                                <td>29.99</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td>100.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <h4>Alternate</h4>
+                <div class="table-wrapper">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Item One</td>
+                                <td>Ante turpis integer aliquet porttitor.</td>
+                                <td>29.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Two</td>
+                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                                <td>19.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Three</td>
+                                <td> Morbi faucibus arcu accumsan lorem.</td>
+                                <td>29.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Four</td>
+                                <td>Vitae integer tempus condimentum.</td>
+                                <td>19.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Five</td>
+                                <td>Ante turpis integer aliquet porttitor.</td>
+                                <td>29.99</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td>100.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="major">Buttons</h3>
+                <ul class="actions">
+                    <li><a href="#" class="button primary">Primary</a></li>
+                    <li><a href="#" class="button">Default</a></li>
+                </ul>
+                <ul class="actions">
+                    <li><a href="#" class="button">Default</a></li>
+                    <li><a href="#" class="button small">Small</a></li>
+                </ul>
+                <ul class="actions">
+                    <li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+                    <li><a href="#" class="button icon solid fa-download">Icon</a></li>
+                </ul>
+                <ul class="actions">
+                    <li><span class="button primary disabled">Disabled</span></li>
+                    <li><span class="button disabled">Disabled</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="major">Form</h3>
+                <form method="post" action="#">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="demo-name">Name</label>
+                            <input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+                        </div>
+                        <div class="field half">
+                            <label for="demo-email">Email</label>
+                            <input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+                        </div>
+                        <div class="field">
+                            <label for="demo-category">Category</label>
+                            <select name="demo-category" id="demo-category">
+                                <option value="">-</option>
+                                <option value="1">Manufacturing</option>
+                                <option value="1">Shipping</option>
+                                <option value="1">Administration</option>
+                                <option value="1">Human Resources</option>
+                            </select>
+                        </div>
+                        <div class="field half">
+                            <input type="radio" id="demo-priority-low" name="demo-priority" checked>
+                            <label for="demo-priority-low">Low</label>
+                        </div>
+                        <div class="field half">
+                            <input type="radio" id="demo-priority-high" name="demo-priority">
+                            <label for="demo-priority-high">High</label>
+                        </div>
+                        <div class="field half">
+                            <input type="checkbox" id="demo-copy" name="demo-copy">
+                            <label for="demo-copy">Email me a copy</label>
+                        </div>
+                        <div class="field half">
+                            <input type="checkbox" id="demo-human" name="demo-human" checked>
+                            <label for="demo-human">Not a robot</label>
+                        </div>
+                        <div class="field">
+                            <label for="demo-message">Message</label>
+                            <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" class="primary" /></li>
+                        <li><input type="reset" value="Reset" /></li>
+                    </ul>
+                </form>
+            </section>
+
+        </article>
+
     </div>
-    <div class="form-group">
-        <label>Was a drowsy_driving Involved?</label>
-        <input type="radio" id="drowsy_driving" name="drowsy_driving" asp-for="drowsy_driving" value="1">
-        <label for="drowsy_driving" asp-for="drowsy_driving">Yes</label>
-        <input type="radio" id="drowsy_driving1" name="drowsy_driving" asp-for="drowsy_driving" value="0">
-        <label for="drowsy_driving1" asp-for="drowsy_driving">No</label>
-    </div>
-    <div class="form-group">
-        <label>Was a roadway_departure Involved?</label>
-        <input type="radio" id="roadway_departure" name="roadway_departure" asp-for="roadway_departure" value="1">
-        <label for="roadway_departure" asp-for="roadway_departure">Yes</label>
-        <input type="radio" id="roadway_departure1" name="roadway_departure" asp-for="roadway_departure" value="0">
-        <label for="roadway_departure1" asp-for="roadway_departure">No</label>
-    </div>
-    <div class="form-group">
-        <label asp-for="month">Month?</label>
-        <select class="form-control" asp-for="month">
-            <option value=1>January</option>
-            <option value=2>Febuary</option>
-            <option value=3>March</option>
-            <option value=4>April</option>
-            <option value=5>May</option>
-            <option value=6>June</option>
-            <option value=7>July</option>
-            <option value=8>August</option>
-            <option value=9>September</option>
-            <option value=10>October</option>
-            <option value=11>November</option>
-            <option value=12>December</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="hour">hour?</label>
-        <input class="form-control" asp-for="hour" />
-    </div>
-    <div class="form-group">
-        <label asp-for="minute">Minute</label>
-        <input class="form-control" asp-for="minute" />
-    </div>
-    <div class="form-group">
-        <label asp-for="weekday">Weekday</label>
-        <select class="form-control" asp-for="weekday">
-            <option value="weekday_Saturday">Saturday</option>
-            <option value="weekday_Sunday">Sunday</option>
-            <option value="other">Other Day of the Weekd</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="county">County</label>
-        <select class="form-control" asp-for="county">
-            <option value="county_name_TOOELE">Tooele</option>
-            <option value="county_name_WASHINGTON">Washington</option>
-            <option value="county_name_WEBER">Weber</option>
-            <option value="other">Other County</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="city">City</label>
-        <select class="form-control" asp-for="city">
-            <option value="city_AMERICAN_FORK">city_AMERICAN_FORK</option>
-            <option value="city_BLUE_CREEK">city_BLUE_CREEK</option>
-            <option value="city_BOULDER">city_BOULDER</option>
-            <option value="city_EMORY">city_EMORY</option>
-            <option value="city_GARDEN_CITY">city_GARDEN_CITY</option>
-            <option value="city_GREEN_RIVER">city_GREEN_RIVER</option>
-            <option value="city_HARRISVILLE">city_HARRISVILLE</option>
-            <option value="city_HIGHLAND">city_HIGHLAND</option>
-            <option value="city_HOLDEN">city_HOLDEN</option>
-            <option value="city_HURRICANE">city_HURRICANE</option>
-            <option value="city_LA_VERKIN">city_LA_VERKIN</option>
-            <option value="city_LAYTON">city_LAYTON</option>
-            <option value="city_LYNN">city_LYNN</option>
-            <option value="city_MAPLETON">city_MAPLETON</option>
-            <option value="city_MOSIDA">city_MOSIDA</option>
-            <option value="city_MOUNT_PLEASANT">city_MOUNT_PLEASANT</option>
-            <option value="city_OGDEN">city_OGDEN</option>
-            <option value="city_OUTSIDE_CITY_LIMITS">city_OUTSIDE_CITY_LIMITS</option>
-            <option value="city_PROVO">city_PROVO</option>
-            <option value="city_ROY">city_ROY</option>
-            <option value="city_SALT_LAKE_CITY">city_SALT_LAKE_CITY</option>
-            <option value="city_SOUTH_OGDEN">city_SOUTH_OGDEN</option>
-            <option value="city_SPANISH_FORK">city_SPANISH_FORK</option>
-            <option value="city_ST_GEORGE">city_ST_GEORGE</option>
-            <option value="city_SYRACUSE">city_SYRACUSE</option>
-            <option value="city_THOMPSON">city_THOMPSON</option>
-            <option value="city_VIVIAN_PARK">city_VIVIAN_PARK</option>
-            <option value="city_WEST_JORDAN">city_WEST_JORDAN</option>
-            <option value="city_WANSHIP">city_WANSHIP</option>
-            <option value="other">Other City</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg">submit</button>
-</form>
+
+    <!-- Footer -->
+    <!--<footer id="footer">
+        <p class="copyright">&copy; Utah Motor Vehicle Incidents. Design: <a href="https://html5up.net">Bear Maximum</a>.</p>
+    </footer>-->
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+
+<!-- Scripts -->
+<script nonce="frick" src="~/js/jquery.min.js"></script>
+<script nonce="frick" src="~/js/browser.min.js"></script>
+<script nonce="frick" src="~/js/breakpoints.min.js"></script>
+<script nonce="frick" src="~/js/util.js"></script>
+<script nonce="frick" src="~/js/main.js"></script>
+
