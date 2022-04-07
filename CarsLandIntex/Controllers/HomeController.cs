@@ -118,6 +118,10 @@ namespace CarsLandIntex.Controllers
         [HttpPost]
         public IActionResult ExploreData(Filtering filter)
         {
+            if(filter.city != null)
+            {
+                filter.city = filter.city.ToUpper();
+            }
             HttpContext.Session.SetJson("filter", filter);
             return RedirectToAction("ExploreData");
         }
@@ -142,6 +146,7 @@ namespace CarsLandIntex.Controllers
         //}
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult EditCrash(Crash crash)
         {
             repo.UpdateCrash(crash);
@@ -157,6 +162,7 @@ namespace CarsLandIntex.Controllers
         //}
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteCrash(Crash crash)
         {
             var x = repo.Crashes.FirstOrDefault(r => r.CRASH_ID == crash.CRASH_ID);
@@ -166,6 +172,7 @@ namespace CarsLandIntex.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddCrash()
         {
             var data = new EditAddCrashData
@@ -179,11 +186,37 @@ namespace CarsLandIntex.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddCrash(Crash crash)
         {
-            repo.AddCrash(crash);
+            if(crash.CRASH_DATETIME != null)
+            {
+                crash.may = crash.CRASH_DATETIME.Value.Day;
+                crash.weekday = crash.CRASH_DATETIME.Value.DayOfWeek.ToString();
+                crash.year = crash.CRASH_DATETIME.Value.Year;
+                crash.hour = crash.CRASH_DATETIME.Value.Hour;
+                crash.minute = crash.CRASH_DATETIME.Value.Minute;
+                crash.month = crash.CRASH_DATETIME.Value.Month;
+            }
+            
+            if (ModelState.IsValid)
+            {
+                repo.AddCrash(crash);
+                return RedirectToAction("ExploreData");
+            }
+            else
+            {
+                var data = new EditAddCrashData
+                {
+                    crash = crash,
+                    Cities = cityRepo.cities,
+                    County = countyRepo.counties,
+                    Severity = sevRepo.Severities
+                };
+                return View(data);
+            }
 
-            return RedirectToAction("ExploreData");
+            
         }
 
 

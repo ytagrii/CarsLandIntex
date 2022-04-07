@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Edit Crash";
 }
+@attribute [Authorize(Roles = "Admin")]
 @model EditAddCrashData
 <div class="container-fluid">
     <form class="form" asp-controller="Home" asp-action="EditCrash" method="post">
@@ -14,9 +15,9 @@
             <input type="hidden" asp-for="@Model.crash.minute" />
             <input type="hidden" asp-for="@Model.crash.may" />
             @*<div class="col-4 form-group">
-            <label asp-for="@Model.crash.CRASH_DATETIME">Date</label>
-            <input asp-for="@Model.crash.CRASH_DATETIME" type="datetime" />
-        </div>*@
+                    <label asp-for="@Model.crash.CRASH_DATETIME">Date</label>
+                    <input asp-for="@Model.crash.CRASH_DATETIME" type="datetime" />
+                </div>*@
             <div class="col-4 form-group">
                 <label asp-for="@Model.crash.ROUTE">Route</label>
                 <input asp-for="@Model.crash.ROUTE" />
