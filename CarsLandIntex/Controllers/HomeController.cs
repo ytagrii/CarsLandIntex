@@ -122,6 +122,11 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
+        public IActionResult ClearFilter()
+        {
+            HttpContext.Session.SetJson("filter", new Filtering());
+            return RedirectToAction("ExploreData");
+        }
 
         public IActionResult FullSummary()
         {
