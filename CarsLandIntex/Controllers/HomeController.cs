@@ -68,6 +68,7 @@ namespace CarsLandIntex.Controllers
                     && (filter.month == null ? x.month != null : x.month == filter.month)
                     && (filter.weekday == null ? x.weekday != null : x.weekday == filter.weekday)
                 )
+                .OrderBy(v => v.CRASH_DATETIME)
                 .Skip((pageNum - 1) * (numberPerPage))
                 .Take(numberPerPage),
                 Filter = filter,
