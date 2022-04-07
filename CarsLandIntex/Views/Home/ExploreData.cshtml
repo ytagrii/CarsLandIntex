@@ -31,9 +31,23 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Filter.weekday">Weekday</label>
+                    <select asp-for="Filter.weekday">
+                        <option></option>
+                        @foreach (string w in Model.weekday)
+                        {
+                            <option value="@w">@w</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Filter.year">Year</label>
+                    <select asp-for="Filter.year">
+                        <option></option>
+                        @foreach (int y in Model.year)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Filter.month">Month</label>
@@ -81,7 +95,9 @@
                         @foreach (var c in Model.Crashes)
                         {
                             <tr>
-                                <td>@c?.CRASH_DATETIME</td>
+                                <td>
+                                    @c?.weekday @c?.month/@c?.may/@c?.year
+                                </td>
                                 <td>@c?.County.COUNTY_NAME</td>
                                 <td>@c?.CITY.CITY</td>
                                 <td>@c?.Severity.DESCRIPTION</td>

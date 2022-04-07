@@ -109,6 +109,7 @@ namespace CarsLandIntex.Models
         public string? weekday { get; set; }
 
         public int? year { get; set; }
+        public int? may { get; set; }
 
     }
 }
