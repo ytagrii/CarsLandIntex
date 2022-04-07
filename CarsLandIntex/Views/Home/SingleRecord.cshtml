@@ -24,18 +24,20 @@
                                     </td>
                                     </tr>
                                     <tr>
-                                        <td>Time</td>@Model.
+                                        <td>Time</td>
+                                        
 
-                                        @{if (Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" "))) > 12)
+                                        @{if (Model.hour > 12)
+                                            { @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
+                                            <td>@(Model.hour-12):@Model.minute PM</td> }
+                                            else if (Model.hour == 12 )
                                             {
-                                                @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
-                                                <td>PM</td>
+                                            <td>@(Model.hour):@Model.minute PM</td>
                                             }
                                             else
                                             {
-                                                <td>@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" ")) AM</td>
-                                            }
-                                          }
+                                            <td>@(Model.hour):@Model.minute AM</td>
+                                            } }
 
                                     </tr>
                                     <tr>
