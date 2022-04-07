@@ -2518,6 +2518,13 @@ th{
     display: flex
 }
 
+p {
+    text-shadow: 0 0 10px #000000;
+}
+
+h1 {
+    text-shadow: 0 0 10px black;
+}
 footer {
     margin-top: 1em !important;
     z-index: 20;
