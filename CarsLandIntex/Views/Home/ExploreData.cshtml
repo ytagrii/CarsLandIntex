@@ -10,7 +10,7 @@
             <br />
             <form class="form" method="post" asp-controller="Home" asp-action="ExploreData">
                 <div class="form-group">
-                    <lablel >County</lablel>
+                    <lablel>County</lablel>
                     <select asp-for="Filter.county">
                         <option></option>
                         @foreach (County county in Model.County)
@@ -30,12 +30,20 @@
                     </datalist>
                 </div>
                 <div class="form-group">
-                    <label>Date Range</label>
-                    <label asp-for="Filter.startDate">Start Date</label>
-                    <input asp-for="Filter.startDate" type="date" />
-                    <br />
-                    <label asp-for="Filter.endDate">End Date</label>
-                    <input asp-for="Filter.endDate" type="date" />
+                    <label asp-for="Filter.weekday">Weekday</label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Filter.year">Year</label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Filter.month">Month</label>
+                    <select asp-for="Filter.month">
+                        <option></option>
+                        @foreach (MonthData mon in Model.month)
+                        {
+                            <option value="@mon.monthId">@mon.monthName</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Filter.severity">Crash Severity</label>
