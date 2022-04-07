@@ -14,31 +14,31 @@
                                     {
                                         if (Model.crash.hour > 12)
                                         {
-                        <td>@(Model.crash.hour - 12):@(Model.crash.minute)PM</td> }
+                        <td>@(Model.crash.hour - 12):@(Model.crash.minute)PM,</td> }
                                         else if (Model.crash.hour == 12)
                                         {
-                        <td>@(Model.crash.hour):@(Model.crash.minute)PM</td> }
+                        <td>@(Model.crash.hour):@(Model.crash.minute)PM,</td> }
                                         else if (Model.crash.hour == 0)
                                         {
                         <td>12:@(Model.crash.minute)AM</td> }
                     else
                     {
-                <td>@(Model.crash.hour):@(Model.crash.minute)AM</td> }
+                <td>@(Model.crash.hour):@(Model.crash.minute)AM,</td> }
                             }
                             else
                             {
                                 if (Model.crash.hour > 12)
                                 {
-                <td>@(Model.crash.hour - 12):0@(Model.crash.minute) PM</td> }
+                <td>@(Model.crash.hour - 12):0@(Model.crash.minute)PM,</td> }
                                 else if (Model.crash.hour == 12)
                                 {
-                <td>@(Model.crash.hour):0@(Model.crash.minute) PM</td> }
+                <td>@(Model.crash.hour):0@(Model.crash.minute)PM,</td> }
                                 else if (Model.crash.hour == 0)
                                 {
-                <td>12:0@(Model.crash.minute) AM</td> }
+                <td>12:0@(Model.crash.minute)AM,</td> }
                                 else
                                 {
-                <td>@Model.crash.hour:0@(Model.crash.minute)AM</td> }
+                <td>@Model.crash.hour:0@(Model.crash.minute)AM,</td> }
                             } }
 
                     a motor vehicle accident occurred. As a result of the accident there was @(Model.crash.Severity.Sentence_Usable).
@@ -121,6 +121,7 @@
 
                 </p>
                 <div class="holder-boy">
+                    
                     <div class="cushyBoi">
                         <div class="table-wrapper model">
                             <table>
@@ -322,7 +323,7 @@
                 <li><a href="#1">Edit</a></li>
                 <li><a href="#2">Delete</a></li>
                 <li><a href="#about">Button3</a></li>
-                <li><a href="#contact">Buttonn</a></li>
+                <li><a href="#street">Street View</a></li>
             </ul>
         </nav>
     </div>
@@ -354,34 +355,17 @@
         </article>
 
         <!-- Contact -->
-        <article id="contact">
-            <h2 class="major">Contact</h2>
-            <form method="post" action="#">
-                <div class="fields">
-                    <div class="field half">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" />
-                    </div>
-                    <div class="field half">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" id="email" />
-                    </div>
-                    <div class="field">
-                        <label for="message">Message</label>
-                        <textarea name="message" id="message" rows="4"></textarea>
-                    </div>
-                </div>
-                <ul class="actions">
-                    <li><input type="submit" value="Send Message" class="primary" /></li>
-                    <li><input type="reset" value="Reset" /></li>
-                </ul>
-            </form>
-            <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-            </ul>
+        <article id="street">
+            <h2 class="major">Accident Location Street View</h2>
+            <div class="model-box2">
+                <iframe class="model"
+                        frameborder="1"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        @{ string street_api_string = "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&location=" + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=10&fov=35"; }
+                        src=@street_api_string
+                        allowfullscreen>
+                </iframe>
+            </div>
         </article>
     </div>
 
