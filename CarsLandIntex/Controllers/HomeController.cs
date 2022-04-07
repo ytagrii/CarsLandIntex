@@ -267,31 +267,38 @@ namespace CarsLandIntex.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // Machine Learning Model Stuff
-        public IActionResult MachineLearning()
+        public IActionResult MachineLearning(Prediction p)
         {
+            if (p == null)
+            {
+                ViewBag.predictions = "";
+            }
+            else
+            {
+                ViewBag.predictions = p;
+            }
             return View();
         }
-        
-        //// Actual Machine Learning Call
-        //[HttpPost]
-        //public IActionResult Score(CrashData data)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        data.AttributeSetting(data);
 
-        //        var result = _session.Run(new List<NamedOnnxValue>
-        //    {
-        //        NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
-        //    });
-        //        Tensor<long> score = result.First().AsTensor<long>();
-        //        var prediction = new Prediction { PredictedValue = score.First() };
-        //        result.Dispose();
-        //        return View(prediction);
-        //    }
-        //    return MachineLearning();
-        //}
+        // Actual Machine Learning Call
+        [HttpPost]
+        public IActionResult Score(CrashData data)
+        {
+            if (ModelState.IsValid)
+            {
+                data.AttributeSetting(data);
+
+                var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
+            });
+                Tensor<long> score = result.First().AsTensor<long>();
+                var prediction = new Prediction { PredictedValue = score.First() };
+                result.Dispose();
+                return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
+            }
+            return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
+        }
     }
 }
 
