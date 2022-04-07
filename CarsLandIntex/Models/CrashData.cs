@@ -121,5 +121,23 @@ namespace CarsLandIntex.Models
                 }
             }
         }
-   }
+        public void CreateCrashData(Crash c)
+        {
+            pedestrian_involved = Convert.ToInt64(c.PEDESTRIAN_INVOLVED);
+            bicyclist_involved = Convert.ToInt64(c.BICYCLIST_INVOLVED);
+            motorcycle_involved = Convert.ToInt64(c.MOTORCYCLE_INVOLVED);
+            improper_restraint = Convert.ToInt64(c.IMPROPER_RESTRAINT);
+            unrestrained = Convert.ToInt64(c.UNRESTRAINED);
+            dui = Convert.ToInt64(c.DUI);
+            overturn_rollover = Convert.ToInt64(c.OVERTURN_ROLLOVER);
+            older_driver_involved = Convert.ToInt64(c.OLDER_DRIVER_INVOLVED);
+            single_vehicle = Convert.ToInt64(c.SINGLE_VEHICLE);
+            distracted_driving = Convert.ToInt64(c.DISTRACTED_DRIVING);
+            drowsy_driving = Convert.ToInt64(c.DROWSY_DRIVING);
+            roadway_departure = Convert.ToInt64(c.ROADWAY_DEPARTURE);
+            month = Convert.ToInt64(c.month);
+            hour = Convert.ToInt64(c.hour);
+            minute = Convert.ToInt64(c.minute);
+        }
+    }
 }
