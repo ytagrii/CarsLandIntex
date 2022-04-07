@@ -21,25 +21,173 @@
                                         <td>Date</td>
                                         <td>
                                             @Model.CRASH_DATETIME.Substring(0, Model.CRASH_DATETIME.IndexOf(" "))
-                                    </td>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Time</td>
-                                        
-
-                                        @{if (Model.hour > 12)
-                                            { @*<td>@(Int32.Parse(Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(" "), Model.CRASH_DATETIME.IndexOf(":") - Model.CRASH_DATETIME.IndexOf(" ")))-12):@Model.CRASH_DATETIME.Substring(Model.CRASH_DATETIME.IndexOf(":")) PM</td>*@
-                                            <td>@(Model.hour-12):@Model.minute PM</td> }
-                                            else if (Model.hour == 12 )
+                                        @{ if (Model.minute > 9)
                                             {
-                                            <td>@(Model.hour):@Model.minute PM</td>
+                                                if (Model.hour > 12)
+                                                {
+                                <td>@(Model.hour - 12):@Model.minute PM</td> }
+                                                else if (Model.hour == 12)
+                                                {
+                                <td>@(Model.hour):@Model.minute PM</td> }
+                                                else if (Model.hour == 0)
+                                                {
+                                <td>12:@Model.minute AM</td>
+ }
+                            else
+                            {
+                                <td>@(Model.hour):@Model.minute AM</td> }
                                             }
                                             else
                                             {
-                                            <td>@(Model.hour):@Model.minute AM</td>
+                                                if (Model.hour > 12)
+                                                {
+                                <td>@(Model.hour - 12):0@(Model.minute) PM</td> }
+                                                else if (Model.hour == 12)
+                                                {
+                                <td>@(Model.hour):0@(Model.minute) PM</td> }
+                                                else if (Model.hour == 0)
+                                                {
+                                <td>12:0@(Model.minute) AM</td> }
+                                                else
+                                                {
+                                <td>@Model.hour:0@(Model.minute) AM</td> }
                                             } }
 
                                     </tr>
+                                    @{ if (Model.WORK_ZONE_RELATED == 1)
+                                        {
+                                <tr>
+                                    <td>Work Zone Related?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.PEDESTRIAN_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Pedestrian Involved?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.PEDESTRIAN_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Pedestrian Involved?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.PEDESTRIAN_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Pedestrian Involved?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.TEENAGE_DRIVER_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Teenage Driver Involved?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.BICYCLIST_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Cyclist Involved?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.MOTORCYCLE_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Motorcycle Involved?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.IMPROPER_RESTRAINT == 1)
+                                        {
+                                <tr>
+                                    <td>Improper Restraint?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.UNRESTRAINED == 1)
+                                        {
+                                <tr>
+                                    <td>Unrestrained?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.DUI == 1)
+                                        {
+                                <tr>
+                                    <td>DUI?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.INTERSECTION_RELATED == 1)
+                                        {
+                                <tr>
+                                    <td>Intersection Related?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.WILD_ANIMAL_RELATED == 1)
+                                        {
+                                <tr>
+                                    <td>Wild Animal Related?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.DOMESTIC_ANIMAL_RELATED == 1)
+                                        {
+                                <tr>
+                                    <td>Domestic Animal Related?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.OVERTURN_ROLLOVER == 1)
+                                        {
+                                <tr>
+                                    <td>Rollover?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.COMMERCIAL_MOTOR_VEH_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Commercial Vehicle Involved?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.OLDER_DRIVER_INVOLVED == 1)
+                                        {
+                                <tr>
+                                    <td>Older Driver Involved?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.NIGHT_DARK_CONDITION == 1)
+                                        {
+                                <tr>
+                                    <td>Night/Dark Conditions?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.SINGLE_VEHICLE == 1)
+                                        {
+                                <tr>
+                                    <td>Single Vehicle?</td>
+                                    <td>Yes</td>
+                                </tr> } }
+                                    @{ if (Model.DISTRACTED_DRIVING == 1)
+                                        {
+                                <tr>
+                                    <td>Distracted Driving?</td>
+                                    <td>Yes</td>
+                                </tr>
+ } }
+                                    @{ if (Model.DOMESTIC_ANIMAL_RELATED == 1)
+                                        {
+                                <tr>
+                                    <td>Domestic Animal Related?</td>
+                                    <td>Yes</td>
+                                </tr> } }
                                     <tr>
                                         <td>Latitude</td>
                                         <td>@Model.LAT_UTM_Y</td>
