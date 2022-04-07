@@ -3,13 +3,15 @@
 }
 @attribute [Authorize(Roles = "Admin")]
 @model Crash
-
-<div class="container-fluid">
-    <h2>Delete Crash #@Model.CRASH_ID</h2>
-    <p>Are you sure you would like to delete this crash?</p>
-    <form method="post" asp-controller="Home" asp-action="DeleteCrash">
-        <input type="hidden" asp-for="@Model.CRASH_ID" />
-        <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-        @*<a class="btn btn-lg btn-success" asp-controller="Home" asp-route="ExploreData">Cancel</a>*@
-    </form>
-</div>
+@if (User.IsInRole("Admin"))
+{
+    <div class="container-fluid">
+        <h2>Delete Crash #@Model.CRASH_ID</h2>
+        <p>Are you sure you would like to delete this crash?</p>
+        <form method="post" asp-controller="Home" asp-action="DeleteCrash">
+            <input type="hidden" asp-for="@Model.CRASH_ID" />
+            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+            @*<a class="btn btn-lg btn-success" asp-controller="Home" asp-route="ExploreData">Cancel</a>*@
+        </form>
+    </div>
+}

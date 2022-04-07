@@ -60,8 +60,8 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             @*<li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>*@
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
@@ -74,9 +74,13 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MachineLearning">ML</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AddCrash">Add Crash</a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AddCrash">Add Crash</a>
+                                </li>
+                            }
+                                
                         </ul>
                     </div>
                 </div>
