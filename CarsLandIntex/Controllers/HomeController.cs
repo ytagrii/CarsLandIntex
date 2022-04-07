@@ -16,6 +16,8 @@ namespace CarsLandIntex.Controllers
 {
     public class HomeController : Controller
     {
+
+        //access to all the databasees 
         private readonly ILogger<HomeController> _logger;
         private ICrashRepository repo;
         private ICountyRepo countyRepo;
@@ -23,6 +25,7 @@ namespace CarsLandIntex.Controllers
         private ISeverityRepo sevRepo;
         //private InferenceSession _session;
 
+        //constructor
         public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
         {
             _logger = logger;
@@ -33,31 +36,37 @@ namespace CarsLandIntex.Controllers
             sevRepo = sr;
         }
 
-
+        //index page
         public IActionResult Index()
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+
+        //privacy page
         public IActionResult Privacy()
         {
             return View();
         }
 
+        //severity page
         public IActionResult Severity()
         {
             return View();
         }
 
+        //explore data page. This page grabs all the data that shows all records
+        //and allows a user to filter those records 
         [HttpGet]
         public IActionResult ExploreData(int pageNum = 1)
         {
             int numberPerPage = 50;
+            //filter metrics are stored in the session storage
             Filtering filter = HttpContext.Session.GetJson<Filtering>("filter") ?? new Filtering();
             if(filter.county == 0)
             {
                 filter.county = null;
             }
+            //grab all the data needed for the page
             var data = new ExploreDataInfo
             {
                 Crashes = repo.Crashes
@@ -68,6 +77,7 @@ namespace CarsLandIntex.Controllers
                     && (filter.month == null ? x.month != null : x.month == filter.month)
                     && (filter.weekday == null ? x.weekday != null : x.weekday == filter.weekday)
                 )
+                .OrderBy(v => v.CRASH_DATETIME)
                 .Skip((pageNum - 1) * (numberPerPage))
                 .Take(numberPerPage),
                 Filter = filter,
@@ -91,7 +101,7 @@ namespace CarsLandIntex.Controllers
 
             };
             List<MonthData> x = new List<MonthData>();
-            List<int> years = new List<int>();
+            data.year = repo.Crashes.Select(x => x.year).Distinct().ToList();
             x.Add(new MonthData { monthId = 1, monthName = "January" });
             x.Add(new MonthData { monthId = 2, monthName = "February" });
             x.Add(new MonthData { monthId = 3, monthName = "March" });
@@ -105,16 +115,14 @@ namespace CarsLandIntex.Controllers
             x.Add(new MonthData { monthId = 11, monthName = "November" });
             x.Add(new MonthData { monthId = 12, monthName = "December" });
             data.month = x;
-            years.Add(2016);
-            years.Add(2017);
-            years.Add(2019);
-            data.year = years;
-            data.weekday = data.Crashes.Select(x => x.weekday).Distinct().ToList();
+            //data.year = years;
+            data.weekday = repo.Crashes.Select(x => x.weekday).Distinct().ToList();
 
 
             return View(data);
         }
 
+        //this is retuned when someone sets a filter
         [HttpPost]
         public IActionResult ExploreData(Filtering filter)
         {
@@ -126,41 +134,36 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
+        //this clears the filter. 
         public IActionResult ClearFilter()
         {
             HttpContext.Session.SetJson("filter", new Filtering());
             return RedirectToAction("ExploreData");
         }
 
-        //[HttpGet]
-        //public IActionResult EditCrash(int id)
-        //{
-        //    var data = new EditAddCrashData
-        //    {
-        //        crash = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id),
-        //        Cities = cityRepo.cities,
-        //        County = countyRepo.counties,
-        //        Severity = sevRepo.Severities
-        //    };
-        //    return View(data);
-        //}
-
+        //Edit a crash on a post request. Only can be access by users logged into with an Admin role
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult EditCrash(Crash crash)
         {
-            repo.UpdateCrash(crash);
+            if (crash.CRASH_DATETIME != null)
+            {
+                crash.may = crash.CRASH_DATETIME.Value.Day;
+                crash.weekday = crash.CRASH_DATETIME.Value.DayOfWeek.ToString();
+                crash.year = crash.CRASH_DATETIME.Value.Year;
+                crash.hour = crash.CRASH_DATETIME.Value.Hour;
+                crash.minute = crash.CRASH_DATETIME.Value.Minute;
+                crash.month = crash.CRASH_DATETIME.Value.Month;
+            }
+            if (ModelState.IsValid)
+            {
+                repo.UpdateCrash(crash);
+            }
 
-            return RedirectToAction("ExploreData");
+            return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
         }
 
-        //[HttpGet]
-        //public IActionResult DeleteCrash(int id)
-        //{
-        //    Crash c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id);
-        //    return View(c);
-        //}
-
+        //Delte crash. Only accessable to those with an Admin role
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteCrash(Crash crash)
@@ -171,6 +174,7 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
+        //Add a crash. Only ADMIN roles. Gets data needed for a user to add a crash. 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult AddCrash()
@@ -185,10 +189,13 @@ namespace CarsLandIntex.Controllers
             return View(data);
         }
 
+        //WHen a user submits a new crash this verifies and adds reccord to database
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult AddCrash(Crash crash)
         {
+            string ci = null;
+            //makes sure the datetime was filled out. Then uses that to add other data
             if(crash.CRASH_DATETIME != null)
             {
                 crash.may = crash.CRASH_DATETIME.Value.Day;
@@ -198,6 +205,9 @@ namespace CarsLandIntex.Controllers
                 crash.minute = crash.CRASH_DATETIME.Value.Minute;
                 crash.month = crash.CRASH_DATETIME.Value.Month;
             }
+            //makes sure city is not null then normalizes the data to make sure it works.
+            //city is not required in the crash.cs model but this area checks to make sure
+            //a city is added. 
             if(crash.CITY.CITY != null)
             {
                 var city = crash.CITY.CITY;
@@ -206,10 +216,12 @@ namespace CarsLandIntex.Controllers
                 City c = cityRepo.cities.FirstOrDefault(x => x.CITY == city);
                 if(c is null)
                 {
-                    ModelState.AddModelError("error", "City Typed Is Invalid");
+                    ModelState.AddModelError("error", "City is required. Please select a valid city.");
                 }
                 else
                 {
+                    //crash.CITY = c;
+                    ci = c.CITY;
                     crash.CITY_ID = c.CITY_ID;
                 }
             }
@@ -217,6 +229,14 @@ namespace CarsLandIntex.Controllers
             if (ModelState.IsValid)
             {
                 repo.AddCrash(crash);
+                Filtering filter = new Filtering();
+                filter.city = ci;
+                filter.county = crash.COUNTY_ID;
+                filter.year = crash.year;
+                filter.weekday = crash.weekday;
+                filter.severity = crash.CRASH_SEVERITY_ID;
+
+                HttpContext.Session.SetJson("filter", filter);
                 return RedirectToAction("ExploreData");
             }
             else
@@ -262,6 +282,7 @@ namespace CarsLandIntex.Controllers
             return View(data);
         }
 
+        //lets a user view a single record. Takes in the record id
         public IActionResult SingleRecord(int id)
         {
             var data = new EditAddCrashData

@@ -14,7 +14,7 @@ namespace CarsLandIntex.Models.ViewModels
         public IQueryable<Severity> Severity { get; set; }
         public PageInfo PageInfo { get; set; }
         public List<string> weekday { get; set; }
-        public List<int> year { get; set; }
+        public List<int?> year { get; set; }
         public List<MonthData> month { get; set; }
     }
 }

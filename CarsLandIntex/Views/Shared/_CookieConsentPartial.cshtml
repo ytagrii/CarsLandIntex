@@ -9,10 +9,13 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        Use this space to summarize your privacy and cookie use policy. <a asp-page="/Privacy">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
-        </button>
+        <div>
+            <h2>Your privacy</h2>
+            <p>By clicking “Accept all cookies”, you agree Bear Maximum can store cookies on your device and disclose information in accordance with our <a asp-action="Privacy">Privacy Policy</a>.</p>
+            <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                <span aria-hidden="true">Accept all cookies</span>
+            </button>
+        </div>
     </div>
     <script>
         (function () {

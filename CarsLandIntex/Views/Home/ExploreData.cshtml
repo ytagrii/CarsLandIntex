@@ -5,9 +5,10 @@
 <!-- Wrapper -->
 <div id="" >
     <div class="row">
+        @*Area for the filter*@
         <div class="col-2">
-            <h4>Filters</h4>
-            <br /> 
+            <h3>Filters</h3>
+            <br />
             <form class="form" method="post" asp-controller="Home" asp-action="ExploreData">
                 <div class="form-group">
                     <lablel>County</lablel>
@@ -43,7 +44,7 @@
                     <label asp-for="Filter.year">Year</label>
                     <select asp-for="Filter.year">
                         <option></option>
-                        @foreach (int y in Model.year)
+                        @foreach (int? y in Model.year)
                         {
                             <option value="@y">@y</option>
                         }
@@ -75,11 +76,14 @@
                     <button class="btn btn-sm btn-secondary" asp-controller="Home" asp-action="ClearFilter">Clear</button>
                 </div>
             </form>
-            
-            
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
+        @*Area for the data*@
         <div class="col">
-            <h4>Crash Data</h4>
+            <h2>Crash Data</h2>
             <br />
             <table class=" table-bordered ">
                 <thead>
@@ -114,6 +118,7 @@
             </table>
             <br />
             <br />
+            @*Pagination stuff*@
             <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="1">First Page</a>
             <div crash-page="@Model.PageInfo" page-action="ExploreData"
                  page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
@@ -123,9 +128,6 @@
             <br />
             <br />
             <br />
-       
-
-
         </div>
     </div>
 </div>
