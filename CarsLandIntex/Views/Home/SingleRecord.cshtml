@@ -334,6 +334,7 @@
         <!-- Intro -->
         <article id="1">
             <h2 class="major">Edit Record</h2>
+            <a asp-controller="Home" asp-action="EditCrash" asp-route-id="@Model.crash.CRASH_ID">Edit</a>
             <span class="image main"><img src="images/Background.jpg" alt="" /></span>
 
             <partial name="EditCrash" model="Model" />
