@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 //using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
 using CarsLandIntex.Infastructure;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace CarsLandIntex.Controllers
 {
@@ -21,12 +23,12 @@ namespace CarsLandIntex.Controllers
         private ICountyRepo countyRepo;
         private ICityRepo cityRepo;
         private ISeverityRepo sevRepo;
-        //private InferenceSession _session;
+        private InferenceSession _session;
 
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr,InferenceSession session)
         {
             _logger = logger;
-            //_session = session;
+            _session = session;
             repo = temp;
             countyRepo = con;
             cityRepo = cr;
