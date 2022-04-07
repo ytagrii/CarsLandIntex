@@ -25,21 +25,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link nonce="frick" rel="stylesheet" href="~/css/main.css" />
     <noscript><link nonce="frick" rel="stylesheet" href="~/css/noscript.css" /></noscript>
-    @*<script nonce="frick">
-        $(document).ready(function () {
-            $('#nav-icon3').click(function () {
-                $(this).toggleClass('open');
-            });
-        });</script>*@
 </head>
 <body class="is-preload">
     <header id="header1">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm main_buttons mb-3 nav-position-z">
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">UT Crash DB</a>
-                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">*@
-                @*<span class="navbar-toggler-icon"></span>*@
                 <div id=pad-case>
                     <div class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                          aria-expanded="false" aria-label="Toggle navigation" id="nav-icon3">
@@ -49,22 +40,9 @@
                             <span></span>
                         </div>
                     </div>
-                    @*</button>*@
-                    @*<div id="nav-icon3">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>*@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
-                            @*<li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-        </li>*@
-                            @*<li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ExploreData">View Data</a>
                             </li>
