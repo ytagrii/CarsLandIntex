@@ -5,6 +5,7 @@
 <!-- Wrapper -->
 <div id="" >
     <div class="row">
+        @*Area for the filter*@
         <div class="col-2">
             <h3>Filters</h3>
             <br />
@@ -80,6 +81,7 @@
             <br />
             <br />
         </div>
+        @*Area for the data*@
         <div class="col">
             <h2>Crash Data</h2>
             <br />
@@ -116,6 +118,7 @@
             </table>
             <br />
             <br />
+            @*Pagination stuff*@
             <a class="btn-group pull-right m-1 btn btn-outline-dark" asp-controller="Home" asp-action="ExploreData" asp-route-pageNum="1">First Page</a>
             <div crash-page="@Model.PageInfo" page-action="ExploreData"
                  page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
@@ -125,9 +128,6 @@
             <br />
             <br />
             <br />
-       
-
-
         </div>
     </div>
 </div>
