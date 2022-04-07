@@ -9,7 +9,7 @@
             <div class="inner">
                 <h1>Page Title</h1>
                 <p>
-                    On @Model.crash.weekday, @Model.crash.CRASH_DATETIME.Substring(0, Model.crash.CRASH_DATETIME.IndexOf(" ")), at
+                    On @Model.crash.CRASH_DATETIME.Value.ToLongDateString(), at
                     @{ if (Model.crash.minute > 9)
                                     {
                                         if (Model.crash.hour > 12)
@@ -128,7 +128,7 @@
                                     <tr>
                                         <td>Date</td>
                                         <td>
-                                            @Model.crash.CRASH_DATETIME.Substring(0, Model.crash.CRASH_DATETIME.IndexOf(" "))
+                                            @Model.crash.CRASH_DATETIME.Value.ToShortDateString()
                                             
                                         </td>
                                     </tr>

@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Delete Crash";
 }
+@attribute [Authorize(Roles = "Admin")]
 @model Crash
 
 <div class="container-fluid">
