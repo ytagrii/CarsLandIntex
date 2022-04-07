@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 //using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
 using CarsLandIntex.Infastructure;
-using Microsoft.ML.OnnxRuntime;
-using Microsoft.ML.OnnxRuntime.Tensors;
+//using Microsoft.ML.OnnxRuntime;
+//using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace CarsLandIntex.Controllers
 {
@@ -23,12 +23,12 @@ namespace CarsLandIntex.Controllers
         private ICountyRepo countyRepo;
         private ICityRepo cityRepo;
         private ISeverityRepo sevRepo;
-        private InferenceSession _session;
+        //private InferenceSession _session;
 
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr,InferenceSession session)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
         {
             _logger = logger;
-            _session = session;
+            //_session = session;
             repo = temp;
             countyRepo = con;
             cityRepo = cr;
@@ -259,17 +259,17 @@ namespace CarsLandIntex.Controllers
                 County = countyRepo.counties,
                 Severity = sevRepo.Severities
             };
-            CrashData cd = new CrashData();
-            cd.CreateCrashData(data.crash);
+            //CrashData cd = new CrashData();
+            //cd.CreateCrashData(data.crash);
 
-            var result = _session.Run(new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
-            });
-            Tensor<long> score = result.First().AsTensor<long>();
-            var prediction = new Prediction { PredictedValue = score.First() };
-            ViewBag.prediction = prediction;
-            result.Dispose();
+            //var result = _session.Run(new List<NamedOnnxValue>
+            //{
+            //    NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
+            //});
+            //Tensor<long> score = result.First().AsTensor<long>();
+            //var prediction = new Prediction { PredictedValue = score.First() };
+            //ViewBag.prediction = prediction;
+            //result.Dispose();
 
             return View(data);
         }
@@ -279,38 +279,38 @@ namespace CarsLandIntex.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult MachineLearning(Prediction p)
-        {
-            if (p == null)
-            {
-                ViewBag.predictions = "";
-            }
-            else
-            {
-                ViewBag.predictions = p;
-            }
-            return View();
-        }
+        //public IActionResult MachineLearning(Prediction p)
+        //{
+        //    if (p == null)
+        //    {
+        //        ViewBag.predictions = "";
+        //    }
+        //    else
+        //    {
+        //        ViewBag.predictions = p;
+        //    }
+        //    return View();
+        //}
 
-        // Actual Machine Learning Call
-        [HttpPost]
-        public IActionResult Score(CrashData data)
-        {
-            if (ModelState.IsValid)
-            {
-                data.AttributeSetting(data);
+        //// Actual Machine Learning Call
+        //[HttpPost]
+        //public IActionResult Score(CrashData data)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        data.AttributeSetting(data);
 
-                var result = _session.Run(new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
-            });
-                Tensor<long> score = result.First().AsTensor<long>();
-                var prediction = new Prediction { PredictedValue = score.First() };
-                result.Dispose();
-                return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
-            }
-            return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
-        }
+        //        var result = _session.Run(new List<NamedOnnxValue>
+        //    {
+        //        NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
+        //    });
+        //        Tensor<long> score = result.First().AsTensor<long>();
+        //        var prediction = new Prediction { PredictedValue = score.First() };
+        //        result.Dispose();
+        //        return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
+        //    }
+        //    return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
+        //}
     }
 }
 
