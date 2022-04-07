@@ -195,9 +195,16 @@ namespace CarsLandIntex.Controllers
 
         public IActionResult SingleRecord(int id)
         {
-            Crash c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id);
+            var data = new EditAddCrashData
+            {
+                crash = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id),
+                Cities = cityRepo.cities,
+                County = countyRepo.counties,
+                Severity = sevRepo.Severities
+            };
+           
 
-            return View(c);
+            return View(data);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
