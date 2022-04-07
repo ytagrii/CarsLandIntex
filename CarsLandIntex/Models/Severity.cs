@@ -10,6 +10,7 @@ namespace CarsLandIntex.Models
         public int CRASH_SEVERITY_ID { get; set; }
 
         public string DESCRIPTION { get; set; }
-        
+
+        public string Sentence_Usable {get; set;}
     }
 }
