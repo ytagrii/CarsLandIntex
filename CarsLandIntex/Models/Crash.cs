@@ -111,5 +111,6 @@ namespace CarsLandIntex.Models
         public int? year { get; set; }
         public int? may { get; set; }
 
+        public DateTime? temp_date { get; set; }
     }
 }
