@@ -198,7 +198,21 @@ namespace CarsLandIntex.Controllers
                 crash.minute = crash.CRASH_DATETIME.Value.Minute;
                 crash.month = crash.CRASH_DATETIME.Value.Month;
             }
-            //if(crash.)
+            if(crash.CITY.CITY != null)
+            {
+                var city = crash.CITY.CITY;
+                city = city.ToUpper();
+                crash.CITY = null;
+                City c = cityRepo.cities.FirstOrDefault(x => x.CITY == city);
+                if(c is null)
+                {
+                    ModelState.AddModelError("error", "City Typed Is Invalid");
+                }
+                else
+                {
+                    crash.CITY_ID = c.CITY_ID;
+                }
+            }
             
             if (ModelState.IsValid)
             {
