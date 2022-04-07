@@ -43,7 +43,7 @@
                     <label asp-for="Filter.year">Year</label>
                     <select asp-for="Filter.year">
                         <option></option>
-                        @foreach (int y in Model.year)
+                        @foreach (int? y in Model.year)
                         {
                             <option value="@y">@y</option>
                         }

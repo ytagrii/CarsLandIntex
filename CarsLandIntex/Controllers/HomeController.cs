@@ -91,7 +91,7 @@ namespace CarsLandIntex.Controllers
 
             };
             List<MonthData> x = new List<MonthData>();
-            List<int> years = new List<int>();
+            data.year = repo.Crashes.Select(x => x.year).Distinct().ToList();
             x.Add(new MonthData { monthId = 1, monthName = "January" });
             x.Add(new MonthData { monthId = 2, monthName = "February" });
             x.Add(new MonthData { monthId = 3, monthName = "March" });
@@ -105,11 +105,8 @@ namespace CarsLandIntex.Controllers
             x.Add(new MonthData { monthId = 11, monthName = "November" });
             x.Add(new MonthData { monthId = 12, monthName = "December" });
             data.month = x;
-            years.Add(2016);
-            years.Add(2017);
-            years.Add(2019);
-            data.year = years;
-            data.weekday = data.Crashes.Select(x => x.weekday).Distinct().ToList();
+            //data.year = years;
+            data.weekday = repo.Crashes.Select(x => x.weekday).Distinct().ToList();
 
 
             return View(data);
@@ -206,10 +203,11 @@ namespace CarsLandIntex.Controllers
                 City c = cityRepo.cities.FirstOrDefault(x => x.CITY == city);
                 if(c is null)
                 {
-                    ModelState.AddModelError("error", "City Typed Is Invalid");
+                    ModelState.AddModelError("error", "City is required. Please select a valid city.");
                 }
                 else
                 {
+                    //crash.CITY = c;
                     crash.CITY_ID = c.CITY_ID;
                 }
             }
