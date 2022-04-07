@@ -7,19 +7,20 @@
 {
     <div class="container-fluid">
         <form class="form" asp-controller="Home" asp-action="EditCrash" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="row">
                 <input type="hidden" asp-for="@Model.crash.CRASH_ID" />
-                <input type="hidden" asp-for="@Model.crash.CRASH_DATETIME" />
+                @*<input type="hidden" asp-for="@Model.crash.CRASH_DATETIME" />*@
                 <input type="hidden" asp-for="@Model.crash.weekday" />
                 <input type="hidden" asp-for="@Model.crash.hour" />
                 <input type="hidden" asp-for="@Model.crash.year" />
                 <input type="hidden" asp-for="@Model.crash.month" />
                 <input type="hidden" asp-for="@Model.crash.minute" />
                 <input type="hidden" asp-for="@Model.crash.may" />
-                @*<div class="col-4 form-group">
+                <div class="col-4 form-group">
                         <label asp-for="@Model.crash.CRASH_DATETIME">Date</label>
-                        <input asp-for="@Model.crash.CRASH_DATETIME" type="datetime" />
-                    </div>*@
+                        <input asp-for="@Model.crash.CRASH_DATETIME" class="datetime" />
+                    </div>
                 <div class="col-4 form-group">
                     <label asp-for="@Model.crash.ROUTE">Route</label>
                     <input asp-for="@Model.crash.ROUTE" />

@@ -141,35 +141,27 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
-        //[HttpGet]
-        //public IActionResult EditCrash(int id)
-        //{
-        //    var data = new EditAddCrashData
-        //    {
-        //        crash = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id),
-        //        Cities = cityRepo.cities,
-        //        County = countyRepo.counties,
-        //        Severity = sevRepo.Severities
-        //    };
-        //    return View(data);
-        //}
-
         //Edit a crash on a post request. Only can be access by users logged into with an Admin role
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult EditCrash(Crash crash)
         {
-            repo.UpdateCrash(crash);
+            if (crash.CRASH_DATETIME != null)
+            {
+                crash.may = crash.CRASH_DATETIME.Value.Day;
+                crash.weekday = crash.CRASH_DATETIME.Value.DayOfWeek.ToString();
+                crash.year = crash.CRASH_DATETIME.Value.Year;
+                crash.hour = crash.CRASH_DATETIME.Value.Hour;
+                crash.minute = crash.CRASH_DATETIME.Value.Minute;
+                crash.month = crash.CRASH_DATETIME.Value.Month;
+            }
+            if (ModelState.IsValid)
+            {
+                repo.UpdateCrash(crash);
+            }
 
             return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
         }
-
-        //[HttpGet]
-        //public IActionResult DeleteCrash(int id)
-        //{
-        //    Crash c = repo.Crashes.FirstOrDefault(x => x.CRASH_ID == id);
-        //    return View(c);
-        //}
 
         //Delte crash. Only accessable to those with an Admin role
         [HttpPost]
