@@ -64,27 +64,54 @@ namespace CarsLandIntex.Controllers
                 .Where(x => (filter.severity == null ? x.CRASH_SEVERITY_ID != null : x.CRASH_SEVERITY_ID == filter.severity)
                     && (filter.county == null ? x.COUNTY_ID != null : x.COUNTY_ID == filter.county)
                     && (filter.city == null ? x.CITY_ID != null : x.CITY.CITY == filter.city)
+                    && (filter.year == null ? x.year != null : x.year == filter.year)
+                    && (filter.month == null ? x.month != null : x.month == filter.month)
+                    && (filter.weekday == null ? x.weekday != null : x.weekday == filter.weekday)
                 )
                 .Skip((pageNum - 1) * (numberPerPage))
                 .Take(numberPerPage),
                 Filter = filter,
-                County = countyRepo.counties,
                 Cities = cityRepo.cities,
+                County = countyRepo.counties,
                 Severity = sevRepo.Severities,
                 PageInfo = new PageInfo
                 {
-                    //this is where the total pages needed comes into play
-                    //TotalCrashes = (bookCategory == null ? repo.Books.Count() :
-                    //    repo.Books.Where(b => b.Category == bookCategory).Count()
-                    //),
-                    TotalCrashes = repo.Crashes.Count(),
+                    TotalCrashes = repo.Crashes
+                    .Where(x => (filter.severity == null ? x.CRASH_SEVERITY_ID != null : x.CRASH_SEVERITY_ID == filter.severity)
+                    && (filter.county == null ? x.COUNTY_ID != null : x.COUNTY_ID == filter.county)
+                    && (filter.city == null ? x.CITY_ID != null : x.CITY.CITY == filter.city)
+                    && (filter.year == null ? x.year != null : x.year == filter.year)
+                    && (filter.month == null ? x.month != null : x.month == filter.month)
+                    && (filter.weekday == null ? x.weekday != null : x.weekday == filter.weekday)
+                )
+                    .Count(),
                     CrashesPerPage = numberPerPage,
                     CurrentPage = pageNum
                 }
 
             };
-            
-            
+            List<MonthData> x = new List<MonthData>();
+            List<int> years = new List<int>();
+            x.Add(new MonthData { monthId = 1, monthName = "January" });
+            x.Add(new MonthData { monthId = 2, monthName = "February" });
+            x.Add(new MonthData { monthId = 3, monthName = "March" });
+            x.Add(new MonthData { monthId = 4, monthName = "April" });
+            x.Add(new MonthData { monthId = 5, monthName = "May" });
+            x.Add(new MonthData { monthId = 6, monthName = "June" });
+            x.Add(new MonthData { monthId = 7, monthName = "July" });
+            x.Add(new MonthData { monthId = 8, monthName = "August" });
+            x.Add(new MonthData { monthId = 9, monthName = "September" });
+            x.Add(new MonthData { monthId = 10, monthName = "October" });
+            x.Add(new MonthData { monthId = 11, monthName = "November" });
+            x.Add(new MonthData { monthId = 12, monthName = "December" });
+            data.month = x;
+            years.Add(2016);
+            years.Add(2017);
+            years.Add(2019);
+            data.year = years;
+            data.weekday = data.Crashes.Select(x => x.weekday).Distinct().ToList();
+
+
             return View(data);
         }
 
@@ -92,34 +119,19 @@ namespace CarsLandIntex.Controllers
         public IActionResult ExploreData(Filtering filter)
         {
             HttpContext.Session.SetJson("filter", filter);
-            int numberPerPage = 50;
-            var data = new ExploreDataInfo
-            {
-                Crashes = repo.Crashes
-                .Where(x => (filter.severity == null ? x.CRASH_SEVERITY_ID != null : x.CRASH_SEVERITY_ID == filter.severity)
-                    && (filter.county == null ? x.COUNTY_ID != null : x.COUNTY_ID == filter.county)
-                    && (filter.city == null ? x.CITY_ID != null : x.CITY.CITY == filter.city)
-                )
-                .Take(numberPerPage),
-                Filter = HttpContext.Session.GetJson<Filtering>("filter"),
-                County = countyRepo.counties,
-                Cities = cityRepo.cities,
-                Severity = sevRepo.Severities,
-                PageInfo = new PageInfo
-                {
-                    //this is where the total pages needed comes into play
-                    //TotalCrashes = (bookCategory == null ? repo.Books.Count() :
-                    //    repo.Books.Where(b => b.Category == bookCategory).Count()
-                    //),
-                    TotalCrashes = repo.Crashes.Count(),
-                    CrashesPerPage = numberPerPage,
-                    CurrentPage = 1
-                }
+            return RedirectToAction("ExploreData");
+        }
 
-            };
+        public IActionResult ClearFilter()
+        {
+            HttpContext.Session.SetJson("filter", new Filtering());
+            return RedirectToAction("ExploreData");
+        }
 
+        public IActionResult EditCrash()
+        {
 
-            return View(data);
+            return View();
         }
 
         public IActionResult FullSummary()

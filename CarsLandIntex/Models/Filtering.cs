@@ -5,8 +5,9 @@ namespace CarsLandIntex.Models
     {
         public int? county { get; set; }
         public string? city { get; set; }
-        public DateTime? startDate { get; set; }
-        public DateTime? endDate { get; set; }
+        public string? weekday { get; set; }
+        public int? year { get; set; }
+        public int? month { get; set; }
         public int? severity { get; set; }
     }
 }
