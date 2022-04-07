@@ -61,10 +61,10 @@ namespace CarsLandIntex
             services.AddScoped<ICountyRepo, EFCountyRepo>();
             services.AddScoped<ICityRepo, EFCityRepo>();
             //This is for the HTTP to HTTPS redirect
-            services.AddHttpsRedirection(options =>
-            {
-                options.HttpsPort = 443;
-            });
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.HttpsPort = 443;
+            //});
 
             //This ensures that the user must consent for cookies
             services.Configure<CookiePolicyOptions>(options =>
@@ -112,7 +112,7 @@ namespace CarsLandIntex
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
