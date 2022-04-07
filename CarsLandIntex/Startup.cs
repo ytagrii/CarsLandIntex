@@ -93,7 +93,7 @@ namespace CarsLandIntex
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<InferenceSession>(
-                new InferenceSession("Models/carCrash.onnx"));
+                new InferenceSession("wwwroot/carCrash.onnx"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
