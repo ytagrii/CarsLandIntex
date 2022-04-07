@@ -1,117 +1,210 @@
 ﻿@{
+    ViewData["Title"] = "Edit Crash";
 }
-@model Crash
+@model EditAddCrashData
 <div class="container-fluid">
-    <form class="form">
+    <form class="form" asp-controller="Home" asp-action="EditCrash" method="post">
         <div class="row">
+            <input type="hidden" asp-for="@Model.crash.CRASH_ID" />
+            <input type="hidden" asp-for="@Model.crash.CRASH_DATETIME" />
+            <input type="hidden" asp-for="@Model.crash.weekday" />
+            <input type="hidden" asp-for="@Model.crash.hour" />
+            <input type="hidden" asp-for="@Model.crash.year" />
+            <input type="hidden" asp-for="@Model.crash.month" />
+            <input type="hidden" asp-for="@Model.crash.minute" />
+            <input type="hidden" asp-for="@Model.crash.may" />
+            @*<div class="col-4 form-group">
+            <label asp-for="@Model.crash.CRASH_DATETIME">Date</label>
+            <input asp-for="@Model.crash.CRASH_DATETIME" type="datetime" />
+        </div>*@
             <div class="col-4 form-group">
-                
+                <label asp-for="@Model.crash.ROUTE">Route</label>
+                <input asp-for="@Model.crash.ROUTE" />
             </div>
             <div class="col-4 form-group">
-                
+                <label asp-for="@Model.crash.MILEPOINT">Milepoint</label>
+                <input asp-for="@Model.crash.MILEPOINT" />
             </div>
             <div class="col-4 form-group">
+                <label asp-for="@Model.crash.LAT_UTM_Y">Latitude</label>
+                <input asp-for="@Model.crash.LAT_UTM_Y" />
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.LONG_UTM_X">Longitude</label>
+                <input asp-for="@Model.crash.LONG_UTM_X" />
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.MAIN_ROAD_NAME">Main Road Name</label>
+                <input asp-for="@Model.crash.MAIN_ROAD_NAME" />
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.CITY_ID">City</label>
+                <select asp-for="@Model.crash.CITY_ID">
+                    <option value=""></option>
+                    @foreach (City c in Model.Cities)
+                    {
+                        <option value="@c.CITY_ID">@c.CITY</option>
+                    }
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.COUNTY_ID">County</label>
+                <select asp-for="@Model.crash.COUNTY_ID">
+                    <option value=""></option>
+                    @foreach (County cc in Model.County)
+                    {
+                        <option value="@cc.COUNTY_ID">@cc.COUNTY_NAME</option>
+                    }
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.CRASH_SEVERITY_ID">Severity</label>
+                <select asp-for="@Model.crash.CRASH_SEVERITY_ID">
+                    <option value=""></option>
+                    @foreach (Severity s in Model.Severity)
+                    {
+                        <option value="@s.CRASH_SEVERITY_ID">@s.DESCRIPTION</option>
+                    }
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a Ped Involved?</label>
+                <select asp-for="@Model.crash.PEDESTRIAN_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a Cyclist Involved?</label>
+                <select asp-for="@Model.crash.BICYCLIST_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a motorcycle_involved Involved?</label>
+                <select asp-for="@Model.crash.MOTORCYCLE_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a  improper_restraint Involved?</label>
+                <select asp-for="@Model.crash.IMPROPER_RESTRAINT">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a unrestrained Involved?</label>
+                <select asp-for="@Model.crash.UNRESTRAINED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a dui Involved?</label>
+                <select asp-for="@Model.crash.DUI">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a intersection_related Involved?</label>
+                <select asp-for="@Model.crash.INTERSECTION_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a overturn_rollover Involved?</label>
+                <select asp-for="@Model.crash.OVERTURN_ROLLOVER">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a older_driver_involved Involved?</label>
+                <select asp-for="@Model.crash.OLDER_DRIVER_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a single_vehicle Involved?</label>
+                <select asp-for="@Model.crash.SINGLE_VEHICLE">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a distracted_driving Involved?</label>
+                <select asp-for="@Model.crash.DISTRACTED_DRIVING">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a drowsy_driving Involved?</label>
+                <select asp-for="@Model.crash.DROWSY_DRIVING">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a roadway departure Involved?</label>
+                <select asp-for="@Model.crash.ROADWAY_DEPARTURE">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label>Was a work zone Invloved?</label>
+                <select asp-for="@Model.crash.WORK_ZONE_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.WILD_ANIMAL_RELATED">Was a wild animal Invloved?</label>
+                <select asp-for="@Model.crash.WILD_ANIMAL_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.DOMESTIC_ANIMAL_RELATED">Was a domestic animal Invloved?</label>
+                <select asp-for="@Model.crash.DOMESTIC_ANIMAL_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.COMMERCIAL_MOTOR_VEH_INVOLVED">Was a commercial vehicle Invloved?</label>
+                <select asp-for="@Model.crash.COMMERCIAL_MOTOR_VEH_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.TEENAGE_DRIVER_INVOLVED">Was a teenage driver Invloved?</label>
+                <select asp-for="@Model.crash.TEENAGE_DRIVER_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-4 form-group">
+                <label asp-for="@Model.crash.NIGHT_DARK_CONDITION">Was it dark Outside?</label>
+                <select asp-for="@Model.crash.NIGHT_DARK_CONDITION">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <br /><br /><br />
+            <div class="col-12 form-group">
+                <button type="submit" class="btn btn-large">Save</button>
+            </div>
 
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
-            <div class="col-4 form-group">
-
-            </div>
         </div>
     </form>
 </div>
