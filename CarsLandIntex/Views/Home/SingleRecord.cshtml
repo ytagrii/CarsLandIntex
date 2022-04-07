@@ -11,35 +11,35 @@
                 <p>
                     On @Model.crash.CRASH_DATETIME.Value.ToLongDateString(), at
                     @{ if (Model.crash.minute > 9)
-                                    {
-                                        if (Model.crash.hour > 12)
-                                        {
+                        {
+                            if (Model.crash.hour > 12)
+                            {
                         <td>@(Model.crash.hour - 12):@(Model.crash.minute)PM,</td> }
-                                        else if (Model.crash.hour == 12)
-                                        {
+                            else if (Model.crash.hour == 12)
+                            {
                         <td>@(Model.crash.hour):@(Model.crash.minute)PM,</td> }
-                                        else if (Model.crash.hour == 0)
-                                        {
+                            else if (Model.crash.hour == 0)
+                            {
                         <td>12:@(Model.crash.minute)AM</td> }
-                    else
-                    {
-                <td>@(Model.crash.hour):@(Model.crash.minute)AM,</td> }
-                            }
                             else
                             {
-                                if (Model.crash.hour > 12)
-                                {
+                <td>@(Model.crash.hour):@(Model.crash.minute)AM,</td> }
+                        }
+                        else
+                        {
+                            if (Model.crash.hour > 12)
+                            {
                 <td>@(Model.crash.hour - 12):0@(Model.crash.minute)PM,</td> }
-                                else if (Model.crash.hour == 12)
-                                {
+                            else if (Model.crash.hour == 12)
+                            {
                 <td>@(Model.crash.hour):0@(Model.crash.minute)PM,</td> }
-                                else if (Model.crash.hour == 0)
-                                {
+                            else if (Model.crash.hour == 0)
+                            {
                 <td>12:0@(Model.crash.minute)AM,</td> }
-                                else
-                                {
+                            else
+                            {
                 <td>@Model.crash.hour:0@(Model.crash.minute)AM,</td> }
-                            } }
+                        } }
 
                     a motor vehicle accident occurred. As a result of the accident there was @(Model.crash.Severity.Sentence_Usable).
 
@@ -85,16 +85,16 @@
                     @{ if (Model.crash.IMPROPER_RESTRAINT == 1)
                         {
                             if (Model.crash.UNRESTRAINED == 1)
-                                {<nobr>Persons involved were either improperly restrained or not restrained. </nobr>}
+                            {<nobr>Persons involved were either improperly restrained or not restrained. </nobr>}
                             else
-                                {<nobr>Persons involved were improperly restrained, though they had some form of restraint. </nobr>}
-                        } 
+                            {<nobr>Persons involved were improperly restrained, though they had some form of restraint. </nobr>}
+                        }
                         else
                         {
                             if (Model.crash.UNRESTRAINED == 1)
-                                {<nobr>Persons involve were not restrained in any way. </nobr>}
+                            {<nobr>Persons involve were not restrained in any way. </nobr>}
                             else
-                                {<nobr>All persons involved were properly restrained. </nobr>}
+                            {<nobr>All persons involved were properly restrained. </nobr>}
                         }
                       }
 
@@ -140,38 +140,38 @@
                                                 if (Model.crash.hour > 12)
                                                 {
                                 <td>@(Model.crash.hour - 12):@Model.crash.minute PM</td>
- }
-                            else if (Model.crash.hour == 12)
-                            {
+                                                }
+                                                else if (Model.crash.hour == 12)
+                                                {
                                 <td>@(Model.crash.hour):@Model.crash.minute PM</td>
- }
-                            else if (Model.crash.hour == 0)
-                            {
+                                                }
+                                                else if (Model.crash.hour == 0)
+                                                {
                                 <td>12:@Model.crash.minute AM</td> }
                                                 else
                                                 {
                                 <td>@(Model.crash.hour):@Model.crash.minute AM</td>
- }
-                        }
-                        else
-                        {
-                            if (Model.crash.hour > 12)
-                            {
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (Model.crash.hour > 12)
+                                                {
                                 <td>@(Model.crash.hour - 12):0@(Model.crash.minute) PM</td>
- }
-                            else if (Model.crash.hour == 12)
-                            {
+                                                }
+                                                else if (Model.crash.hour == 12)
+                                                {
                                 <td>@(Model.crash.hour):0@(Model.crash.minute) PM</td>
- }
-                            else if (Model.crash.hour == 0)
-                            {
+                                                }
+                                                else if (Model.crash.hour == 0)
+                                                {
                                 <td>12:0@(Model.crash.minute) AM</td>
- }
-                            else
-                            {
+                                                }
+                                                else
+                                                {
                                 <td>@Model.crash.hour:0@(Model.crash.minute) AM</td>
- }
-                        } }
+                                                }
+                                            } }
 
                                     </tr>
                                     @{ if (Model.crash.WORK_ZONE_RELATED == 1)
@@ -192,21 +192,21 @@
                                     <td>Teenage Driver Involved?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.BICYCLIST_INVOLVED == 1)
                                         {
                                 <tr>
                                     <td>Cyclist Involved?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.MOTORCYCLE_INVOLVED == 1)
                                         {
                                 <tr>
                                     <td>Motorcycle Involved?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.IMPROPER_RESTRAINT == 1)
                                         {
                                 <tr>
@@ -219,7 +219,7 @@
                                     <td>Unrestrained?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.DUI == 1)
                                         {
                                 <tr>
@@ -232,7 +232,7 @@
                                     <td>Intersection Related?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.WILD_ANIMAL_RELATED == 1)
                                         {
                                 <tr>
@@ -245,14 +245,14 @@
                                     <td>Domestic Animal Related?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.OVERTURN_ROLLOVER == 1)
                                         {
                                 <tr>
                                     <td>Rollover?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.COMMERCIAL_MOTOR_VEH_INVOLVED == 1)
                                         {
                                 <tr>
@@ -265,7 +265,7 @@
                                     <td>Older Driver Involved?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.NIGHT_DARK_CONDITION == 1)
                                         {
                                 <tr>
@@ -278,7 +278,7 @@
                                     <td>Single Vehicle?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.DISTRACTED_DRIVING == 1)
                                         {
                                 <tr>
@@ -291,7 +291,7 @@
                                     <td>Drowsy Driving?</td>
                                     <td>Yes</td>
                                 </tr>
- } }
+                                        } }
                                     @{ if (Model.crash.ROADWAY_DEPARTURE == 1)
                                         {
                                 <tr>
@@ -320,10 +320,14 @@
         </div>
         <nav>
             <ul class="main_buttons">
-                <li><a href="#1">Edit</a></li>
-                <li><a href="#2">Delete</a></li>
-                <li><a href="#about">Button3</a></li>
-                <li><a href="#street">Street View</a></li>
+                @{if (User.IsInRole("Admin"))
+                    {
+                        <li><a href="#1">Edit</a></li>
+                        <li><a href="#2">Delete</a></li>
+                        } }
+
+                  <li><a href="#about">Button3</a></li>
+                  <li><a href="#street">Street</a></li>
             </ul>
         </nav>
     </div>
@@ -361,7 +365,7 @@
                 <iframe class="model"
                         frameborder="1"
                         referrerpolicy="no-referrer-when-downgrade"
-                        @{ string street_api_string = "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&location=" + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=10&fov=35"; }
+                        @{ string street_api_string = "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&location=" + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=0&fov=100"; }
                         src=@street_api_string
                         allowfullscreen>
                 </iframe>
