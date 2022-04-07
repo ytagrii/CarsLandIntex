@@ -1935,10 +1935,56 @@ nav {
 
 /*Cookie Styles*/
 
+.cookie-wrapper {
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    width: 50%;
+    display: flex;
+    padding: 0.5rem;
+    border: 1px solid lightskyblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cookie-svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .cookie-svg svg {
+        overflow: visible;
+    }
+
+.cookie-text {
+    padding-left: 1rem;
+}
+
+.cookie-btn {
+    border: none;
+    background-color: lightskyblue;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+
 #cookieConsent {
     z-index: 999;
     position: fixed;
     width: 70%;
+    background-color:black;
+    padding-bottom:0;
+}
+
+.cookie-text{
+    position:relative;
+    
+}
+
+.cookie-click{
+    position:relative;
+    height:50px;
 }
 
 
