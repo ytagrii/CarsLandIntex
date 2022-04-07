@@ -11,7 +11,7 @@ namespace CarsLandIntex.Models
         public int CRASH_ID { get; set; }
 
         [Required]
-        public string? CRASH_DATETIME { get; set; }
+        public DateTime? CRASH_DATETIME { get; set; }
 
         [Required]
         public int? ROUTE { get; set; }
@@ -111,6 +111,6 @@ namespace CarsLandIntex.Models
         public int? year { get; set; }
         public int? may { get; set; }
 
-        public DateTime? temp_date { get; set; }
+        
     }
 }
