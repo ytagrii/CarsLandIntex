@@ -165,6 +165,27 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
+        [HttpGet]
+        public IActionResult AddCrash()
+        {
+            var data = new EditAddCrashData
+            {
+                crash = new Crash(),
+                Cities = cityRepo.cities,
+                County = countyRepo.counties,
+                Severity = sevRepo.Severities
+            };
+            return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult AddCrash(Crash crash)
+        {
+            repo.AddCrash(crash);
+
+            return RedirectToAction("ExploreData");
+        }
+
 
         public IActionResult FullSummary()
         {
