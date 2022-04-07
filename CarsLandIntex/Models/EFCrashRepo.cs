@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarsLandIntex.Models
 {
@@ -12,7 +13,7 @@ namespace CarsLandIntex.Models
             context = temp;
         }
 
-        public IQueryable<Crash> Crashes => context.master;
+        public IQueryable<Crash> Crashes => context.master.Include(x => x.CITY).Include(x => x.County).Include(x => x.Severity);
 
         public void UpdateCrash(Crash c)
         {
