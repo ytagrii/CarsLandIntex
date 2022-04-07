@@ -2517,3 +2517,10 @@ th{
 .holder-boy {
     display: flex
 }
+
+footer {
+    margin-top: 1em !important;
+    z-index: 20;
+    font-weight:bolder;
+    
+}

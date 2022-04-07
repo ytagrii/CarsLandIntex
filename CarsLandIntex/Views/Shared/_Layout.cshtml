@@ -62,9 +62,9 @@
                             @*<li class="nav-item">
             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </li>*@
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                            </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ExploreData">View Data</a>
                             </li>
@@ -93,10 +93,10 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <br /><br />
+    <footer class="border-top footer text-center">
         <div class="container">
-            &copy; 2022 - CarsLandIntex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - UT Crash DB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script nonce="frick" src="~/lib/jquery/dist/jquery.min.js"></script>
