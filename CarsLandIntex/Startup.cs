@@ -93,7 +93,12 @@ namespace CarsLandIntex
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDistributedMemoryCache();
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("Models/carCrash.onnx"));
         }
