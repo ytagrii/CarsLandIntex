@@ -120,13 +120,14 @@ namespace CarsLandIntex
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
+            //Enable cookie policies
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //Enable cookie policies
-            app.UseCookiePolicy();
+            
 
             //Adding in the Content Security Policy HTTP header response
             //app.Use(async (context, next) =>
