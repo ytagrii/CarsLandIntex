@@ -28,7 +28,7 @@ namespace CarsLandIntex.Models
         [Required(ErrorMessage = "Please Enter a Main Road Name")]
         public string? MAIN_ROAD_NAME { get; set; }
 
-        [Required(ErrorMessage = "Please Choose a City. If there is no city select 'OUTSIDE CITY LIMITS'")]
+        //[Required(ErrorMessage = "Please Choose a City. If there is no city select 'OUTSIDE CITY LIMITS'")]
         public int? CITY_ID { get; set; }
         [ForeignKey("CITY_ID")]
         public City? CITY { get; set; }
