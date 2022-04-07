@@ -119,9 +119,10 @@ namespace CarsLandIntex
             }
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
             //Enable cookie policies
             app.UseCookiePolicy();
+            app.UseSession();
+            
             app.UseRouting();
 
             app.UseAuthentication();
