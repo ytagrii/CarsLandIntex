@@ -319,8 +319,8 @@
         </div>
         <nav>
             <ul class="main_buttons">
-                <li><a href="#1">Edit Record</a></li>
-                <li><a href="#work">Button2</a></li>
+                <li><a href="#1">Edit</a></li>
+                <li><a href="#2">Delete</a></li>
                 <li><a href="#about">Button3</a></li>
                 <li><a href="#contact">Buttonn</a></li>
                 <li><a href="#elements">Support</a></li>
@@ -334,18 +334,17 @@
         <!-- Intro -->
         <article id="1">
             <h2 class="major">Edit Record</h2>
-            <a asp-controller="Home" asp-action="EditCrash" asp-route-id="@Model.crash.CRASH_ID">Edit</a>
+            
             <span class="image main"><img src="images/Background.jpg" alt="" /></span>
 
-            <partial name="EditCrash" model="Model" />
+            <partial name="EditCrash" model="@Model" />
         </article>
 
         <!-- Work -->
-        <article id="work">
-            <h2 class="major">Work</h2>
+        <article id="2">
+            <h2 class="major">Delete Record?</h2>
             <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-            <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-            <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+            <partial name="DeleteCrash" model="@Model.crash" />
         </article>
 
         <!-- About -->
