@@ -128,6 +128,12 @@ namespace CarsLandIntex.Controllers
             return RedirectToAction("ExploreData");
         }
 
+        public IActionResult EditCrash()
+        {
+
+            return View();
+        }
+
         public IActionResult FullSummary()
         {
             int numberPerPage = 500;
