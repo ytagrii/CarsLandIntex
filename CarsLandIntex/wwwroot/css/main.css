@@ -2525,3 +2525,9 @@ p {
 h1 {
     text-shadow: 0 0 10px black;
 }
+footer {
+    margin-top: 1em !important;
+    z-index: 20;
+    font-weight:bolder;
+    
+}
