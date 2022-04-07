@@ -148,7 +148,7 @@ namespace CarsLandIntex.Controllers
         {
             repo.UpdateCrash(crash);
 
-            return RedirectToAction("ExploreData");
+            return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
         }
 
         //[HttpGet]
