@@ -186,6 +186,7 @@ namespace CarsLandIntex.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult AddCrash(Crash crash)
         {
+            string ci = null;
             if(crash.CRASH_DATETIME != null)
             {
                 crash.may = crash.CRASH_DATETIME.Value.Day;
@@ -208,6 +209,7 @@ namespace CarsLandIntex.Controllers
                 else
                 {
                     //crash.CITY = c;
+                    ci = c.CITY;
                     crash.CITY_ID = c.CITY_ID;
                 }
             }
@@ -215,6 +217,14 @@ namespace CarsLandIntex.Controllers
             if (ModelState.IsValid)
             {
                 repo.AddCrash(crash);
+                Filtering filter = new Filtering();
+                filter.city = ci;
+                filter.county = crash.COUNTY_ID;
+                filter.year = crash.year;
+                filter.weekday = crash.weekday;
+                filter.severity = crash.CRASH_SEVERITY_ID;
+
+                HttpContext.Session.SetJson("filter", filter);
                 return RedirectToAction("ExploreData");
             }
             else
