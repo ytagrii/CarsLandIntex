@@ -2,6 +2,8 @@
     ViewData["Title"] = "Predictions";
 }
 @model CrashData
+
+<!--This page contains our machine learning calculator-->
 <div id="wrapper">
 
     <!-- Header -->
@@ -13,7 +15,8 @@
             <div class="inner">
                 <h1>Predictions and Trends</h1>
                 <p>
-                    We have implented a few models to help identify issues and trends in car accidents to aide with decision making
+                    We designed a machine learning model to help identify issues and trends in car accidents to aid with 
+                    decision making. We have also implemented Tableau visualizations to view more trends!
                 </p>
             </div>
         </div>
@@ -21,7 +24,7 @@
             <ul class="main_buttons">
                 <li><a href="#severity">Severity Prediction</a></li>
                 <li><a href="#result">Prediction Results</a></li>
-                <li><a href="#about">Tableau</a></li>
+                <li><a href="#about">Trends</a></li>
             </ul>
         </nav>
     </div>
@@ -231,35 +234,13 @@
 
         </article>
 
-        <!-- Contact -->
+        <!-- Tableau -->
         <article id="contact">
-            <h2 class="major">Contact</h2>
-            <form method="post" action="#">
-                <div class="fields">
-                    <div class="field half">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" />
-                    </div>
-                    <div class="field half">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" id="email" />
-                    </div>
-                    <div class="field">
-                        <label for="message">Message</label>
-                        <textarea name="message" id="message" rows="4"></textarea>
-                    </div>
-                </div>
-                <ul class="actions">
-                    <li><input type="submit" value="Send Message" class="primary" /></li>
-                    <li><input type="reset" value="Reset" /></li>
-                </ul>
-            </form>
-            <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-            </ul>
+            <h2 class="major">Tableau Crash Heatmap</h2>
+            <span class="image main"><img src="images/Background.jpg" alt="" /></span>
+            <div z-index="20" class='tableauPlaceholder' id='viz1649184524181' style='position: relative'><noscript><a href='#'><img alt='Density ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ut&#47;UtahCarCrashesbyLocation&#47;Density&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='UtahCarCrashesbyLocation&#47;Density' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ut&#47;UtahCarCrashesbyLocation&#47;Density&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+            <script type='text/javascript'>var divElement = document.getElementById('viz1649184524181'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Severity">View More Visualizations</a>
         </article>
     </div>
 </div>
