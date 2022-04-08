@@ -124,6 +124,7 @@ namespace CarsLandIntex.Controllers
 
         //this is retuned when someone sets a filter
         [HttpPost]
+        [Authorize(Roles = "Basic")]
         public IActionResult ExploreData(Filtering filter)
         {
             if(filter.city != null)

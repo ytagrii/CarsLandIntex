@@ -34,9 +34,12 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ExploreData">View Data</a>
-                            </li>
+                            @if (User.IsInRole("Basic"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ExploreData">View Data</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Severity">Severity</a>
                             </li>
@@ -49,7 +52,6 @@
                                     <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AddCrash">Add Crash</a>
                                 </li>
                             }
-                                
                         </ul>
                     </div>
                 </div>
