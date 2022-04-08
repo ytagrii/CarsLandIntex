@@ -61,6 +61,14 @@ namespace CarsLandIntex
             //    options.HttpsPort = 443;
             //});
 
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
+
+
             //This ensures that the user must consent for cookies
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -94,6 +102,8 @@ namespace CarsLandIntex
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            
             //services.AddSingleton<InferenceSession>(
             //    new InferenceSession("wwwroot/carCrash.onnx"));
         }
@@ -112,8 +122,9 @@ namespace CarsLandIntex
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                
             }
+            app.UseHsts();
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             //Enable cookie policies
