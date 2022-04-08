@@ -2493,8 +2493,10 @@ th{
     position: relative;
     width: 50%;
     height: 0;
-    padding-top: 50%; /* This is your aspect ratio */
+    padding-top: 40%; /* This is your aspect ratio */
 }
+
+
 
 .model-box iframe {
     border-style: ridge;
@@ -2529,12 +2531,25 @@ th{
     position: relative;
     width: 50%;
     height: 0;
-    padding-top: 50%; /* This is your aspect ratio */
+    padding-top: 40%; /* This is your aspect ratio */
 }
 
 .holder-boy {
     display: flex
 }
+
+@media screen and (max-width: 770px) {
+    .cushyBoi {
+        width:100%;
+        padding-top:50%;
+    }
+    .holder-boy{
+        flex-direction:column-reverse;
+        height:fit-content;
+    }
+}
+
+
 
 p {
     text-shadow: 0 0 10px #000000;
