@@ -177,6 +177,16 @@
                                             } }
 
                                     </tr>
+
+                                <tr>
+                                    <td>County</td>
+                                    <td>@(Model.crash.County.COUNTY_NAME)</td>
+                                </tr>
+                                <tr>
+                                    <td>Severity</td>
+                                    <td>@(Model.crash.Severity.DESCRIPTION)</td>
+                                </tr>
+
                                     @{ if (Model.crash.WORK_ZONE_RELATED == 1)
                                         {
                                 <tr>
@@ -330,7 +340,7 @@
                         <li><a href="#2">Delete</a></li>
                     } }
 
-                <li><a href="#about">Predictions</a></li>
+                <li><a href="#about">Predict</a></li>
                 <li><a href="#street">Street</a></li>
             </ul>
         </nav>
