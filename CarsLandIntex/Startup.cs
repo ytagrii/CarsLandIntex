@@ -100,7 +100,7 @@ namespace CarsLandIntex
                 options.Cookie.IsEssential = true;
             });
             //services.AddSingleton<InferenceSession>(
-            //    new InferenceSession("Models/carCrash.onnx"));
+            //    new InferenceSession("wwwroot/carCrash.onnx"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -100,7 +100,7 @@ namespace CarsLandIntex.Models
             return new DenseTensor<long>(data, dimensions);
         }
         public void AttributeSetting(CrashData randomname)
-    {
+        {
             PropertyInfo[] properties = typeof(CrashData).GetProperties();
 
             foreach (PropertyInfo property in properties)
@@ -122,20 +122,50 @@ namespace CarsLandIntex.Models
             }
 
         }
-    //public void citySetting(CrashData randomname)
-    //{
-    //        PropertyInfo[] properties = typeof(CrashData).GetProperties();
-    //        foreach (PropertyInfo property in properties)
-    //        {
-    //            if (property.Name == randomname.county)
-    //            {
-    //                property.SetValue(randomname, 1);
-    //            }
-    //        }
-    //    }
-    //public void daySetting()
-    //{
-    //}
+        public void CreateCrashData(Crash c)
+        {
+            pedestrian_involved = Convert.ToInt64(c.PEDESTRIAN_INVOLVED);
+            bicyclist_involved = Convert.ToInt64(c.BICYCLIST_INVOLVED);
+            motorcycle_involved = Convert.ToInt64(c.MOTORCYCLE_INVOLVED);
+            improper_restraint = Convert.ToInt64(c.IMPROPER_RESTRAINT);
+            unrestrained = Convert.ToInt64(c.UNRESTRAINED);
+            dui = Convert.ToInt64(c.DUI);
+            overturn_rollover = Convert.ToInt64(c.OVERTURN_ROLLOVER);
+            older_driver_involved = Convert.ToInt64(c.OLDER_DRIVER_INVOLVED);
+            single_vehicle = Convert.ToInt64(c.SINGLE_VEHICLE);
+            distracted_driving = Convert.ToInt64(c.DISTRACTED_DRIVING);
+            drowsy_driving = Convert.ToInt64(c.DROWSY_DRIVING);
+            roadway_departure = Convert.ToInt64(c.ROADWAY_DEPARTURE);
+            month = Convert.ToInt64(c.month);
+            hour = Convert.ToInt64(c.hour);
+            minute = Convert.ToInt64(c.minute);
 
-   }
+            string cityParsed = c.CITY.CITY.ToString().ToUpper().Replace(" ", "_");
+            cityParsed = "city_" + cityParsed;
+
+            string countyParsed = c.County.ToString().ToUpper().Replace(" ", "_");
+            countyParsed = "county_" + countyParsed;
+
+            PropertyInfo[] properties = typeof(CrashData).GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.Name == countyParsed)
+                {
+                    property.SetValue(countyParsed, 1);
+                }
+
+                if (property.Name == cityParsed)
+                {
+                    property.SetValue(cityParsed, 1);
+                }
+
+                if (property.Name == c.weekday)
+                {
+                    property.SetValue(c.weekday, 1);
+                }
+
+            }
+        }
+    }
 }
