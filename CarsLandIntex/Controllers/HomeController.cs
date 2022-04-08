@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CarsLandIntex.Models;
 using Microsoft.AspNetCore.Authorization;
-//using Microsoft.ML.OnnxRuntime;
-//using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
 using CarsLandIntex.Infastructure;
 
@@ -23,13 +23,13 @@ namespace CarsLandIntex.Controllers
         private ICountyRepo countyRepo;
         private ICityRepo cityRepo;
         private ISeverityRepo sevRepo;
-        //private InferenceSession _session;
+        private InferenceSession _session;
 
         //constructor
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr, InferenceSession session)
         {
             _logger = logger;
-            //_session = session;
+            _session = session;
             repo = temp;
             countyRepo = con;
             cityRepo = cr;
@@ -292,17 +292,17 @@ namespace CarsLandIntex.Controllers
                 County = countyRepo.counties,
                 Severity = sevRepo.Severities
             };
-            //CrashData cd = new CrashData();
-            //cd.CreateCrashData(data.crash);
+            CrashData cd = new CrashData();
+            cd.CreateCrashData(data.crash);
 
-            //var result = _session.Run(new List<NamedOnnxValue>
-            //{
-            //    NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
-            //});
-            //Tensor<long> score = result.First().AsTensor<long>();
-            //var prediction = new Prediction { PredictedValue = score.First() };
-            //ViewBag.prediction = prediction;
-            //result.Dispose();
+            var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
+            });
+            Tensor<long> score = result.First().AsTensor<long>();
+            var prediction = new Prediction { PredictedValue = score.First() };
+            ViewBag.prediction = prediction;
+            result.Dispose();
 
             return View(data);
         }
@@ -317,26 +317,26 @@ namespace CarsLandIntex.Controllers
         {
             return View();
         }
-        
-        //// Actual Machine Learning Call
-        //[HttpPost]
-        //public IActionResult Score(CrashData data)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        data.AttributeSetting(data);
 
-        //        var result = _session.Run(new List<NamedOnnxValue>
-        //    {
-        //        NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
-        //    });
-        //        Tensor<long> score = result.First().AsTensor<long>();
-        //        var prediction = new Prediction { PredictedValue = score.First() };
-        //        result.Dispose();
-        //        return View(prediction);
-        //    }
-        //    return MachineLearning();
-        //}
+        //Actual Machine Learning Call
+       [HttpPost]
+        public IActionResult Score(CrashData data)
+        {
+            if (ModelState.IsValid)
+            {
+                data.AttributeSetting(data);
+
+                var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
+            });
+                Tensor<long> score = result.First().AsTensor<long>();
+                var prediction = new Prediction { PredictedValue = score.First() };
+                result.Dispose();
+                return View(prediction);
+            }
+            return MachineLearning();
+        }
     }
 }
 
