@@ -292,7 +292,17 @@ namespace CarsLandIntex.Controllers
                 County = countyRepo.counties,
                 Severity = sevRepo.Severities
             };
-           
+            //CrashData cd = new CrashData();
+            //cd.CreateCrashData(data.crash);
+
+            //var result = _session.Run(new List<NamedOnnxValue>
+            //{
+            //    NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
+            //});
+            //Tensor<long> score = result.First().AsTensor<long>();
+            //var prediction = new Prediction { PredictedValue = score.First() };
+            //ViewBag.prediction = prediction;
+            //result.Dispose();
 
             return View(data);
         }
