@@ -42,4 +42,7 @@
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Infastructure\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\carCrash.onnx" />
+  </ItemGroup>
 </Project>
