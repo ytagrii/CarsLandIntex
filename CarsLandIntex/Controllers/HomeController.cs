@@ -159,9 +159,14 @@ namespace CarsLandIntex.Controllers
             if (ModelState.IsValid)
             {
                 repo.UpdateCrash(crash);
+                return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
+            }
+            else
+            {
+                return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}#1");
             }
 
-            return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
+            
         }
 
         //Delte crash. Only accessable to those with an Admin role
