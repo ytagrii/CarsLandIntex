@@ -19,7 +19,7 @@ using System.IO;
 using Amazon;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
-//using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime;
 
 namespace CarsLandIntex
 {
@@ -42,14 +42,14 @@ namespace CarsLandIntex
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(endpointAuth);
+                options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
             });
 
             string endpoint = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
             services.AddDbContext<CrashDataDBContext>(options =>
             {
-                options.UseMySql(endpoint);
+                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
             });
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
@@ -94,8 +94,8 @@ namespace CarsLandIntex
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            //services.AddSingleton<InferenceSession>(
-            //    new InferenceSession("wwwroot/carCrash.onnx"));
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("wwwroot/carCrash.onnx"));
         }
 
         
