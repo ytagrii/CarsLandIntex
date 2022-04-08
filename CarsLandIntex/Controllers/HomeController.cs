@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CarsLandIntex.Models;
 using Microsoft.AspNetCore.Authorization;
-//using Microsoft.ML.OnnxRuntime;
-//using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using CarsLandIntex.Models.ViewModels;
 using CarsLandIntex.Infastructure;
 
@@ -23,13 +23,13 @@ namespace CarsLandIntex.Controllers
         private ICountyRepo countyRepo;
         private ICityRepo cityRepo;
         private ISeverityRepo sevRepo;
-        //private InferenceSession _session;
+        private InferenceSession _session;
 
         //constructor
-        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository temp, ICountyRepo con, ICityRepo cr, ISeverityRepo sr, InferenceSession session)
         {
             _logger = logger;
-            //_session = session;
+            _session = session;
             repo = temp;
             countyRepo = con;
             cityRepo = cr;
@@ -159,9 +159,14 @@ namespace CarsLandIntex.Controllers
             if (ModelState.IsValid)
             {
                 repo.UpdateCrash(crash);
+                return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
+            }
+            else
+            {
+                return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}#1");
             }
 
-            return Redirect($"/Home/SingleRecord/{crash.CRASH_ID}");
+            
         }
 
         //Delte crash. Only accessable to those with an Admin role
@@ -293,17 +298,16 @@ namespace CarsLandIntex.Controllers
                 County = countyRepo.counties,
                 Severity = sevRepo.Severities
             };
-            //CrashData cd = new CrashData();
-            //cd.CreateCrashData(data.crash);
+            CrashData cd = new CrashData();
+            cd.CreateCrashData(data.crash, cd);
 
-            //var result = _session.Run(new List<NamedOnnxValue>
-            //{
-            //    NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
-            //});
-            //Tensor<long> score = result.First().AsTensor<long>();
-            //var prediction = new Prediction { PredictedValue = score.First() };
-            //ViewBag.prediction = prediction;
-            //result.Dispose();
+            var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", cd.AsTensor())
+            });
+            Tensor<long> score = result.First().AsTensor<long>();
+            var prediction = new Prediction { PredictedValue = score.First() };
+            ViewBag.prediction = prediction;
 
             return View(data);
         }
@@ -314,31 +318,40 @@ namespace CarsLandIntex.Controllers
         }
 
         // Machine Learning Model Stuff
-        public IActionResult MachineLearning()
+        public IActionResult MachineLearning(Prediction p)
         {
+            if (p == null)
+            {
+                ViewBag.predictions = "";
+            }
+            else
+            {
+                ViewBag.predictions = p;
+            }
             return View();
         }
-        
-        //// Actual Machine Learning Call
-        //[HttpPost]
-        //public IActionResult Score(CrashData data)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        data.AttributeSetting(data);
 
-        //        var result = _session.Run(new List<NamedOnnxValue>
-        //    {
-        //        NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
-        //    });
-        //        Tensor<long> score = result.First().AsTensor<long>();
-        //        var prediction = new Prediction { PredictedValue = score.First() };
-        //        result.Dispose();
-        //        return View(prediction);
-        //    }
-        //    return MachineLearning();
-        //}
+        // Actual Machine Learning Call
+        [HttpPost]
+        public IActionResult Score(CrashData data)
+        {
+            if (ModelState.IsValid)
+            {
+                data.AttributeSetting(data);
+
+                var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("int64_input", data.AsTensor())
+            });
+                Tensor<long> score = result.First().AsTensor<long>();
+                var prediction = new Prediction { PredictedValue = score.First() };
+                return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
+            }
+
+           return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
+        }
     }
 }
+
 
 //https://www.codeproject.com/Articles/875547/Custom-Roles-Based-Access-Control-RBAC-in-ASP-NET#:~:text=Roles%20Based%20Access%20Control%20is,do%20not%20need%20to%20see.

@@ -19,7 +19,7 @@ using System.IO;
 using Amazon;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
-//using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime;
 
 namespace CarsLandIntex
 {
@@ -43,7 +43,7 @@ namespace CarsLandIntex
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 //options.UseMySql(endpointAuth); // To run with ONNX
-                options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]); // To run without ONNX
+                options.UseMySql(endpointAuth); // To run without ONNX
             });
 
             string endpoint = Environment.GetEnvironmentVariable("CONNECTION_STRING");
@@ -51,18 +51,21 @@ namespace CarsLandIntex
             services.AddDbContext<CrashDataDBContext>(options =>
             {
                 //options.UseMySql(endpoint); // To run with ONNX
-                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]); // To run without ONNX
+                options.UseMySql(endpoint); // To run without ONNX
             });
 
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             services.AddScoped<ICountyRepo, EFCountyRepo>();
             services.AddScoped<ICityRepo, EFCityRepo>();
-            //This is for the HTTP to HTTPS redirect
-            //services.AddHttpsRedirection(options =>
-            //{
-            //    options.HttpsPort = 443;
-            //});
+
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
+
 
             //This ensures that the user must consent for cookies
             services.Configure<CookiePolicyOptions>(options =>
@@ -97,8 +100,8 @@ namespace CarsLandIntex
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            //services.AddSingleton<InferenceSession>(
-            //    new InferenceSession("wwwroot/carCrash.onnx"));
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("wwwroot/carCrash.onnx"));
         }
 
         
@@ -115,8 +118,16 @@ namespace CarsLandIntex
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                
             }
+            app.UseHsts();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' script-src 'self' 'nonce-frick' https://public.tableau.com/javascripts/api/viz_v1.js; style-src 'self' maxcdn.bootstrapcdn.com; img-src 'self' 'nonce-frick' https://items-images-production.s3.us-west-2.amazonaws.com/files/86f00ea2a7bd151d5411c7c50fe3281b161b38f0/original.png https://items-images-production.s3.us-west-2.amazonaws.com/files/390f8cfe0bbddeb45ad58ddc38d4114ff3bd1595/original.png; frame-src 'self' https://www.google.com/ https://www.tableau.com http://public.tableau.com/ ");
+                await next();
+            });
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             //Enable cookie policies
