@@ -43,7 +43,7 @@ namespace CarsLandIntex
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 //options.UseMySql(endpointAuth); // To run with ONNX
-                options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]); // To run without ONNX
+                options.UseMySql(endpointAuth); // To run without ONNX
             });
 
             string endpoint = Environment.GetEnvironmentVariable("CONNECTION_STRING");
@@ -51,18 +51,13 @@ namespace CarsLandIntex
             services.AddDbContext<CrashDataDBContext>(options =>
             {
                 //options.UseMySql(endpoint); // To run with ONNX
-                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]); // To run without ONNX
+                options.UseMySql(endpoint); // To run without ONNX
             });
 
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             services.AddScoped<ICountyRepo, EFCountyRepo>();
             services.AddScoped<ICityRepo, EFCityRepo>();
-            //This is for the HTTP to HTTPS redirect
-            //services.AddHttpsRedirection(options =>
-            //{
-            //    options.HttpsPort = 443;
-            //});
 
             services.AddHsts(options =>
             {
@@ -126,6 +121,13 @@ namespace CarsLandIntex
                 
             }
             app.UseHsts();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' script-src 'self' 'nonce-frick' https://public.tableau.com/javascripts/api/viz_v1.js; style-src 'self' maxcdn.bootstrapcdn.com; img-src 'self' 'nonce-frick'; frame-src 'self' https://www.google.com/ https://www.tableau.com http://public.tableau.com/ ");
+                await next();
+            });
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             //Enable cookie policies
