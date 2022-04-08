@@ -147,11 +147,11 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="hour">Which hour did this incident occur?</label>
-                    <input class="form-control" asp-for="hour" min="0" max="23"/>
+                    <input class="form-control" asp-for="hour" min="0" max="23" required/>
                 </div>
                 <div class="form-group">
                     <label asp-for="minute">Which minute did this incident occur?</label>
-                    <input class="form-control" asp-for="minute" min="0" max="59"/>
+                    <input class="form-control" asp-for="minute" min="0" max="59" required/>
                 </div>
                 <div class="form-group">
                     <label asp-for="weekday">Which day of the week did this incident occur?</label>
