@@ -313,13 +313,21 @@ namespace CarsLandIntex.Controllers
         }
 
         // Machine Learning Model Stuff
-        public IActionResult MachineLearning()
+        public IActionResult MachineLearning(Prediction p)
         {
+            if (p == null)
+            {
+                ViewBag.predictions = "";
+            }
+            else
+            {
+                ViewBag.predictions = p;
+            }
             return View();
         }
 
-        //Actual Machine Learning Call
-       [HttpPost]
+        // Actual Machine Learning Call
+        [HttpPost]
         public IActionResult Score(CrashData data)
         {
             if (ModelState.IsValid)
@@ -333,11 +341,12 @@ namespace CarsLandIntex.Controllers
                 Tensor<long> score = result.First().AsTensor<long>();
                 var prediction = new Prediction { PredictedValue = score.First() };
                 result.Dispose();
-                return View(prediction);
+                return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
             }
-            return MachineLearning();
+            return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
         }
     }
 }
+
 
 //https://www.codeproject.com/Articles/875547/Custom-Roles-Based-Access-Control-RBAC-in-ASP-NET#:~:text=Roles%20Based%20Access%20Control%20is,do%20not%20need%20to%20see.
