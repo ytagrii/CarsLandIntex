@@ -15,6 +15,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using CarsLandIntex.Models;
 using Microsoft.Data.SqlClient;
+using System.IO;
+using Amazon;
+using Amazon.SecretsManager;
+using Amazon.SecretsManager.Model;
 //using Microsoft.ML.OnnxRuntime;
 
 namespace CarsLandIntex
@@ -31,30 +35,21 @@ namespace CarsLandIntex
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
-            //This configures a secret variable for the db password
-            //var mainbuilder = new SqlConnectionStringBuilder(
-            //Configuration.GetConnectionString("ConnectionStrings: MainConnection"));
-            //mainbuilder.Password = Configuration["DbPassword"];
-            //_mainConnection = mainbuilder.ConnectionString;
+            string endpointAuth = Environment.GetEnvironmentVariable("CONNECTION_STRING_AUTH");
 
-            //var authbuilder = new SqlConnectionStringBuilder(
-            //Configuration.GetConnectionString("ConnectionStrings: AuthConnection"));
-            //authbuilder.Password = Configuration["DbPassword"];
-            //_authConnection = authbuilder.ConnectionString;
-
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlite(
-            //        Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]);
+                options.UseMySql(endpointAuth);
             });
+
+            string endpoint = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
             services.AddDbContext<CrashDataDBContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]);
+                options.UseMySql(endpoint);
             });
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
@@ -73,7 +68,7 @@ namespace CarsLandIntex
                 // cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -103,8 +98,10 @@ namespace CarsLandIntex
             //    new InferenceSession("wwwroot/carCrash.onnx"));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        
+    
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
