@@ -324,10 +324,10 @@
                     {
                         <li><a href="#1">Edit</a></li>
                         <li><a href="#2">Delete</a></li>
-                        } }
+                    } }
 
-                  <li><a href="#about">Button3</a></li>
-                  <li><a href="#street">Street</a></li>
+                <li><a href="#about">Predictions</a></li>
+                <li><a href="#street">Street</a></li>
             </ul>
         </nav>
     </div>
@@ -353,9 +353,24 @@
 
         <!-- About -->
         <article id="about">
-            <h2 class="major">About</h2>
-            <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-            <p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+            <h2 class="major">Machine Learning Predictions</h2>
+            <h4>We integrated a machine learning algorithm that takes data from a specific crash and predicts what the severity should be.</h4>
+            <h4>Results will be one of the following: </h4>
+            <ul>
+                <li>1: No Injury</li>
+                <li>2: Possible Injury</li>
+                <li>3: Suspected Minor Injury</li>
+                <li>4: Suspected Serious Injury</li>
+                <li>5: Fatal</li>
+            </ul>
+            
+            @*<h4>The predicted severity level was a level @ViewBag.prediction.PredictedValue</h4>*@
+            <h4>The actual severity level is level @Model.crash.CRASH_SEVERITY_ID</h4>
+            <br />
+            <br />
+            <h4>The alorithm used to make these predictions takes into account the factors that make an accident more severe.
+            These predictions can help us determine what about a particular accident causes it more severe. Together we can do to better
+            mitigate these severities and allow for Uthans to be safe on the roads.</h4>
         </article>
 
         <!-- Contact -->

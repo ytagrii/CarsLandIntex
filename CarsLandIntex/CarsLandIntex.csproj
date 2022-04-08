@@ -15,6 +15,7 @@
     <None Remove="Infastructure\" />
     <None Remove="Microsoft.ML.OnnxRuntime.MKLML" />
     <None Remove="Microsoft.ML.OnnxRuntime" />
+    <None Remove="Views\Templates\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.27" />
@@ -42,6 +43,7 @@
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Infastructure\" />
+    <Folder Include="Views\Page Templates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\carCrash.onnx" />
