@@ -17,31 +17,31 @@
                         {
                             if (Model.crash.hour > 12)
                             {
-                        <td>@(Model.crash.hour - 12):@(Model.crash.minute)PM,</td> }
+                        <nobr>@(Model.crash.hour - 12):@(Model.crash.minute)PM, </nobr> }
                             else if (Model.crash.hour == 12)
                             {
-                        <td>@(Model.crash.hour):@(Model.crash.minute)PM,</td> }
+                <nobr>@(Model.crash.hour):@(Model.crash.minute)PM, </nobr>}
                             else if (Model.crash.hour == 0)
                             {
-                        <td>12:@(Model.crash.minute)AM</td> }
+                        <nobr>12:@(Model.crash.minute)AM, </nobr> }
                             else
                             {
-                <td>@(Model.crash.hour):@(Model.crash.minute)AM,</td> }
+                <nobr>@(Model.crash.hour):@(Model.crash.minute)AM, </nobr> }
                         }
                         else
                         {
                             if (Model.crash.hour > 12)
                             {
-                <td>@(Model.crash.hour - 12):0@(Model.crash.minute)PM,</td> }
+                <nobr>@(Model.crash.hour - 12):0@(Model.crash.minute)PM, </nobr> }
                             else if (Model.crash.hour == 12)
                             {
-                <td>@(Model.crash.hour):0@(Model.crash.minute)PM,</td> }
+                <nobr>@(Model.crash.hour):0@(Model.crash.minute)PM, </nobr> }
                             else if (Model.crash.hour == 0)
                             {
-                <td>12:0@(Model.crash.minute)AM,</td> }
+                <nobr>12:0@(Model.crash.minute)AM, </nobr> }
                             else
                             {
-                <td>@Model.crash.hour:0@(Model.crash.minute)AM,</td> }
+                <nobr>@Model.crash.hour:0@(Model.crash.minute)AM, </nobr> }
                         } }
 
                     a motor vehicle accident occurred. As a result of the accident there was @(Model.crash.Severity.Sentence_Usable).
@@ -379,12 +379,14 @@
 
         <!-- Contact -->
         <article id="street">
-            <h2 class="major">Accident Location Street View</h2>
+            <h2 class="major">Street View</h2>
             <div class="model-box2">
                 <iframe nonce="frick" class="model"
                         frameborder="1"
                         referrerpolicy="no-referrer-when-downgrade"
-                        @{ string street_api_string = "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&location=" + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=0&fov=100"; }
+                        @{ 
+                        string street_string_var =  Environment.GetEnvironmentVariable("STREET_API_STRING");
+                        string street_api_string = street_string_var + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=0&fov=100"; }
                         src=@street_api_string
                         allowfullscreen>
                 </iframe>

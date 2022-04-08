@@ -48,8 +48,8 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/lib/qrcode/qrcode.min.js"></script>
-    <script type="text/javascript">
+    <script nonce="frick" src="~/lib/qrcode/qrcode.min.js"></script>
+    <script nonce="frick" type="text/javascript">
  new QRCode(document.getElementById("qrCode"),
  {
  text: "@Html.Raw(Model.AuthenticatorUri)",

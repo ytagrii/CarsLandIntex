@@ -124,7 +124,7 @@ namespace CarsLandIntex
 
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' script-src 'self' 'nonce-frick' https://public.tableau.com/javascripts/api/viz_v1.js; style-src 'self' maxcdn.bootstrapcdn.com; img-src 'self' 'nonce-frick'; frame-src 'self' https://www.google.com/ https://www.tableau.com http://public.tableau.com/ ");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' script-src 'self' 'nonce-frick' https://public.tableau.com/javascripts/api/viz_v1.js; style-src 'self' maxcdn.bootstrapcdn.com; img-src 'self' 'nonce-frick' https://items-images-production.s3.us-west-2.amazonaws.com/files/86f00ea2a7bd151d5411c7c50fe3281b161b38f0/original.png https://items-images-production.s3.us-west-2.amazonaws.com/files/390f8cfe0bbddeb45ad58ddc38d4114ff3bd1595/original.png; frame-src 'self' https://www.google.com/ https://www.tableau.com http://public.tableau.com/ ");
                 await next();
             });
 
