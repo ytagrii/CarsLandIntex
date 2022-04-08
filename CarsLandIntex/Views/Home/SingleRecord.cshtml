@@ -308,7 +308,8 @@
                                 frameborder="1"
                                 referrerpolicy="no-referrer-when-downgrade"
                                 @{
-                                    string api_string = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&q=" + Model.crash.LAT_UTM_Y + "+" + Model.crash.LONG_UTM_X + "&zoom=16&maptype=satellite";
+                                    string api_string_var =  Environment.GetEnvironmentVariable("MAP_API_STRING");
+                                    string api_string = api_string_var + Model.crash.LAT_UTM_Y + "+" + Model.crash.LONG_UTM_X + "&zoom=16&maptype=satellite";
                                 }
                                 src=@api_string
                                 allowfullscreen>
@@ -377,7 +378,7 @@
         <article id="street">
             <h2 class="major">Accident Location Street View</h2>
             <div class="model-box2">
-                <iframe class="model"
+                <iframe nonce="frick" class="model"
                         frameborder="1"
                         referrerpolicy="no-referrer-when-downgrade"
                         @{ string street_api_string = "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCroVEEEv1pj6RSfD_OPmpy0msLOvsOqXU&location=" + Model.crash.LAT_UTM_Y + "," + Model.crash.LONG_UTM_X + "&heading=210&pitch=0&fov=100"; }
