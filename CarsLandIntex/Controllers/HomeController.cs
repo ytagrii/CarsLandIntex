@@ -299,7 +299,7 @@ namespace CarsLandIntex.Controllers
                 Severity = sevRepo.Severities
             };
             CrashData cd = new CrashData();
-            cd.CreateCrashData(data.crash);
+            cd.CreateCrashData(data.crash, cd);
 
             var result = _session.Run(new List<NamedOnnxValue>
             {
@@ -308,7 +308,6 @@ namespace CarsLandIntex.Controllers
             Tensor<long> score = result.First().AsTensor<long>();
             var prediction = new Prediction { PredictedValue = score.First() };
             ViewBag.prediction = prediction;
-            result.Dispose();
 
             return View(data);
         }
@@ -346,7 +345,6 @@ namespace CarsLandIntex.Controllers
             });
                 Tensor<long> score = result.First().AsTensor<long>();
                 var prediction = new Prediction { PredictedValue = score.First() };
-                result.Dispose();
                 return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
             }
 
