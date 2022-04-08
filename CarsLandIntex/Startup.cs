@@ -42,15 +42,18 @@ namespace CarsLandIntex
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(endpointAuth);
+                //options.UseMySql(endpointAuth); // To run with ONNX
+                options.UseMySql(Configuration["ConnectionStrings:AuthConnection"]); // To run without ONNX
             });
 
             string endpoint = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
             services.AddDbContext<CrashDataDBContext>(options =>
             {
-                options.UseMySql(endpoint);
+                //options.UseMySql(endpoint); // To run with ONNX
+                options.UseMySql(Configuration["ConnectionStrings:MainConnection"]); // To run without ONNX
             });
+
             services.AddScoped<ICrashRepository, EFCrashRepo>();
             services.AddScoped<ISeverityRepo, EFSeverityRepo>();
             services.AddScoped<ICountyRepo, EFCountyRepo>();
