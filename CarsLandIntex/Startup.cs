@@ -151,6 +151,16 @@ namespace CarsLandIntex
                 //endpoints.MapFallbackToPage("/admin/{*catchall}", "/Areas/Identity/Pages/Admin/Index");
             });
 
+            //Adding in the Content Security Policy HTTP header response
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy",
+            //        "default-src 'self';" +
+            //        "script-src 'self' 'unsafe-inline';" +
+            //        "style-src 'self' 'unsafe-inline' 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600'; ");
+            //    await next();
+            //});
+
 
         }
     }
