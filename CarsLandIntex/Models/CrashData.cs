@@ -39,7 +39,7 @@ namespace CarsLandIntex.Models
         [Required]
         public long month { get; set; }
         [Required]
-        [Range(1, 24, ErrorMessage = "Hour must be a number between 1 and 24")]
+        [Range(1, 24, ErrorMessage = "Hour must be a number between 0 and 23")]
         public long hour { get; set; }
         [Required]
         [Range(0, 59, ErrorMessage = "Minute must be a number between 0 and 59")]

@@ -343,7 +343,8 @@ namespace CarsLandIntex.Controllers
                 result.Dispose();
                 return new RedirectResult(Url.Action("MachineLearning", prediction) + "#result");
             }
-            return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
+
+           return new RedirectResult(Url.Action("MachineLearning") + "#severity"); ;
         }
     }
 }
