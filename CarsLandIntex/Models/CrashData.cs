@@ -122,7 +122,7 @@ namespace CarsLandIntex.Models
             }
 
         }
-        public void CreateCrashData(Crash c)
+        public void CreateCrashData(Crash c, CrashData cd)
         {
             pedestrian_involved = Convert.ToInt64(c.PEDESTRIAN_INVOLVED);
             bicyclist_involved = Convert.ToInt64(c.BICYCLIST_INVOLVED);
@@ -143,7 +143,7 @@ namespace CarsLandIntex.Models
             string cityParsed = c.CITY.CITY.ToString().ToUpper().Replace(" ", "_");
             cityParsed = "city_" + cityParsed;
 
-            string countyParsed = c.County.ToString().ToUpper().Replace(" ", "_");
+            string countyParsed = c.County.COUNTY_NAME.ToString().ToUpper().Replace(" ", "_");
             countyParsed = "county_" + countyParsed;
 
             PropertyInfo[] properties = typeof(CrashData).GetProperties();
@@ -152,17 +152,17 @@ namespace CarsLandIntex.Models
             {
                 if (property.Name == countyParsed)
                 {
-                    property.SetValue(countyParsed, 1);
+                    property.SetValue(cd, 1);
                 }
 
                 if (property.Name == cityParsed)
                 {
-                    property.SetValue(cityParsed, 1);
+                    property.SetValue(cd, 1);
                 }
 
                 if (property.Name == c.weekday)
                 {
-                    property.SetValue(c.weekday, 1);
+                    property.SetValue(cd, 1);
                 }
 
             }
